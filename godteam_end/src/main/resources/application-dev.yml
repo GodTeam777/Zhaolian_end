@@ -1,0 +1,26 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+#连接数据库
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@47.116.135.78:1521:helowin
+    username: yan_test
+    password: yan_test
+    type: com.alibaba.druid.pool.DruidDataSource
+
+
+#日志
+logging:
+  level:
+    com.zhaolian.demo.data.dao: DEBUG
+
+pagehelper:
+  reasonable: true
+
+mybatis:
+  mapper-locations: classpath:mybatis_generate/*.xml
+  type-aliases-package: com.zhaolian.demo.data.entity

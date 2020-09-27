@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhaolian.demo.data.dao.ProorderMapper">
+  <resultMap id="BaseResultMap" type="com.zhaolian.demo.data.entity.Proorder">
+    <!--@mbg.generated-->
+    <!--@Table PROORDER-->
+    <id column="POID" jdbcType="DECIMAL" property="poid" />
+    <result column="MPID" jdbcType="DECIMAL" property="mpid" />
+    <result column="USERSID" jdbcType="DECIMAL" property="usersid" />
+    <result column="MONEY" jdbcType="DECIMAL" property="money" />
+    <result column="LICAI_DATE" jdbcType="TIMESTAMP" property="licaiDate" />
+    <result column="ZHIFUTYPE" jdbcType="VARCHAR" property="zhifutype" />
+    <result column="SHOU_DATE" jdbcType="TIMESTAMP" property="shouDate" />
+    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    POID, MPID, USERSID, MONEY, LICAI_DATE, ZHIFUTYPE, SHOU_DATE, "STATUS"
+  </sql>
+  <select id="selectByExample" parameterType="com.zhaolian.demo.data.entity.ProorderExample" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from PROORDER
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from PROORDER
+    where POID = #{poid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    <!--@mbg.generated-->
+    delete from PROORDER
+    where POID = #{poid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhaolian.demo.data.entity.ProorderExample">
+    <!--@mbg.generated-->
+    delete from PROORDER
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhaolian.demo.data.entity.Proorder">
+    <!--@mbg.generated-->
+    insert into PROORDER (POID, MPID, USERSID, 
+      MONEY, LICAI_DATE, ZHIFUTYPE, 
+      SHOU_DATE, "STATUS")
+    values (#{poid,jdbcType=DECIMAL}, #{mpid,jdbcType=DECIMAL}, #{usersid,jdbcType=DECIMAL}, 
+      #{money,jdbcType=DECIMAL}, #{licaiDate,jdbcType=TIMESTAMP}, #{zhifutype,jdbcType=VARCHAR}, 
+      #{shouDate,jdbcType=TIMESTAMP}, #{status,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhaolian.demo.data.entity.Proorder">
+    <!--@mbg.generated-->
+    insert into PROORDER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="poid != null">
+        POID,
+      </if>
+      <if test="mpid != null">
+        MPID,
+      </if>
+      <if test="usersid != null">
+        USERSID,
+      </if>
+      <if test="money != null">
+        MONEY,
+      </if>
+      <if test="licaiDate != null">
+        LICAI_DATE,
+      </if>
+      <if test="zhifutype != null">
+        ZHIFUTYPE,
+      </if>
+      <if test="shouDate != null">
+        SHOU_DATE,
+      </if>
+      <if test="status != null">
+        "STATUS",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="poid != null">
+        #{poid,jdbcType=DECIMAL},
+      </if>
+      <if test="mpid != null">
+        #{mpid,jdbcType=DECIMAL},
+      </if>
+      <if test="usersid != null">
+        #{usersid,jdbcType=DECIMAL},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="licaiDate != null">
+        #{licaiDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zhifutype != null">
+        #{zhifutype,jdbcType=VARCHAR},
+      </if>
+      <if test="shouDate != null">
+        #{shouDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhaolian.demo.data.entity.ProorderExample" resultType="java.lang.Long">
+    <!--@mbg.generated-->
+    select count(*) from PROORDER
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--@mbg.generated-->
+    update PROORDER
+    <set>
+      <if test="record.poid != null">
+        POID = #{record.poid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mpid != null">
+        MPID = #{record.mpid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.usersid != null">
+        USERSID = #{record.usersid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.money != null">
+        MONEY = #{record.money,jdbcType=DECIMAL},
+      </if>
+      <if test="record.licaiDate != null">
+        LICAI_DATE = #{record.licaiDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.zhifutype != null">
+        ZHIFUTYPE = #{record.zhifutype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shouDate != null">
+        SHOU_DATE = #{record.shouDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null">
+        "STATUS" = #{record.status,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--@mbg.generated-->
+    update PROORDER
+    set POID = #{record.poid,jdbcType=DECIMAL},
+      MPID = #{record.mpid,jdbcType=DECIMAL},
+      USERSID = #{record.usersid,jdbcType=DECIMAL},
+      MONEY = #{record.money,jdbcType=DECIMAL},
+      LICAI_DATE = #{record.licaiDate,jdbcType=TIMESTAMP},
+      ZHIFUTYPE = #{record.zhifutype,jdbcType=VARCHAR},
+      SHOU_DATE = #{record.shouDate,jdbcType=TIMESTAMP},
+      "STATUS" = #{record.status,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhaolian.demo.data.entity.Proorder">
+    <!--@mbg.generated-->
+    update PROORDER
+    <set>
+      <if test="mpid != null">
+        MPID = #{mpid,jdbcType=DECIMAL},
+      </if>
+      <if test="usersid != null">
+        USERSID = #{usersid,jdbcType=DECIMAL},
+      </if>
+      <if test="money != null">
+        MONEY = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="licaiDate != null">
+        LICAI_DATE = #{licaiDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zhifutype != null">
+        ZHIFUTYPE = #{zhifutype,jdbcType=VARCHAR},
+      </if>
+      <if test="shouDate != null">
+        SHOU_DATE = #{shouDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        "STATUS" = #{status,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where POID = #{poid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhaolian.demo.data.entity.Proorder">
+    <!--@mbg.generated-->
+    update PROORDER
+    set MPID = #{mpid,jdbcType=DECIMAL},
+      USERSID = #{usersid,jdbcType=DECIMAL},
+      MONEY = #{money,jdbcType=DECIMAL},
+      LICAI_DATE = #{licaiDate,jdbcType=TIMESTAMP},
+      ZHIFUTYPE = #{zhifutype,jdbcType=VARCHAR},
+      SHOU_DATE = #{shouDate,jdbcType=TIMESTAMP},
+      "STATUS" = #{status,jdbcType=DECIMAL}
+    where POID = #{poid,jdbcType=DECIMAL}
+  </update>
+</mapper>

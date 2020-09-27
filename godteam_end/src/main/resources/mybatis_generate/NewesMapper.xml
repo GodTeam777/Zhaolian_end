@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhaolian.demo.data.dao.NewesMapper">
+  <resultMap id="BaseResultMap" type="com.zhaolian.demo.data.entity.Newes">
+    <!--@mbg.generated-->
+    <!--@Table NEWES-->
+    <id column="NID" jdbcType="DECIMAL" property="nid" />
+    <result column="NEWS_TITLE" jdbcType="VARCHAR" property="newsTitle" />
+    <result column="NEWS_BODY" jdbcType="VARCHAR" property="newsBody" />
+    <result column="CHUBANSHE" jdbcType="VARCHAR" property="chubanshe" />
+    <result column="FABIAONAME" jdbcType="VARCHAR" property="fabiaoname" />
+    <result column="NEWS_DATE" jdbcType="TIMESTAMP" property="newsDate" />
+    <result column="NTYPE" jdbcType="DECIMAL" property="ntype" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    NID, NEWS_TITLE, NEWS_BODY, CHUBANSHE, FABIAONAME, NEWS_DATE, NTYPE
+  </sql>
+  <select id="selectByExample" parameterType="com.zhaolian.demo.data.entity.NewesExample" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from NEWES
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from NEWES
+    where NID = #{nid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    <!--@mbg.generated-->
+    delete from NEWES
+    where NID = #{nid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhaolian.demo.data.entity.NewesExample">
+    <!--@mbg.generated-->
+    delete from NEWES
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhaolian.demo.data.entity.Newes">
+    <!--@mbg.generated-->
+    insert into NEWES (NID, NEWS_TITLE, NEWS_BODY, 
+      CHUBANSHE, FABIAONAME, NEWS_DATE, 
+      NTYPE)
+    values (#{nid,jdbcType=DECIMAL}, #{newsTitle,jdbcType=VARCHAR}, #{newsBody,jdbcType=VARCHAR}, 
+      #{chubanshe,jdbcType=VARCHAR}, #{fabiaoname,jdbcType=VARCHAR}, #{newsDate,jdbcType=TIMESTAMP}, 
+      #{ntype,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhaolian.demo.data.entity.Newes">
+    <!--@mbg.generated-->
+    insert into NEWES
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="nid != null">
+        NID,
+      </if>
+      <if test="newsTitle != null">
+        NEWS_TITLE,
+      </if>
+      <if test="newsBody != null">
+        NEWS_BODY,
+      </if>
+      <if test="chubanshe != null">
+        CHUBANSHE,
+      </if>
+      <if test="fabiaoname != null">
+        FABIAONAME,
+      </if>
+      <if test="newsDate != null">
+        NEWS_DATE,
+      </if>
+      <if test="ntype != null">
+        NTYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="nid != null">
+        #{nid,jdbcType=DECIMAL},
+      </if>
+      <if test="newsTitle != null">
+        #{newsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="newsBody != null">
+        #{newsBody,jdbcType=VARCHAR},
+      </if>
+      <if test="chubanshe != null">
+        #{chubanshe,jdbcType=VARCHAR},
+      </if>
+      <if test="fabiaoname != null">
+        #{fabiaoname,jdbcType=VARCHAR},
+      </if>
+      <if test="newsDate != null">
+        #{newsDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ntype != null">
+        #{ntype,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhaolian.demo.data.entity.NewesExample" resultType="java.lang.Long">
+    <!--@mbg.generated-->
+    select count(*) from NEWES
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--@mbg.generated-->
+    update NEWES
+    <set>
+      <if test="record.nid != null">
+        NID = #{record.nid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.newsTitle != null">
+        NEWS_TITLE = #{record.newsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newsBody != null">
+        NEWS_BODY = #{record.newsBody,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chubanshe != null">
+        CHUBANSHE = #{record.chubanshe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fabiaoname != null">
+        FABIAONAME = #{record.fabiaoname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newsDate != null">
+        NEWS_DATE = #{record.newsDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ntype != null">
+        NTYPE = #{record.ntype,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--@mbg.generated-->
+    update NEWES
+    set NID = #{record.nid,jdbcType=DECIMAL},
+      NEWS_TITLE = #{record.newsTitle,jdbcType=VARCHAR},
+      NEWS_BODY = #{record.newsBody,jdbcType=VARCHAR},
+      CHUBANSHE = #{record.chubanshe,jdbcType=VARCHAR},
+      FABIAONAME = #{record.fabiaoname,jdbcType=VARCHAR},
+      NEWS_DATE = #{record.newsDate,jdbcType=TIMESTAMP},
+      NTYPE = #{record.ntype,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhaolian.demo.data.entity.Newes">
+    <!--@mbg.generated-->
+    update NEWES
+    <set>
+      <if test="newsTitle != null">
+        NEWS_TITLE = #{newsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="newsBody != null">
+        NEWS_BODY = #{newsBody,jdbcType=VARCHAR},
+      </if>
+      <if test="chubanshe != null">
+        CHUBANSHE = #{chubanshe,jdbcType=VARCHAR},
+      </if>
+      <if test="fabiaoname != null">
+        FABIAONAME = #{fabiaoname,jdbcType=VARCHAR},
+      </if>
+      <if test="newsDate != null">
+        NEWS_DATE = #{newsDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ntype != null">
+        NTYPE = #{ntype,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where NID = #{nid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhaolian.demo.data.entity.Newes">
+    <!--@mbg.generated-->
+    update NEWES
+    set NEWS_TITLE = #{newsTitle,jdbcType=VARCHAR},
+      NEWS_BODY = #{newsBody,jdbcType=VARCHAR},
+      CHUBANSHE = #{chubanshe,jdbcType=VARCHAR},
+      FABIAONAME = #{fabiaoname,jdbcType=VARCHAR},
+      NEWS_DATE = #{newsDate,jdbcType=TIMESTAMP},
+      NTYPE = #{ntype,jdbcType=DECIMAL}
+    where NID = #{nid,jdbcType=DECIMAL}
+  </update>
+</mapper>
