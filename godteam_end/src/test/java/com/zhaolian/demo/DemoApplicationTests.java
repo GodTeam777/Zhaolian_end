@@ -25,9 +25,6 @@ class DemoApplicationTests {
     @Test
     void contextLoads() {
         System.out.println("!111111111");
-
-        Bank bank= dao.selectByPrimaryKey(new BigDecimal(1));
-        System.out.println(bank.toString());
     }
 
 }
