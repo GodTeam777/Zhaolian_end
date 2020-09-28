@@ -10,6 +10,7 @@
     <result column="CARADDRESS" jdbcType="VARCHAR" property="caraddress" />
     <result column="CPATH" jdbcType="VARCHAR" property="cpath" />
     <result column="STATUS" jdbcType="DECIMAL" property="status" />
+    <result column="NDATE" jdbcType="TIMESTAMP" property="ndate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--@mbg.generated-->
@@ -73,7 +74,7 @@
   </sql>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    CID, CARBRAND, CARID, CARADDRESS, CPATH, "STATUS"
+    CID, CARBRAND, CARID, CARADDRESS, CPATH, "STATUS", NDATE
   </sql>
   <select id="selectByExample" parameterType="com.zhaolian.demo.data.entity.CarExample" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -112,11 +113,11 @@
   <insert id="insert" parameterType="com.zhaolian.demo.data.entity.Car">
     <!--@mbg.generated-->
     insert into CAR (CID, CARBRAND, CARID, 
-      CARADDRESS, CPATH, "STATUS"
-      )
+      CARADDRESS, CPATH, "STATUS", 
+      NDATE)
     values (#{cid,jdbcType=DECIMAL}, #{carbrand,jdbcType=VARCHAR}, #{carid,jdbcType=VARCHAR}, 
-      #{caraddress,jdbcType=VARCHAR}, #{cpath,jdbcType=VARCHAR}, #{status,jdbcType=DECIMAL}
-      )
+      #{caraddress,jdbcType=VARCHAR}, #{cpath,jdbcType=VARCHAR}, #{status,jdbcType=DECIMAL}, 
+      #{ndate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.zhaolian.demo.data.entity.Car">
     <!--@mbg.generated-->
@@ -140,6 +141,9 @@
       <if test="status != null">
         "STATUS",
       </if>
+      <if test="ndate != null">
+        NDATE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="cid != null">
@@ -159,6 +163,9 @@
       </if>
       <if test="status != null">
         #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="ndate != null">
+        #{ndate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -191,6 +198,9 @@
       <if test="record.status != null">
         "STATUS" = #{record.status,jdbcType=DECIMAL},
       </if>
+      <if test="record.ndate != null">
+        NDATE = #{record.ndate,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -204,7 +214,8 @@
       CARID = #{record.carid,jdbcType=VARCHAR},
       CARADDRESS = #{record.caraddress,jdbcType=VARCHAR},
       CPATH = #{record.cpath,jdbcType=VARCHAR},
-      "STATUS" = #{record.status,jdbcType=DECIMAL}
+      "STATUS" = #{record.status,jdbcType=DECIMAL},
+      NDATE = #{record.ndate,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -228,6 +239,9 @@
       <if test="status != null">
         "STATUS" = #{status,jdbcType=DECIMAL},
       </if>
+      <if test="ndate != null">
+        NDATE = #{ndate,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where CID = #{cid,jdbcType=DECIMAL}
   </update>
@@ -238,7 +252,8 @@
       CARID = #{carid,jdbcType=VARCHAR},
       CARADDRESS = #{caraddress,jdbcType=VARCHAR},
       CPATH = #{cpath,jdbcType=VARCHAR},
-      "STATUS" = #{status,jdbcType=DECIMAL}
+      "STATUS" = #{status,jdbcType=DECIMAL},
+      NDATE = #{ndate,jdbcType=TIMESTAMP}
     where CID = #{cid,jdbcType=DECIMAL}
   </update>
 </mapper>
