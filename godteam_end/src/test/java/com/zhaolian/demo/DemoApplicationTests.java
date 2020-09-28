@@ -20,14 +20,16 @@ import java.util.List;
 class DemoApplicationTests {
 
     @Resource
-    BankMapper dao;
+    UsersMapper dao;
 
     @Test
     void contextLoads() {
         System.out.println("!111111111");
+        List<Users> allUser = dao.selectByExample(new UsersExample());
+        for (Users users : allUser) {
+            System.out.println(users.toString());
+        }
 
-        Bank bank= dao.selectByPrimaryKey(new BigDecimal(1));
-        System.out.println(bank.toString());
     }
 
 }
