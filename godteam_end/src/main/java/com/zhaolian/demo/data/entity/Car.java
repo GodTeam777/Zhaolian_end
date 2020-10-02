@@ -2,6 +2,7 @@ package com.zhaolian.demo.data.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class Car implements Serializable {
     private BigDecimal cid;
@@ -15,6 +16,8 @@ public class Car implements Serializable {
     private String cpath;
 
     private BigDecimal status;
+
+    private Date ndate;
 
     private static final long serialVersionUID = 1L;
 
@@ -66,6 +69,14 @@ public class Car implements Serializable {
         this.status = status;
     }
 
+    public Date getNdate() {
+        return ndate;
+    }
+
+    public void setNdate(Date ndate) {
+        this.ndate = ndate;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -78,6 +89,7 @@ public class Car implements Serializable {
         sb.append(", caraddress=").append(caraddress);
         sb.append(", cpath=").append(cpath);
         sb.append(", status=").append(status);
+        sb.append(", ndate=").append(ndate);
         sb.append("]");
         return sb.toString();
     }
