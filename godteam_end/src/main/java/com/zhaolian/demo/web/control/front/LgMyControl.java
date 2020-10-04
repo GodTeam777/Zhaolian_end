@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -79,5 +80,36 @@ public class LgMyControl {
         so.setUsersid(user.getUsersid());
         so.setYihuan(new BigDecimal(0));
         return this.smallDaiService.smalldai(user,so);
+    }
+
+    //保存后端频道
+    @RequestMapping("/websocket_end")
+    public @ResponseBody
+    String end_web(HttpSession session,@RequestBody String data) {
+        Map m=(Map) session.getAttribute("mymapso");
+        if (m==null){
+            Map<String,String> maps=new HashMap<String, String>();
+            maps.put("endweb",data);
+            session.setAttribute("mymapso",maps);
+        }else{
+            m.put("endweb",data);
+            session.setAttribute("mymapso",m);
+        }
+        return "";
+    }
+
+    //保存前端频道
+    @RequestMapping("/websocket_front")
+    public @ResponseBody
+    String end_front(HttpSession session,@RequestBody String data) {
+        Map m=(Map) session.getAttribute("mymapso");
+        if (m==null){
+            Map<String,String> maps=new HashMap<String, String>();
+            maps.put("frontweb",data);
+            session.setAttribute("mymapso",maps);
+        }else{
+
+        }
+        return "";
     }
 }
