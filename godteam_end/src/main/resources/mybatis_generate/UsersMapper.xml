@@ -85,6 +85,11 @@
     USERSID, EDUSERSID, CID, HID, CARDID, UNAME, SEX, BIRTHDAY, PHONE, SMALLDAI, "TYPE", 
     "STATUS", USPWS, ZFPWS, PETNAME
   </sql>
+
+  <select id="LoginBypetnameAnduspws" parameterType="java.util.Map" resultMap="BaseResultMap">
+select * from USERS where PETNAME=#{Uname} and USPWS=#{Upass}
+</select>
+
   <select id="selectByExample" parameterType="com.zhaolian.demo.data.entity.UsersExample" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select
