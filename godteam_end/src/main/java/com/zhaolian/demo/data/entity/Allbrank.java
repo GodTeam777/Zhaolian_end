@@ -6,9 +6,9 @@ import java.math.BigDecimal;
 public class Allbrank implements Serializable {
     private BigDecimal bid;
 
-    private BigDecimal bname;
+    private String bname;
 
-    private BigDecimal bpath;
+    private String bpath;
 
     private static final long serialVersionUID = 1L;
 
@@ -20,19 +20,19 @@ public class Allbrank implements Serializable {
         this.bid = bid;
     }
 
-    public BigDecimal getBname() {
+    public String getBname() {
         return bname;
     }
 
-    public void setBname(BigDecimal bname) {
+    public void setBname(String bname) {
         this.bname = bname;
     }
 
-    public BigDecimal getBpath() {
+    public String getBpath() {
         return bpath;
     }
 
-    public void setBpath(BigDecimal bpath) {
+    public void setBpath(String bpath) {
         this.bpath = bpath;
     }
 

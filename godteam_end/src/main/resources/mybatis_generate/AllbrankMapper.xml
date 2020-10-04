@@ -5,8 +5,8 @@
     <!--@mbg.generated-->
     <!--@Table ALLBRANK-->
     <id column="BID" jdbcType="DECIMAL" property="bid" />
-    <result column="BNAME" jdbcType="DECIMAL" property="bname" />
-    <result column="BPATH" jdbcType="DECIMAL" property="bpath" />
+    <result column="BNAME" jdbcType="VARCHAR" property="bname" />
+    <result column="BPATH" jdbcType="VARCHAR" property="bpath" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--@mbg.generated-->
@@ -110,7 +110,7 @@
     <!--@mbg.generated-->
     insert into ALLBRANK (BID, BNAME, BPATH
       )
-    values (#{bid,jdbcType=DECIMAL}, #{bname,jdbcType=DECIMAL}, #{bpath,jdbcType=DECIMAL}
+    values (#{bid,jdbcType=DECIMAL}, #{bname,jdbcType=VARCHAR}, #{bpath,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.zhaolian.demo.data.entity.Allbrank">
@@ -132,10 +132,10 @@
         #{bid,jdbcType=DECIMAL},
       </if>
       <if test="bname != null">
-        #{bname,jdbcType=DECIMAL},
+        #{bname,jdbcType=VARCHAR},
       </if>
       <if test="bpath != null">
-        #{bpath,jdbcType=DECIMAL},
+        #{bpath,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -154,10 +154,10 @@
         BID = #{record.bid,jdbcType=DECIMAL},
       </if>
       <if test="record.bname != null">
-        BNAME = #{record.bname,jdbcType=DECIMAL},
+        BNAME = #{record.bname,jdbcType=VARCHAR},
       </if>
       <if test="record.bpath != null">
-        BPATH = #{record.bpath,jdbcType=DECIMAL},
+        BPATH = #{record.bpath,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -168,8 +168,8 @@
     <!--@mbg.generated-->
     update ALLBRANK
     set BID = #{record.bid,jdbcType=DECIMAL},
-      BNAME = #{record.bname,jdbcType=DECIMAL},
-      BPATH = #{record.bpath,jdbcType=DECIMAL}
+      BNAME = #{record.bname,jdbcType=VARCHAR},
+      BPATH = #{record.bpath,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -179,10 +179,10 @@
     update ALLBRANK
     <set>
       <if test="bname != null">
-        BNAME = #{bname,jdbcType=DECIMAL},
+        BNAME = #{bname,jdbcType=VARCHAR},
       </if>
       <if test="bpath != null">
-        BPATH = #{bpath,jdbcType=DECIMAL},
+        BPATH = #{bpath,jdbcType=VARCHAR},
       </if>
     </set>
     where BID = #{bid,jdbcType=DECIMAL}
@@ -190,8 +190,8 @@
   <update id="updateByPrimaryKey" parameterType="com.zhaolian.demo.data.entity.Allbrank">
     <!--@mbg.generated-->
     update ALLBRANK
-    set BNAME = #{bname,jdbcType=DECIMAL},
-      BPATH = #{bpath,jdbcType=DECIMAL}
+    set BNAME = #{bname,jdbcType=VARCHAR},
+      BPATH = #{bpath,jdbcType=VARCHAR}
     where BID = #{bid,jdbcType=DECIMAL}
   </update>
 </mapper>

@@ -175,52 +175,62 @@ public class AllbrankExample {
             return (Criteria) this;
         }
 
-        public Criteria andBnameEqualTo(BigDecimal value) {
+        public Criteria andBnameEqualTo(String value) {
             addCriterion("BNAME =", value, "bname");
             return (Criteria) this;
         }
 
-        public Criteria andBnameNotEqualTo(BigDecimal value) {
+        public Criteria andBnameNotEqualTo(String value) {
             addCriterion("BNAME <>", value, "bname");
             return (Criteria) this;
         }
 
-        public Criteria andBnameGreaterThan(BigDecimal value) {
+        public Criteria andBnameGreaterThan(String value) {
             addCriterion("BNAME >", value, "bname");
             return (Criteria) this;
         }
 
-        public Criteria andBnameGreaterThanOrEqualTo(BigDecimal value) {
+        public Criteria andBnameGreaterThanOrEqualTo(String value) {
             addCriterion("BNAME >=", value, "bname");
             return (Criteria) this;
         }
 
-        public Criteria andBnameLessThan(BigDecimal value) {
+        public Criteria andBnameLessThan(String value) {
             addCriterion("BNAME <", value, "bname");
             return (Criteria) this;
         }
 
-        public Criteria andBnameLessThanOrEqualTo(BigDecimal value) {
+        public Criteria andBnameLessThanOrEqualTo(String value) {
             addCriterion("BNAME <=", value, "bname");
             return (Criteria) this;
         }
 
-        public Criteria andBnameIn(List<BigDecimal> values) {
+        public Criteria andBnameLike(String value) {
+            addCriterion("BNAME like", value, "bname");
+            return (Criteria) this;
+        }
+
+        public Criteria andBnameNotLike(String value) {
+            addCriterion("BNAME not like", value, "bname");
+            return (Criteria) this;
+        }
+
+        public Criteria andBnameIn(List<String> values) {
             addCriterion("BNAME in", values, "bname");
             return (Criteria) this;
         }
 
-        public Criteria andBnameNotIn(List<BigDecimal> values) {
+        public Criteria andBnameNotIn(List<String> values) {
             addCriterion("BNAME not in", values, "bname");
             return (Criteria) this;
         }
 
-        public Criteria andBnameBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andBnameBetween(String value1, String value2) {
             addCriterion("BNAME between", value1, value2, "bname");
             return (Criteria) this;
         }
 
-        public Criteria andBnameNotBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andBnameNotBetween(String value1, String value2) {
             addCriterion("BNAME not between", value1, value2, "bname");
             return (Criteria) this;
         }
@@ -235,52 +245,62 @@ public class AllbrankExample {
             return (Criteria) this;
         }
 
-        public Criteria andBpathEqualTo(BigDecimal value) {
+        public Criteria andBpathEqualTo(String value) {
             addCriterion("BPATH =", value, "bpath");
             return (Criteria) this;
         }
 
-        public Criteria andBpathNotEqualTo(BigDecimal value) {
+        public Criteria andBpathNotEqualTo(String value) {
             addCriterion("BPATH <>", value, "bpath");
             return (Criteria) this;
         }
 
-        public Criteria andBpathGreaterThan(BigDecimal value) {
+        public Criteria andBpathGreaterThan(String value) {
             addCriterion("BPATH >", value, "bpath");
             return (Criteria) this;
         }
 
-        public Criteria andBpathGreaterThanOrEqualTo(BigDecimal value) {
+        public Criteria andBpathGreaterThanOrEqualTo(String value) {
             addCriterion("BPATH >=", value, "bpath");
             return (Criteria) this;
         }
 
-        public Criteria andBpathLessThan(BigDecimal value) {
+        public Criteria andBpathLessThan(String value) {
             addCriterion("BPATH <", value, "bpath");
             return (Criteria) this;
         }
 
-        public Criteria andBpathLessThanOrEqualTo(BigDecimal value) {
+        public Criteria andBpathLessThanOrEqualTo(String value) {
             addCriterion("BPATH <=", value, "bpath");
             return (Criteria) this;
         }
 
-        public Criteria andBpathIn(List<BigDecimal> values) {
+        public Criteria andBpathLike(String value) {
+            addCriterion("BPATH like", value, "bpath");
+            return (Criteria) this;
+        }
+
+        public Criteria andBpathNotLike(String value) {
+            addCriterion("BPATH not like", value, "bpath");
+            return (Criteria) this;
+        }
+
+        public Criteria andBpathIn(List<String> values) {
             addCriterion("BPATH in", values, "bpath");
             return (Criteria) this;
         }
 
-        public Criteria andBpathNotIn(List<BigDecimal> values) {
+        public Criteria andBpathNotIn(List<String> values) {
             addCriterion("BPATH not in", values, "bpath");
             return (Criteria) this;
         }
 
-        public Criteria andBpathBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andBpathBetween(String value1, String value2) {
             addCriterion("BPATH between", value1, value2, "bpath");
             return (Criteria) this;
         }
 
-        public Criteria andBpathNotBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andBpathNotBetween(String value1, String value2) {
             addCriterion("BPATH not between", value1, value2, "bpath");
             return (Criteria) this;
         }
