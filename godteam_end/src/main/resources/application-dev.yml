@@ -1,7 +1,7 @@
 server:
   port: 10086
   servlet:
-    context-path: /
+      context-path: /
 
 #连接数据库
 spring:
@@ -12,6 +12,13 @@ spring:
     password: yan_test
     type: com.alibaba.druid.pool.DruidDataSource
 
+##配置文件传输
+#spring.servlet.multipart.enabled=true
+#spring.servlet.multipart.file-size-threshold=0
+##单个数据的大小
+#spring.servlet.multipart.maxFileSize=100MB
+##总数据的大小
+#spring.servlet.multipart.maxRequestSize=100MB
 
 #日志
 logging:
