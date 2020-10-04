@@ -19,6 +19,8 @@ public class Education implements Serializable {
 
     private BigDecimal status;
 
+    private Date ndate;
+
     private static final long serialVersionUID = 1L;
 
     public BigDecimal getEdusersid() {
@@ -77,6 +79,14 @@ public class Education implements Serializable {
         this.status = status;
     }
 
+    public Date getNdate() {
+        return ndate;
+    }
+
+    public void setNdate(Date ndate) {
+        this.ndate = ndate;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -90,6 +100,7 @@ public class Education implements Serializable {
         sb.append(", degree=").append(degree);
         sb.append(", spath=").append(spath);
         sb.append(", status=").append(status);
+        sb.append(", ndate=").append(ndate);
         sb.append("]");
         return sb.toString();
     }

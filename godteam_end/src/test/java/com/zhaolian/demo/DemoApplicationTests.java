@@ -28,8 +28,6 @@ import java.util.Map;
 @SpringBootTest
 class DemoApplicationTests {
 
-    @Resource
-    BankMapper dao;
 
     @Resource
     UsersMapper Usersdao;
@@ -41,6 +39,7 @@ class DemoApplicationTests {
     void contextLoads(HttpServletRequest request) throws FileNotFoundException {
         Users user=service.UserLogin("wangwu",456);
         System.out.println(user.toString());
+
     }
 
 }
