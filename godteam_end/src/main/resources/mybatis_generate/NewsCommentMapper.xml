@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhaolian.demo.data.dao.NewsCommentMapper">
+  <resultMap id="BaseResultMap" type="com.zhaolian.demo.data.entity.NewsComment">
+    <!--@mbg.generated-->
+    <!--@Table NEWS_COMMENT-->
+    <id column="NCID" jdbcType="DECIMAL" property="ncid" />
+    <result column="USERSID" jdbcType="DECIMAL" property="usersid" />
+    <result column="NID" jdbcType="DECIMAL" property="nid" />
+    <result column="TEXT" jdbcType="VARCHAR" property="text" />
+    <result column="COMMENT_DATE" jdbcType="TIMESTAMP" property="commentDate" />
+  </resultMap>
+
+  <sql id="Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    NCID, USERSID, NID, "TEXT", COMMENT_DATE
+  </sql>
+  <select id="selectByExample" parameterType="com.zhaolian.demo.data.entity.NewsCommentExample" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from NEWS_COMMENT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from NEWS_COMMENT
+    where NCID = #{ncid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    <!--@mbg.generated-->
+    delete from NEWS_COMMENT
+    where NCID = #{ncid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhaolian.demo.data.entity.NewsCommentExample">
+    <!--@mbg.generated-->
+    delete from NEWS_COMMENT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhaolian.demo.data.entity.NewsComment">
+    <!--@mbg.generated-->
+    insert into NEWS_COMMENT (NCID, USERSID, NID, 
+      "TEXT", COMMENT_DATE)
+    values (#{ncid,jdbcType=DECIMAL}, #{usersid,jdbcType=DECIMAL}, #{nid,jdbcType=DECIMAL}, 
+      #{text,jdbcType=VARCHAR}, #{commentDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhaolian.demo.data.entity.NewsComment">
+    <!--@mbg.generated-->
+    insert into NEWS_COMMENT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ncid != null">
+        NCID,
+      </if>
+      <if test="usersid != null">
+        USERSID,
+      </if>
+      <if test="nid != null">
+        NID,
+      </if>
+      <if test="text != null">
+        "TEXT",
+      </if>
+      <if test="commentDate != null">
+        COMMENT_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ncid != null">
+        #{ncid,jdbcType=DECIMAL},
+      </if>
+      <if test="usersid != null">
+        #{usersid,jdbcType=DECIMAL},
+      </if>
+      <if test="nid != null">
+        #{nid,jdbcType=DECIMAL},
+      </if>
+      <if test="text != null">
+        #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="commentDate != null">
+        #{commentDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhaolian.demo.data.entity.NewsCommentExample" resultType="java.lang.Long">
+    <!--@mbg.generated-->
+    select count(*) from NEWS_COMMENT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--@mbg.generated-->
+    update NEWS_COMMENT
+    <set>
+      <if test="record.ncid != null">
+        NCID = #{record.ncid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.usersid != null">
+        USERSID = #{record.usersid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.nid != null">
+        NID = #{record.nid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.text != null">
+        "TEXT" = #{record.text,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commentDate != null">
+        COMMENT_DATE = #{record.commentDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--@mbg.generated-->
+    update NEWS_COMMENT
+    set NCID = #{record.ncid,jdbcType=DECIMAL},
+      USERSID = #{record.usersid,jdbcType=DECIMAL},
+      NID = #{record.nid,jdbcType=DECIMAL},
+      "TEXT" = #{record.text,jdbcType=VARCHAR},
+      COMMENT_DATE = #{record.commentDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhaolian.demo.data.entity.NewsComment">
+    <!--@mbg.generated-->
+    update NEWS_COMMENT
+    <set>
+      <if test="usersid != null">
+        USERSID = #{usersid,jdbcType=DECIMAL},
+      </if>
+      <if test="nid != null">
+        NID = #{nid,jdbcType=DECIMAL},
+      </if>
+      <if test="text != null">
+        "TEXT" = #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="commentDate != null">
+        COMMENT_DATE = #{commentDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where NCID = #{ncid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhaolian.demo.data.entity.NewsComment">
+    <!--@mbg.generated-->
+    update NEWS_COMMENT
+    set USERSID = #{usersid,jdbcType=DECIMAL},
+      NID = #{nid,jdbcType=DECIMAL},
+      "TEXT" = #{text,jdbcType=VARCHAR},
+      COMMENT_DATE = #{commentDate,jdbcType=TIMESTAMP}
+    where NCID = #{ncid,jdbcType=DECIMAL}
+  </update>
+</mapper>

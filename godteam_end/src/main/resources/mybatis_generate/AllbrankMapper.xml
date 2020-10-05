@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhaolian.demo.data.dao.AllbrankMapper">
+  <resultMap id="BaseResultMap" type="com.zhaolian.demo.data.entity.Allbrank">
+    <!--@mbg.generated-->
+    <!--@Table ALLBRANK-->
+    <id column="BID" jdbcType="DECIMAL" property="bid" />
+    <result column="BNAME" jdbcType="VARCHAR" property="bname" />
+    <result column="BPATH" jdbcType="VARCHAR" property="bpath" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    BID, BNAME, BPATH
+  </sql>
+  <select id="selectByExample" parameterType="com.zhaolian.demo.data.entity.AllbrankExample" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ALLBRANK
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from ALLBRANK
+    where BID = #{bid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    <!--@mbg.generated-->
+    delete from ALLBRANK
+    where BID = #{bid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhaolian.demo.data.entity.AllbrankExample">
+    <!--@mbg.generated-->
+    delete from ALLBRANK
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhaolian.demo.data.entity.Allbrank">
+    <!--@mbg.generated-->
+    insert into ALLBRANK (BID, BNAME, BPATH
+      )
+    values (#{bid,jdbcType=DECIMAL}, #{bname,jdbcType=VARCHAR}, #{bpath,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhaolian.demo.data.entity.Allbrank">
+    <!--@mbg.generated-->
+    insert into ALLBRANK
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bid != null">
+        BID,
+      </if>
+      <if test="bname != null">
+        BNAME,
+      </if>
+      <if test="bpath != null">
+        BPATH,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bid != null">
+        #{bid,jdbcType=DECIMAL},
+      </if>
+      <if test="bname != null">
+        #{bname,jdbcType=VARCHAR},
+      </if>
+      <if test="bpath != null">
+        #{bpath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhaolian.demo.data.entity.AllbrankExample" resultType="java.lang.Long">
+    <!--@mbg.generated-->
+    select count(*) from ALLBRANK
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--@mbg.generated-->
+    update ALLBRANK
+    <set>
+      <if test="record.bid != null">
+        BID = #{record.bid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bname != null">
+        BNAME = #{record.bname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bpath != null">
+        BPATH = #{record.bpath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--@mbg.generated-->
+    update ALLBRANK
+    set BID = #{record.bid,jdbcType=DECIMAL},
+      BNAME = #{record.bname,jdbcType=VARCHAR},
+      BPATH = #{record.bpath,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhaolian.demo.data.entity.Allbrank">
+    <!--@mbg.generated-->
+    update ALLBRANK
+    <set>
+      <if test="bname != null">
+        BNAME = #{bname,jdbcType=VARCHAR},
+      </if>
+      <if test="bpath != null">
+        BPATH = #{bpath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BID = #{bid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhaolian.demo.data.entity.Allbrank">
+    <!--@mbg.generated-->
+    update ALLBRANK
+    set BNAME = #{bname,jdbcType=VARCHAR},
+      BPATH = #{bpath,jdbcType=VARCHAR}
+    where BID = #{bid,jdbcType=DECIMAL}
+  </update>
+</mapper>

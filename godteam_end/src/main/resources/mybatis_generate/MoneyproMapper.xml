@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhaolian.demo.data.dao.MoneyproMapper">
+  <resultMap id="BaseResultMap" type="com.zhaolian.demo.data.entity.Moneypro">
+    <!--@mbg.generated-->
+    <!--@Table MONEYPRO-->
+    <id column="MPID" jdbcType="DECIMAL" property="mpid" />
+    <result column="MPNAME" jdbcType="VARCHAR" property="mpname" />
+    <result column="MPTYPE" jdbcType="VARCHAR" property="mptype" />
+    <result column="INCOME" jdbcType="DECIMAL" property="income" />
+    <result column="MPPATH" jdbcType="VARCHAR" property="mppath" />
+    <result column="MP_TITLE" jdbcType="VARCHAR" property="mpTitle" />
+    <result column="MP_BODY" jdbcType="VARCHAR" property="mpBody" />
+    <result column="ZHOUQI" jdbcType="DECIMAL" property="zhouqi" />
+    <result column="MIN_MONEY" jdbcType="DECIMAL" property="minMoney" />
+    <result column="BIG_MONEY" jdbcType="DECIMAL" property="bigMoney" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    MPID, MPNAME, MPTYPE, INCOME, MPPATH, MP_TITLE, MP_BODY, ZHOUQI, MIN_MONEY, BIG_MONEY
+  </sql>
+  <select id="selectByExample" parameterType="com.zhaolian.demo.data.entity.MoneyproExample" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from MONEYPRO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from MONEYPRO
+    where MPID = #{mpid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    <!--@mbg.generated-->
+    delete from MONEYPRO
+    where MPID = #{mpid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhaolian.demo.data.entity.MoneyproExample">
+    <!--@mbg.generated-->
+    delete from MONEYPRO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhaolian.demo.data.entity.Moneypro">
+    <!--@mbg.generated-->
+    insert into MONEYPRO (MPID, MPNAME, MPTYPE, 
+      INCOME, MPPATH, MP_TITLE, 
+      MP_BODY, ZHOUQI, MIN_MONEY, 
+      BIG_MONEY)
+    values (#{mpid,jdbcType=DECIMAL}, #{mpname,jdbcType=VARCHAR}, #{mptype,jdbcType=VARCHAR}, 
+      #{income,jdbcType=DECIMAL}, #{mppath,jdbcType=VARCHAR}, #{mpTitle,jdbcType=VARCHAR}, 
+      #{mpBody,jdbcType=VARCHAR}, #{zhouqi,jdbcType=DECIMAL}, #{minMoney,jdbcType=DECIMAL}, 
+      #{bigMoney,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhaolian.demo.data.entity.Moneypro">
+    <!--@mbg.generated-->
+    insert into MONEYPRO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mpid != null">
+        MPID,
+      </if>
+      <if test="mpname != null">
+        MPNAME,
+      </if>
+      <if test="mptype != null">
+        MPTYPE,
+      </if>
+      <if test="income != null">
+        INCOME,
+      </if>
+      <if test="mppath != null">
+        MPPATH,
+      </if>
+      <if test="mpTitle != null">
+        MP_TITLE,
+      </if>
+      <if test="mpBody != null">
+        MP_BODY,
+      </if>
+      <if test="zhouqi != null">
+        ZHOUQI,
+      </if>
+      <if test="minMoney != null">
+        MIN_MONEY,
+      </if>
+      <if test="bigMoney != null">
+        BIG_MONEY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mpid != null">
+        #{mpid,jdbcType=DECIMAL},
+      </if>
+      <if test="mpname != null">
+        #{mpname,jdbcType=VARCHAR},
+      </if>
+      <if test="mptype != null">
+        #{mptype,jdbcType=VARCHAR},
+      </if>
+      <if test="income != null">
+        #{income,jdbcType=DECIMAL},
+      </if>
+      <if test="mppath != null">
+        #{mppath,jdbcType=VARCHAR},
+      </if>
+      <if test="mpTitle != null">
+        #{mpTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="mpBody != null">
+        #{mpBody,jdbcType=VARCHAR},
+      </if>
+      <if test="zhouqi != null">
+        #{zhouqi,jdbcType=DECIMAL},
+      </if>
+      <if test="minMoney != null">
+        #{minMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="bigMoney != null">
+        #{bigMoney,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhaolian.demo.data.entity.MoneyproExample" resultType="java.lang.Long">
+    <!--@mbg.generated-->
+    select count(*) from MONEYPRO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--@mbg.generated-->
+    update MONEYPRO
+    <set>
+      <if test="record.mpid != null">
+        MPID = #{record.mpid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mpname != null">
+        MPNAME = #{record.mpname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mptype != null">
+        MPTYPE = #{record.mptype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.income != null">
+        INCOME = #{record.income,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mppath != null">
+        MPPATH = #{record.mppath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mpTitle != null">
+        MP_TITLE = #{record.mpTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mpBody != null">
+        MP_BODY = #{record.mpBody,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zhouqi != null">
+        ZHOUQI = #{record.zhouqi,jdbcType=DECIMAL},
+      </if>
+      <if test="record.minMoney != null">
+        MIN_MONEY = #{record.minMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bigMoney != null">
+        BIG_MONEY = #{record.bigMoney,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--@mbg.generated-->
+    update MONEYPRO
+    set MPID = #{record.mpid,jdbcType=DECIMAL},
+      MPNAME = #{record.mpname,jdbcType=VARCHAR},
+      MPTYPE = #{record.mptype,jdbcType=VARCHAR},
+      INCOME = #{record.income,jdbcType=DECIMAL},
+      MPPATH = #{record.mppath,jdbcType=VARCHAR},
+      MP_TITLE = #{record.mpTitle,jdbcType=VARCHAR},
+      MP_BODY = #{record.mpBody,jdbcType=VARCHAR},
+      ZHOUQI = #{record.zhouqi,jdbcType=DECIMAL},
+      MIN_MONEY = #{record.minMoney,jdbcType=DECIMAL},
+      BIG_MONEY = #{record.bigMoney,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhaolian.demo.data.entity.Moneypro">
+    <!--@mbg.generated-->
+    update MONEYPRO
+    <set>
+      <if test="mpname != null">
+        MPNAME = #{mpname,jdbcType=VARCHAR},
+      </if>
+      <if test="mptype != null">
+        MPTYPE = #{mptype,jdbcType=VARCHAR},
+      </if>
+      <if test="income != null">
+        INCOME = #{income,jdbcType=DECIMAL},
+      </if>
+      <if test="mppath != null">
+        MPPATH = #{mppath,jdbcType=VARCHAR},
+      </if>
+      <if test="mpTitle != null">
+        MP_TITLE = #{mpTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="mpBody != null">
+        MP_BODY = #{mpBody,jdbcType=VARCHAR},
+      </if>
+      <if test="zhouqi != null">
+        ZHOUQI = #{zhouqi,jdbcType=DECIMAL},
+      </if>
+      <if test="minMoney != null">
+        MIN_MONEY = #{minMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="bigMoney != null">
+        BIG_MONEY = #{bigMoney,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where MPID = #{mpid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhaolian.demo.data.entity.Moneypro">
+    <!--@mbg.generated-->
+    update MONEYPRO
+    set MPNAME = #{mpname,jdbcType=VARCHAR},
+      MPTYPE = #{mptype,jdbcType=VARCHAR},
+      INCOME = #{income,jdbcType=DECIMAL},
+      MPPATH = #{mppath,jdbcType=VARCHAR},
+      MP_TITLE = #{mpTitle,jdbcType=VARCHAR},
+      MP_BODY = #{mpBody,jdbcType=VARCHAR},
+      ZHOUQI = #{zhouqi,jdbcType=DECIMAL},
+      MIN_MONEY = #{minMoney,jdbcType=DECIMAL},
+      BIG_MONEY = #{bigMoney,jdbcType=DECIMAL}
+    where MPID = #{mpid,jdbcType=DECIMAL}
+  </update>
+</mapper>

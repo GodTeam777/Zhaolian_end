@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhaolian.demo.data.dao.BigdaiMapper">
+  <resultMap id="BaseResultMap" type="com.zhaolian.demo.data.entity.Bigdai">
+    <!--@mbg.generated-->
+    <!--@Table BIGDAI-->
+    <id column="BDID" jdbcType="DECIMAL" property="bdid" />
+    <result column="VID" jdbcType="DECIMAL" property="vid" />
+    <result column="BDNAME" jdbcType="VARCHAR" property="bdname" />
+    <result column="BDPATH" jdbcType="VARCHAR" property="bdpath" />
+    <result column="INTEREST" jdbcType="DECIMAL" property="interest" />
+    <result column="BIGDAI_TITLE" jdbcType="VARCHAR" property="bigdaiTitle" />
+    <result column="BIGDAI_BODY" jdbcType="VARCHAR" property="bigdaiBody" />
+    <result column="BDTYPE" jdbcType="VARCHAR" property="bdtype" />
+    <result column="BDDATE" jdbcType="DECIMAL" property="bddate" />
+    <result column="SMALL_MONEY" jdbcType="DECIMAL" property="smallMoney" />
+    <result column="BIG_MONEY" jdbcType="DECIMAL" property="bigMoney" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    BDID, VID, BDNAME, BDPATH, INTEREST, BIGDAI_TITLE, BIGDAI_BODY, BDTYPE, BDDATE, SMALL_MONEY, 
+    BIG_MONEY
+  </sql>
+  <select id="selectByExample" parameterType="com.zhaolian.demo.data.entity.BigdaiExample" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from BIGDAI
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from BIGDAI
+    where BDID = #{bdid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    <!--@mbg.generated-->
+    delete from BIGDAI
+    where BDID = #{bdid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhaolian.demo.data.entity.BigdaiExample">
+    <!--@mbg.generated-->
+    delete from BIGDAI
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhaolian.demo.data.entity.Bigdai">
+    <!--@mbg.generated-->
+    insert into BIGDAI (BDID, VID, BDNAME, 
+      BDPATH, INTEREST, BIGDAI_TITLE, 
+      BIGDAI_BODY, BDTYPE, BDDATE, 
+      SMALL_MONEY, BIG_MONEY)
+    values (#{bdid,jdbcType=DECIMAL}, #{vid,jdbcType=DECIMAL}, #{bdname,jdbcType=VARCHAR}, 
+      #{bdpath,jdbcType=VARCHAR}, #{interest,jdbcType=DECIMAL}, #{bigdaiTitle,jdbcType=VARCHAR}, 
+      #{bigdaiBody,jdbcType=VARCHAR}, #{bdtype,jdbcType=VARCHAR}, #{bddate,jdbcType=DECIMAL}, 
+      #{smallMoney,jdbcType=DECIMAL}, #{bigMoney,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhaolian.demo.data.entity.Bigdai">
+    <!--@mbg.generated-->
+    insert into BIGDAI
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bdid != null">
+        BDID,
+      </if>
+      <if test="vid != null">
+        VID,
+      </if>
+      <if test="bdname != null">
+        BDNAME,
+      </if>
+      <if test="bdpath != null">
+        BDPATH,
+      </if>
+      <if test="interest != null">
+        INTEREST,
+      </if>
+      <if test="bigdaiTitle != null">
+        BIGDAI_TITLE,
+      </if>
+      <if test="bigdaiBody != null">
+        BIGDAI_BODY,
+      </if>
+      <if test="bdtype != null">
+        BDTYPE,
+      </if>
+      <if test="bddate != null">
+        BDDATE,
+      </if>
+      <if test="smallMoney != null">
+        SMALL_MONEY,
+      </if>
+      <if test="bigMoney != null">
+        BIG_MONEY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bdid != null">
+        #{bdid,jdbcType=DECIMAL},
+      </if>
+      <if test="vid != null">
+        #{vid,jdbcType=DECIMAL},
+      </if>
+      <if test="bdname != null">
+        #{bdname,jdbcType=VARCHAR},
+      </if>
+      <if test="bdpath != null">
+        #{bdpath,jdbcType=VARCHAR},
+      </if>
+      <if test="interest != null">
+        #{interest,jdbcType=DECIMAL},
+      </if>
+      <if test="bigdaiTitle != null">
+        #{bigdaiTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bigdaiBody != null">
+        #{bigdaiBody,jdbcType=VARCHAR},
+      </if>
+      <if test="bdtype != null">
+        #{bdtype,jdbcType=VARCHAR},
+      </if>
+      <if test="bddate != null">
+        #{bddate,jdbcType=DECIMAL},
+      </if>
+      <if test="smallMoney != null">
+        #{smallMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="bigMoney != null">
+        #{bigMoney,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhaolian.demo.data.entity.BigdaiExample" resultType="java.lang.Long">
+    <!--@mbg.generated-->
+    select count(*) from BIGDAI
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--@mbg.generated-->
+    update BIGDAI
+    <set>
+      <if test="record.bdid != null">
+        BDID = #{record.bdid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.vid != null">
+        VID = #{record.vid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bdname != null">
+        BDNAME = #{record.bdname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bdpath != null">
+        BDPATH = #{record.bdpath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interest != null">
+        INTEREST = #{record.interest,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bigdaiTitle != null">
+        BIGDAI_TITLE = #{record.bigdaiTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bigdaiBody != null">
+        BIGDAI_BODY = #{record.bigdaiBody,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bdtype != null">
+        BDTYPE = #{record.bdtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bddate != null">
+        BDDATE = #{record.bddate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.smallMoney != null">
+        SMALL_MONEY = #{record.smallMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bigMoney != null">
+        BIG_MONEY = #{record.bigMoney,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--@mbg.generated-->
+    update BIGDAI
+    set BDID = #{record.bdid,jdbcType=DECIMAL},
+      VID = #{record.vid,jdbcType=DECIMAL},
+      BDNAME = #{record.bdname,jdbcType=VARCHAR},
+      BDPATH = #{record.bdpath,jdbcType=VARCHAR},
+      INTEREST = #{record.interest,jdbcType=DECIMAL},
+      BIGDAI_TITLE = #{record.bigdaiTitle,jdbcType=VARCHAR},
+      BIGDAI_BODY = #{record.bigdaiBody,jdbcType=VARCHAR},
+      BDTYPE = #{record.bdtype,jdbcType=VARCHAR},
+      BDDATE = #{record.bddate,jdbcType=DECIMAL},
+      SMALL_MONEY = #{record.smallMoney,jdbcType=DECIMAL},
+      BIG_MONEY = #{record.bigMoney,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhaolian.demo.data.entity.Bigdai">
+    <!--@mbg.generated-->
+    update BIGDAI
+    <set>
+      <if test="vid != null">
+        VID = #{vid,jdbcType=DECIMAL},
+      </if>
+      <if test="bdname != null">
+        BDNAME = #{bdname,jdbcType=VARCHAR},
+      </if>
+      <if test="bdpath != null">
+        BDPATH = #{bdpath,jdbcType=VARCHAR},
+      </if>
+      <if test="interest != null">
+        INTEREST = #{interest,jdbcType=DECIMAL},
+      </if>
+      <if test="bigdaiTitle != null">
+        BIGDAI_TITLE = #{bigdaiTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bigdaiBody != null">
+        BIGDAI_BODY = #{bigdaiBody,jdbcType=VARCHAR},
+      </if>
+      <if test="bdtype != null">
+        BDTYPE = #{bdtype,jdbcType=VARCHAR},
+      </if>
+      <if test="bddate != null">
+        BDDATE = #{bddate,jdbcType=DECIMAL},
+      </if>
+      <if test="smallMoney != null">
+        SMALL_MONEY = #{smallMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="bigMoney != null">
+        BIG_MONEY = #{bigMoney,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where BDID = #{bdid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhaolian.demo.data.entity.Bigdai">
+    <!--@mbg.generated-->
+    update BIGDAI
+    set VID = #{vid,jdbcType=DECIMAL},
+      BDNAME = #{bdname,jdbcType=VARCHAR},
+      BDPATH = #{bdpath,jdbcType=VARCHAR},
+      INTEREST = #{interest,jdbcType=DECIMAL},
+      BIGDAI_TITLE = #{bigdaiTitle,jdbcType=VARCHAR},
+      BIGDAI_BODY = #{bigdaiBody,jdbcType=VARCHAR},
+      BDTYPE = #{bdtype,jdbcType=VARCHAR},
+      BDDATE = #{bddate,jdbcType=DECIMAL},
+      SMALL_MONEY = #{smallMoney,jdbcType=DECIMAL},
+      BIG_MONEY = #{bigMoney,jdbcType=DECIMAL}
+    where BDID = #{bdid,jdbcType=DECIMAL}
+  </update>
+</mapper>

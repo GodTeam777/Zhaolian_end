@@ -1,0 +1,33 @@
+server:
+  port: 10086
+  servlet:
+      context-path: /
+
+#连接数据库
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@47.116.135.78:1521:helowin
+    username: yan_test
+    password: yan_test
+    type: com.alibaba.druid.pool.DruidDataSource
+
+##配置文件传输
+#spring.servlet.multipart.enabled=true
+#spring.servlet.multipart.file-size-threshold=0
+##单个数据的大小
+#spring.servlet.multipart.maxFileSize=100MB
+##总数据的大小
+#spring.servlet.multipart.maxRequestSize=100MB
+
+#日志
+logging:
+  level:
+    com.zhaolian.demo.data.dao: DEBUG
+
+pagehelper:
+  reasonable: true
+
+mybatis:
+  mapper-locations: classpath:mybatis_generate/*.xml
+  type-aliases-package: com.zhaolian.demo.data.entity

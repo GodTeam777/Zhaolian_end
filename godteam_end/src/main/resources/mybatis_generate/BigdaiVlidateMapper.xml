@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhaolian.demo.data.dao.BigdaiVlidateMapper">
+  <resultMap id="BaseResultMap" type="com.zhaolian.demo.data.entity.BigdaiVlidate">
+    <!--@mbg.generated-->
+    <!--@Table BIGDAI_VLIDATE-->
+    <id column="VID" jdbcType="DECIMAL" property="vid" />
+    <result column="IDCARD" jdbcType="DECIMAL" property="idcard" />
+    <result column="XUELI" jdbcType="DECIMAL" property="xueli" />
+    <result column="CHELIANG" jdbcType="DECIMAL" property="cheliang" />
+    <result column="HOME" jdbcType="DECIMAL" property="home" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    VID, IDCARD, XUELI, CHELIANG, HOME
+  </sql>
+  <select id="selectByExample" parameterType="com.zhaolian.demo.data.entity.BigdaiVlidateExample" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from BIGDAI_VLIDATE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from BIGDAI_VLIDATE
+    where VID = #{vid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    <!--@mbg.generated-->
+    delete from BIGDAI_VLIDATE
+    where VID = #{vid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhaolian.demo.data.entity.BigdaiVlidateExample">
+    <!--@mbg.generated-->
+    delete from BIGDAI_VLIDATE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhaolian.demo.data.entity.BigdaiVlidate">
+    <!--@mbg.generated-->
+    insert into BIGDAI_VLIDATE (VID, IDCARD, XUELI, 
+      CHELIANG, HOME)
+    values (#{vid,jdbcType=DECIMAL}, #{idcard,jdbcType=DECIMAL}, #{xueli,jdbcType=DECIMAL}, 
+      #{cheliang,jdbcType=DECIMAL}, #{home,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhaolian.demo.data.entity.BigdaiVlidate">
+    <!--@mbg.generated-->
+    insert into BIGDAI_VLIDATE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="vid != null">
+        VID,
+      </if>
+      <if test="idcard != null">
+        IDCARD,
+      </if>
+      <if test="xueli != null">
+        XUELI,
+      </if>
+      <if test="cheliang != null">
+        CHELIANG,
+      </if>
+      <if test="home != null">
+        HOME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="vid != null">
+        #{vid,jdbcType=DECIMAL},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=DECIMAL},
+      </if>
+      <if test="xueli != null">
+        #{xueli,jdbcType=DECIMAL},
+      </if>
+      <if test="cheliang != null">
+        #{cheliang,jdbcType=DECIMAL},
+      </if>
+      <if test="home != null">
+        #{home,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhaolian.demo.data.entity.BigdaiVlidateExample" resultType="java.lang.Long">
+    <!--@mbg.generated-->
+    select count(*) from BIGDAI_VLIDATE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--@mbg.generated-->
+    update BIGDAI_VLIDATE
+    <set>
+      <if test="record.vid != null">
+        VID = #{record.vid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.idcard != null">
+        IDCARD = #{record.idcard,jdbcType=DECIMAL},
+      </if>
+      <if test="record.xueli != null">
+        XUELI = #{record.xueli,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cheliang != null">
+        CHELIANG = #{record.cheliang,jdbcType=DECIMAL},
+      </if>
+      <if test="record.home != null">
+        HOME = #{record.home,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--@mbg.generated-->
+    update BIGDAI_VLIDATE
+    set VID = #{record.vid,jdbcType=DECIMAL},
+      IDCARD = #{record.idcard,jdbcType=DECIMAL},
+      XUELI = #{record.xueli,jdbcType=DECIMAL},
+      CHELIANG = #{record.cheliang,jdbcType=DECIMAL},
+      HOME = #{record.home,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhaolian.demo.data.entity.BigdaiVlidate">
+    <!--@mbg.generated-->
+    update BIGDAI_VLIDATE
+    <set>
+      <if test="idcard != null">
+        IDCARD = #{idcard,jdbcType=DECIMAL},
+      </if>
+      <if test="xueli != null">
+        XUELI = #{xueli,jdbcType=DECIMAL},
+      </if>
+      <if test="cheliang != null">
+        CHELIANG = #{cheliang,jdbcType=DECIMAL},
+      </if>
+      <if test="home != null">
+        HOME = #{home,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where VID = #{vid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhaolian.demo.data.entity.BigdaiVlidate">
+    <!--@mbg.generated-->
+    update BIGDAI_VLIDATE
+    set IDCARD = #{idcard,jdbcType=DECIMAL},
+      XUELI = #{xueli,jdbcType=DECIMAL},
+      CHELIANG = #{cheliang,jdbcType=DECIMAL},
+      HOME = #{home,jdbcType=DECIMAL}
+    where VID = #{vid,jdbcType=DECIMAL}
+  </update>
+</mapper>

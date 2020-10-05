@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhaolian.demo.data.dao.EducationMapper">
+  <resultMap id="BaseResultMap" type="com.zhaolian.demo.data.entity.Education">
+    <!--@mbg.generated-->
+    <!--@Table EDUCATION-->
+    <id column="EDUSERSID" jdbcType="DECIMAL" property="edusersid" />
+    <result column="SCHOOLNAME" jdbcType="VARCHAR" property="schoolname" />
+    <result column="BEGIN_DATE" jdbcType="TIMESTAMP" property="beginDate" />
+    <result column="END_DATE" jdbcType="TIMESTAMP" property="endDate" />
+    <result column="DEGREE" jdbcType="VARCHAR" property="degree" />
+    <result column="SPATH" jdbcType="VARCHAR" property="spath" />
+    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+    <result column="NDATE" jdbcType="TIMESTAMP" property="ndate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    EDUSERSID, SCHOOLNAME, BEGIN_DATE, END_DATE, "DEGREE", SPATH, "STATUS", NDATE
+  </sql>
+  <select id="selectByExample" parameterType="com.zhaolian.demo.data.entity.EducationExample" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from EDUCATION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from EDUCATION
+    where EDUSERSID = #{edusersid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    <!--@mbg.generated-->
+    delete from EDUCATION
+    where EDUSERSID = #{edusersid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhaolian.demo.data.entity.EducationExample">
+    <!--@mbg.generated-->
+    delete from EDUCATION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhaolian.demo.data.entity.Education">
+    <!--@mbg.generated-->
+    insert into EDUCATION (EDUSERSID, SCHOOLNAME, BEGIN_DATE, 
+      END_DATE, "DEGREE", SPATH, 
+      "STATUS", NDATE)
+    values (#{edusersid,jdbcType=DECIMAL}, #{schoolname,jdbcType=VARCHAR}, #{beginDate,jdbcType=TIMESTAMP}, 
+      #{endDate,jdbcType=TIMESTAMP}, #{degree,jdbcType=VARCHAR}, #{spath,jdbcType=VARCHAR}, 
+      #{status,jdbcType=DECIMAL}, #{ndate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhaolian.demo.data.entity.Education">
+    <!--@mbg.generated-->
+    insert into EDUCATION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="edusersid != null">
+        EDUSERSID,
+      </if>
+      <if test="schoolname != null">
+        SCHOOLNAME,
+      </if>
+      <if test="beginDate != null">
+        BEGIN_DATE,
+      </if>
+      <if test="endDate != null">
+        END_DATE,
+      </if>
+      <if test="degree != null">
+        "DEGREE",
+      </if>
+      <if test="spath != null">
+        SPATH,
+      </if>
+      <if test="status != null">
+        "STATUS",
+      </if>
+      <if test="ndate != null">
+        NDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="edusersid != null">
+        #{edusersid,jdbcType=DECIMAL},
+      </if>
+      <if test="schoolname != null">
+        #{schoolname,jdbcType=VARCHAR},
+      </if>
+      <if test="beginDate != null">
+        #{beginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="degree != null">
+        #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="spath != null">
+        #{spath,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="ndate != null">
+        #{ndate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhaolian.demo.data.entity.EducationExample" resultType="java.lang.Long">
+    <!--@mbg.generated-->
+    select count(*) from EDUCATION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--@mbg.generated-->
+    update EDUCATION
+    <set>
+      <if test="record.edusersid != null">
+        EDUSERSID = #{record.edusersid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.schoolname != null">
+        SCHOOLNAME = #{record.schoolname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beginDate != null">
+        BEGIN_DATE = #{record.beginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endDate != null">
+        END_DATE = #{record.endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.degree != null">
+        "DEGREE" = #{record.degree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spath != null">
+        SPATH = #{record.spath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        "STATUS" = #{record.status,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ndate != null">
+        NDATE = #{record.ndate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--@mbg.generated-->
+    update EDUCATION
+    set EDUSERSID = #{record.edusersid,jdbcType=DECIMAL},
+      SCHOOLNAME = #{record.schoolname,jdbcType=VARCHAR},
+      BEGIN_DATE = #{record.beginDate,jdbcType=TIMESTAMP},
+      END_DATE = #{record.endDate,jdbcType=TIMESTAMP},
+      "DEGREE" = #{record.degree,jdbcType=VARCHAR},
+      SPATH = #{record.spath,jdbcType=VARCHAR},
+      "STATUS" = #{record.status,jdbcType=DECIMAL},
+      NDATE = #{record.ndate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhaolian.demo.data.entity.Education">
+    <!--@mbg.generated-->
+    update EDUCATION
+    <set>
+      <if test="schoolname != null">
+        SCHOOLNAME = #{schoolname,jdbcType=VARCHAR},
+      </if>
+      <if test="beginDate != null">
+        BEGIN_DATE = #{beginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null">
+        END_DATE = #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="degree != null">
+        "DEGREE" = #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="spath != null">
+        SPATH = #{spath,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        "STATUS" = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="ndate != null">
+        NDATE = #{ndate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where EDUSERSID = #{edusersid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhaolian.demo.data.entity.Education">
+    <!--@mbg.generated-->
+    update EDUCATION
+    set SCHOOLNAME = #{schoolname,jdbcType=VARCHAR},
+      BEGIN_DATE = #{beginDate,jdbcType=TIMESTAMP},
+      END_DATE = #{endDate,jdbcType=TIMESTAMP},
+      "DEGREE" = #{degree,jdbcType=VARCHAR},
+      SPATH = #{spath,jdbcType=VARCHAR},
+      "STATUS" = #{status,jdbcType=DECIMAL},
+      NDATE = #{ndate,jdbcType=TIMESTAMP}
+    where EDUSERSID = #{edusersid,jdbcType=DECIMAL}
+  </update>
+</mapper>
