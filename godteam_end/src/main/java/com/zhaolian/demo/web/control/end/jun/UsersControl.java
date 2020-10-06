@@ -31,8 +31,8 @@ public class UsersControl {
     @RequestMapping("Login")
         public @ResponseBody
     Users UsersLogin(HttpSession session,@RequestBody Map data) {
-        System.out.println("进入控制器");
-        System.out.println("传输的数据："+data.toString());
+        //System.out.println("进入控制器");
+        //System.out.println("传输的数据："+data.toString());
 //        Users user=userService.UserLogin((String)data.get("petname"),Integer.parseInt((String)data.get("uspws")));
         Users user=new Users();
         int i=4;
