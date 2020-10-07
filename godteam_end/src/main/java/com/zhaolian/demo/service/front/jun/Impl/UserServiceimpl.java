@@ -29,5 +29,11 @@ public class UserServiceimpl implements IUserService {
         return user;
     }
 
+    @Override
+    public int UserRegister(Users user) {
+
+        return 0;
+    }
+
 
 }
