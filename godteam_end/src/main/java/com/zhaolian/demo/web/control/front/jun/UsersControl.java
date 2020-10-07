@@ -31,7 +31,6 @@ public class UsersControl {
         System.out.println("进入控制器");
         System.out.println("传输的数据："+data.toString());
         Users user=userService.UserLogin((String)data.get("petname"),Integer.parseInt((String)data.get("uspws")));
-
         System.out.println("会话："+session.toString());
         session.setAttribute("myuser",user);
         System.out.println(user.toString());

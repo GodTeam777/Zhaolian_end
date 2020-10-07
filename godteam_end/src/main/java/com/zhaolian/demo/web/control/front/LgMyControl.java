@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class LgMyControl {
@@ -80,4 +78,5 @@ public class LgMyControl {
         so.setYihuan(new BigDecimal(0));
         return this.smallDaiService.smalldai(user,so);
     }
+
 }
