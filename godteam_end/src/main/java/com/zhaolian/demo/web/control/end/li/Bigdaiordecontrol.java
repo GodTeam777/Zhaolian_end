@@ -36,4 +36,5 @@ public class Bigdaiordecontrol {
         System.out.println("分页结果PageBean:"+pb.getTotal());
         return pb;
     }
+
 }

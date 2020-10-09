@@ -33,4 +33,15 @@ public class Bigdaiordeserviceimpl implements Bigdaiordeservice {
 
         return pd;
     }
+
+//    @Override
+//    public   Integer updateByPrimaryKeySelective(Bigdaiorder record){
+//        int a= dao.updateByPrimaryKeySelective(record);
+//        return a;
+//    };
+//    @Override
+//    public  Integer deleteByPrimaryKey(int bdid){
+//        int a=  dao.deleteByPrimaryKey(bdid);
+//        return a;
+//    };
 }
