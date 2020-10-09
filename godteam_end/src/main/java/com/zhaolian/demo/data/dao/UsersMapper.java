@@ -12,6 +12,13 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface UsersMapper {
 
+    //房屋认证修改额度
+    int updateHome(Users record);
+    //车辆认证修改额度
+    int updateCAR(Users record);
+    //学历认证修改额度
+    int update(Users record);
+
     Users LoginBypetnameAnduspws(Map<String,Object> map);
 
     long countByExample(UsersExample example);
