@@ -19,6 +19,7 @@
     <result column="USPWS" jdbcType="DECIMAL" property="uspws" />
     <result column="ZFPWS" jdbcType="DECIMAL" property="zfpws" />
     <result column="PETNAME" jdbcType="VARCHAR" property="petname" />
+
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--@mbg.generated-->

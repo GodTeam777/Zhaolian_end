@@ -1,10 +1,13 @@
 package com.zhaolian.demo.data.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class Bigdai implements Serializable {
-    private BigDecimal bdid;
+    private int bdid;
 
     private BigDecimal vid;
 
@@ -12,7 +15,7 @@ public class Bigdai implements Serializable {
 
     private String bdpath;
 
-    private BigDecimal interest;
+    private Double interest;
 
     private String bigdaiTitle;
 
@@ -20,19 +23,19 @@ public class Bigdai implements Serializable {
 
     private String bdtype;
 
-    private BigDecimal bddate;
+    private int bddate;
 
-    private BigDecimal smallMoney;
+    private int smallMoney;
 
-    private BigDecimal bigMoney;
+    private int bigMoney;
 
     private static final long serialVersionUID = 1L;
 
-    public BigDecimal getBdid() {
+    public int getBdid() {
         return bdid;
     }
 
-    public void setBdid(BigDecimal bdid) {
+    public void setBdid(int bdid) {
         this.bdid = bdid;
     }
 
@@ -60,11 +63,11 @@ public class Bigdai implements Serializable {
         this.bdpath = bdpath;
     }
 
-    public BigDecimal getInterest() {
+    public Double getInterest() {
         return interest;
     }
 
-    public void setInterest(BigDecimal interest) {
+    public void setInterest(Double interest) {
         this.interest = interest;
     }
 
@@ -92,27 +95,27 @@ public class Bigdai implements Serializable {
         this.bdtype = bdtype;
     }
 
-    public BigDecimal getBddate() {
+    public int getBddate() {
         return bddate;
     }
 
-    public void setBddate(BigDecimal bddate) {
+    public void setBddate(int bddate) {
         this.bddate = bddate;
     }
 
-    public BigDecimal getSmallMoney() {
+    public int getSmallMoney() {
         return smallMoney;
     }
 
-    public void setSmallMoney(BigDecimal smallMoney) {
+    public void setSmallMoney(int smallMoney) {
         this.smallMoney = smallMoney;
     }
 
-    public BigDecimal getBigMoney() {
+    public int getBigMoney() {
         return bigMoney;
     }
 
-    public void setBigMoney(BigDecimal bigMoney) {
+    public void setBigMoney(int bigMoney) {
         this.bigMoney = bigMoney;
     }
 

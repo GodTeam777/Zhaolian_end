@@ -103,7 +103,7 @@
     from BIGDAI
     where BDID = #{bdid,jdbcType=DECIMAL}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+  <delete id="deleteByPrimaryKey" parameterType="int">
     <!--@mbg.generated-->
     delete from BIGDAI
     where BDID = #{bdid,jdbcType=DECIMAL}
@@ -115,17 +115,56 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+
+  <select id="getBigdaiCount" parameterType="com.zhaolian.demo.web.util.BigdaiDTO" resultType="int">
+select count(*) from BIGDAI b
+<where>
+<if test='bdname != null and bdname!=""'>
+			b.BDNAME like '%'||#{bdname}||'%'
+			</if>
+
+			<if test='Bdtype != null and Bdtype!=""'>
+			and  b.bdtype like '%'||#{Bdtype}||'%'
+			</if>
+</where>
+
+</select>
+
+  <select id="selectBigdaiByPage" parameterType="java.util.Map"  resultMap="BaseResultMap">
+select * from (select row_number()
+  over(order by BDID)no,b.* from bigdai b
+  <where><if test='bdname != null and bdname!=""'>
+			b.BDNAME like '%'||#{bdname}||'%'
+			</if>
+
+			<if test='Bdtype != null and Bdtype!=""'>
+			and  b.bdtype like '%'||#{Bdtype}||'%'
+			</if>
+
+		</where>
+
+)temp
+<if test='endIndex != null and endIndex!=""'>
+			<![CDATA[where temp.no <=#{endIndex}]]>
+		</if>
+		<if test='startIndex != null and startIndex!=""'>
+			and temp.no>=#{startIndex}
+		</if>
+
+</select>
+
   <insert id="insert" parameterType="com.zhaolian.demo.data.entity.Bigdai">
     <!--@mbg.generated-->
-    insert into BIGDAI (BDID, VID, BDNAME, 
+    insert into BIGDAI (BDID, BDNAME,
       BDPATH, INTEREST, BIGDAI_TITLE, 
       BIGDAI_BODY, BDTYPE, BDDATE, 
       SMALL_MONEY, BIG_MONEY)
-    values (#{bdid,jdbcType=DECIMAL}, #{vid,jdbcType=DECIMAL}, #{bdname,jdbcType=VARCHAR}, 
+    values (#{bdid,jdbcType=DECIMAL}, #{bdname,jdbcType=VARCHAR},
       #{bdpath,jdbcType=VARCHAR}, #{interest,jdbcType=DECIMAL}, #{bigdaiTitle,jdbcType=VARCHAR}, 
       #{bigdaiBody,jdbcType=VARCHAR}, #{bdtype,jdbcType=VARCHAR}, #{bddate,jdbcType=DECIMAL}, 
       #{smallMoney,jdbcType=DECIMAL}, #{bigMoney,jdbcType=DECIMAL})
   </insert>
+
   <insert id="insertSelective" parameterType="com.zhaolian.demo.data.entity.Bigdai">
     <!--@mbg.generated-->
     insert into BIGDAI
@@ -319,4 +358,5 @@
       BIG_MONEY = #{bigMoney,jdbcType=DECIMAL}
     where BDID = #{bdid,jdbcType=DECIMAL}
   </update>
+
 </mapper>
