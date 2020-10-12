@@ -4,12 +4,14 @@ import com.zhaolian.demo.data.dao.CarMapper;
 import com.zhaolian.demo.data.dao.UsersMapper;
 import com.zhaolian.demo.data.entity.Car;
 import com.zhaolian.demo.data.entity.Education;
+import com.zhaolian.demo.data.entity.Idcard;
 import com.zhaolian.demo.data.entity.Users;
 import com.zhaolian.demo.service.front.yjh.ICar;
 import com.zhaolian.demo.service.util.PageBean;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +56,13 @@ public class ICarompl implements ICar {
         dao.updateByPrimaryKeySelective(car);
         //调用执行方法
         Usersdao.updateCAR(user);
+    }
+
+    @Override
+    public Car selectByid(Integer id) {
+        //根据个人信息id查询详细信息
+        Car all=this.dao.selectByPrimaryKey(new BigDecimal(id));
+        return all;
     }
 }
 

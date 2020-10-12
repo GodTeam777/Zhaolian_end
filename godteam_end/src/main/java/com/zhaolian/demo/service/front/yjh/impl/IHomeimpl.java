@@ -4,12 +4,14 @@ import com.zhaolian.demo.data.dao.HomeMapper;
 import com.zhaolian.demo.data.dao.UsersMapper;
 import com.zhaolian.demo.data.entity.Car;
 import com.zhaolian.demo.data.entity.Home;
+import com.zhaolian.demo.data.entity.Idcard;
 import com.zhaolian.demo.data.entity.Users;
 import com.zhaolian.demo.service.front.yjh.IHome;
 import com.zhaolian.demo.service.util.PageBean;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,5 +53,12 @@ public class IHomeimpl implements IHome {
         dao.updateByPrimaryKeySelective(home);
         //调用执行方法
         Usersdao.updateHome(user);
+    }
+
+    @Override
+    public Home selectByid(Integer id) {
+        //根据个人信息id查询详细信息
+        Home all=this.dao.selectByPrimaryKey(new BigDecimal(id));
+        return all;
     }
 }

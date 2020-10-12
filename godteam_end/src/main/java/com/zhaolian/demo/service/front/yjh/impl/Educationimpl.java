@@ -20,7 +20,6 @@ public class Educationimpl implements Ieducation {
     @Resource
     EducationMapper dao;
 
-
     @Resource
     UsersMapper Usersdao;
     //分页
@@ -55,6 +54,14 @@ public class Educationimpl implements Ieducation {
              dao.updateByPrimaryKeySelective(edu);
              //调用执行方法
              Usersdao.update(user);
+    }
+
+    //根据用户id查询学历信息
+    @Override
+    public Education selectByid(Integer id) {
+        //根据个人信息id查询学历信息
+        Education all= this.dao.selectByPrimaryKey(new BigDecimal(id));
+        return all;
     }
 }
 

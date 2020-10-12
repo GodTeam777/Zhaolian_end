@@ -1,6 +1,7 @@
 package com.zhaolian.demo.web.control.front.yjh;
 
 import com.zhaolian.demo.data.entity.Education;
+import com.zhaolian.demo.data.entity.Idcard;
 import com.zhaolian.demo.data.entity.Users;
 import com.zhaolian.demo.service.front.yjh.impl.Educationimpl;
 import com.zhaolian.demo.service.util.PageBean;
@@ -66,5 +67,15 @@ public class IeducationControl {
         //不通过执行修改状态为1
         this.service.EducationAdd(edu,null);
         return edu;
+    }
+
+    //根据id查询学历信息
+    @RequestMapping(value="selectEducationByid",method = RequestMethod.POST)
+    public @ResponseBody
+    Education selectByid (String id){
+        System.out.println("前端传递的id:"+id);
+        Education all=this.service.selectByid(new Integer(id));
+        System.out.println("查询结果"+all.toString());
+        return all;
     }
 }

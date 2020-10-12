@@ -10,4 +10,6 @@ public interface IHome {
     PageBean<Home> queryReturnPage(int pageNo, int pageSize);
     //学历审核通过增加小额额度
     public void HomeUpdateandAdd(Home home, Users user);
+    //根据用户id查询学历信息
+    public Home selectByid(Integer id);
 }
