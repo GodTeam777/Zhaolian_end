@@ -35,9 +35,10 @@ public class LgMyControl {
     @RequestMapping("/smalldai_home")
     public @ResponseBody
     Map smalldaihome(HttpSession session){
-        Users user1 = userDao.selectByPrimaryKey(new BigDecimal(4));
-        session.setAttribute("myuser",user1);
+//        Users user1 = userDao.selectByPrimaryKey(new BigDecimal(4));
+//        session.setAttribute("myuser",user1);
         Users user =(Users) session.getAttribute("myuser");
+        System.out.println("aaa:"+user.toString());
         Map list=smallDaiService.smallDai_home(user);
         return list;
     }
