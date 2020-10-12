@@ -30,6 +30,7 @@
     select count(*) from samlldai_order where to_number(to_char(DAI_DATE,'MM')) = #{month}
   </select>
 
+
   <sql id="Example_Where_Clause">
     <!--@mbg.generated-->
     <where>

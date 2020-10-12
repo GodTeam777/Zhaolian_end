@@ -14,6 +14,7 @@
     <result column="STATUS" jdbcType="DECIMAL" property="status" />
   </resultMap>
 
+
   <!--  自定义 查询理财产品-->
   <select id="pro_order_all" parameterType="java.lang.String" resultMap="BaseResultMap">
     select * from PROORDER where LICAI_DATE between to_date(#{start},'yyyy-MM-dd') and to_date(#{end},'yyyy-MM-dd')
@@ -28,6 +29,7 @@
   <select id="pro_order_month_count" parameterType="java.lang.Integer" resultType="int">
     select count(*) from PROORDER where to_number(to_char(LICAI_DATE,'MM')) = #{month}
   </select>
+
 
   <sql id="Example_Where_Clause">
     <!--@mbg.generated-->

@@ -256,4 +256,25 @@
       NDATE = #{ndate,jdbcType=TIMESTAMP}
     where CID = #{cid,jdbcType=DECIMAL}
   </update>
+
+     <!--总记录数：-->
+   <select id="getTotalCount"
+		resultType="int">
+		select count(*) from CAR
+	</select>
+
+
+<!--分页 叶金豪-->
+<select id="selectByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+select * from (select row_number() over(order by CID desc) no, t.* from CAR t
+) temp
+		<if test='endIndex != null and endIndex!=""'>
+			<![CDATA[where no <=#{endIndex}]]>
+		</if>
+
+		<if test='startIndex != null and startIndex!=""'>
+			and no>=#{startIndex}
+		</if>
+</select>
+
 </mapper>

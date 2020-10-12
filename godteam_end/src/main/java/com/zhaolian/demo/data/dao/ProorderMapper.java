@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface ProorderMapper {
 
+
     //查询理财产品
     List<Proorder> pro_order_all(String start, String end);
 
@@ -18,6 +19,7 @@ public interface ProorderMapper {
 
     //查询理财产品一月的总数
     int pro_order_month_count(Integer month);
+
 
     long countByExample(ProorderExample example);
 

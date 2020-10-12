@@ -5,12 +5,15 @@ import com.zhaolian.demo.data.entity.SamlldaiOrderExample;
 import java.math.BigDecimal;
 import java.util.List;
 
+
 import com.zhaolian.demo.data.entity.SmadaiLilv;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface SamlldaiOrderMapper {
+
 
     //查询小额贷款
     List<SamlldaiOrder> samll_dk_all(String start, String end);
@@ -18,6 +21,7 @@ public interface SamlldaiOrderMapper {
     int samll_dk_count(String dates, String datesOne);
 
     int samll_month_count(Integer month);
+
 
     long countByExample(SamlldaiOrderExample example);
 

@@ -17,6 +17,7 @@
     <result column="STATUS" jdbcType="DECIMAL" property="status" />
   </resultMap>
 
+
   <!--  自定义 查询大额贷款-->
   <select id="big_dk_all" parameterType="java.lang.String" resultMap="BaseResultMap">
     select * from bigdaiorder where DAI_DATE between to_date(#{start},'yyyy-MM-dd') and to_date(#{end},'yyyy-MM-dd')
@@ -31,6 +32,7 @@
   <select id="big_month_count" parameterType="java.lang.Integer" resultType="int">
     select count(*) from bigdaiorder where to_number(to_char(DAI_DATE,'MM')) = #{month}
   </select>
+
 
   <sql id="Example_Where_Clause">
     <!--@mbg.generated-->
