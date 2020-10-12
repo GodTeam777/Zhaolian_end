@@ -9,5 +9,7 @@ public interface Ieducation {
     PageBean<Education> queryReturnPage(int pageNo, int pageSize);
     //学历审核通过增加小额额度
     public void EducationAdd(Education edu, Users user);
+    //根据用户id查询学历信息
+    public Education selectByid(Integer id);
 
 }
