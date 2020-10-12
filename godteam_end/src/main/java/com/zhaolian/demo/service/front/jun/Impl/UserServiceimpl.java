@@ -1,10 +1,7 @@
 package com.zhaolian.demo.service.front.jun.Impl;
 
 import ch.qos.logback.core.joran.spi.InterpretationContext;
-import com.zhaolian.demo.data.dao.BankMapper;
-import com.zhaolian.demo.data.dao.EducationMapper;
-import com.zhaolian.demo.data.dao.IdcardMapper;
-import com.zhaolian.demo.data.dao.UsersMapper;
+import com.zhaolian.demo.data.dao.*;
 import com.zhaolian.demo.data.entity.*;
 import com.zhaolian.demo.service.front.jun.IUserService;
 import org.springframework.stereotype.Service;
@@ -20,6 +17,8 @@ import java.util.List;
 public class UserServiceimpl implements IUserService {
 
     @Resource
+    HomeMapper homeMapper;
+    @Resource
     EducationMapper educationMapper;
     @Resource
     UsersMapper Usersdao;
@@ -27,6 +26,8 @@ public class UserServiceimpl implements IUserService {
     IdcardMapper idcardMapper;
     @Resource
     BankMapper bankMapper;
+    @Resource
+    CarMapper carMapper;
     private InterpretationContext EmptyUtil;
 
     //根据id查询用户
@@ -161,11 +162,6 @@ public class UserServiceimpl implements IUserService {
         return i;
     }
 
-    //学历是否验证
-    public Education select_att_education(BigDecimal eduid){
-        return educationMapper.selectByPrimaryKey(eduid);
-    }
-
     //添加银行卡
     @Override
     public int AddBankCard(Bank bank){
@@ -179,6 +175,121 @@ public class UserServiceimpl implements IUserService {
         ex.createCriteria().andUsersidEqualTo(new BigDecimal(33));
         List<Bank> list=bankMapper.selectByExample(ex);
         return list;
+    }
+
+
+
+    //学历是否提交验证
+    @Override
+    public Education select_att_education(BigDecimal eduid){
+        return educationMapper.selectByPrimaryKey(eduid);
+    }
+
+    //提交学历验证
+    @Override
+    public int att_education(HttpSession session,Education education){
+        Users users= (Users) session.getAttribute("myuser");
+
+        System.out.println("认证："+users.toString());
+        BigDecimal id=new BigDecimal(0);
+        String path="";
+        if(users.getEdusersid()!=null){
+            id=users.getEdusersid();
+        }
+
+        int i=educationMapper.insertSelective(education);
+        EducationExample ex=new EducationExample();
+        ex.createCriteria().andSpathEqualTo(education.getSpath());
+        education=educationMapper.selectByExample(ex).get(0);
+        Users user=(Users)session.getAttribute("myuser");
+
+        Users u=new Users();
+        u.setUsersid(user.getUsersid());
+        u.setEdusersid(education.getEdusersid());
+        Usersdao.updateByPrimaryKeySelective(u);
+
+        if(new Integer(id.toString())>0) {
+            education = educationMapper.selectByPrimaryKey(id);
+            path = System.getProperty("user.dir") + "\\upload\\" + education.getSpath();
+            File file = new File(path);
+            file.delete();
+            educationMapper.deleteByPrimaryKey(id);
+        }
+        return i;
+    }
+
+    //房屋是否提交验证
+    @Override
+    public Home select_att_house(BigDecimal hid){
+        return homeMapper.selectByPrimaryKey(hid);
+    }
+    //提交房屋验证
+    @Override
+    public int att_house(HttpSession session,Home home){
+        Users users= (Users) session.getAttribute("myuser");
+
+        System.out.println("认证："+users.toString());
+        BigDecimal id=new BigDecimal(0);
+        String path="";
+        if(users.getHid()!=null){
+            id=users.getHid();
+        }
+
+        int i=homeMapper.insertSelective(home);
+
+        HomeExample hex=new HomeExample();
+        hex.createCriteria().andHpathEqualTo(home.getHpath());
+        home=homeMapper.selectByExample(hex).get(0);
+
+        Users u=new Users();
+        u.setUsersid(users.getUsersid());
+        u.setHid(home.getHid());
+        Usersdao.updateByPrimaryKeySelective(u);
+        if(new Integer(id.toString())>0) {
+            home = homeMapper.selectByPrimaryKey(id);
+            path = System.getProperty("user.dir") + "\\upload\\" + home.getHpath();
+            File file = new File(path);
+            file.delete();
+            homeMapper.deleteByPrimaryKey(id);
+        }
+        return i;
+    }
+
+    //车辆是否提交验证
+    @Override
+    public Car select_att_car(BigDecimal cid){
+        return carMapper.selectByPrimaryKey(cid);
+    }
+    //提交车辆验证
+    @Override
+    public int att_car(HttpSession session,Car car){
+        Users users= (Users) session.getAttribute("myuser");
+        System.out.println("认证："+users.toString());
+        BigDecimal id=new BigDecimal(0);
+        String path="";
+            if(users.getCid()!=null){
+                 id=users.getCid();
+            }
+
+        int i=carMapper.insertSelective(car);
+
+        CarExample cex=new CarExample();
+        cex.createCriteria().andCpathEqualTo(car.getCpath());
+        car=carMapper.selectByExample(cex).get(0);
+
+        Users u=new Users();
+        u.setUsersid(users.getUsersid());
+        u.setCid(car.getCid());
+        Usersdao.updateByPrimaryKeySelective(u);
+
+        if(new Integer(id.toString())>0) {
+            car = carMapper.selectByPrimaryKey(id);
+            path = System.getProperty("user.dir") + "\\upload\\" + car.getCpath();
+            File file = new File(path);
+            file.delete();
+            carMapper.deleteByPrimaryKey(id);
+        }
+        return i;
     }
 
 }
