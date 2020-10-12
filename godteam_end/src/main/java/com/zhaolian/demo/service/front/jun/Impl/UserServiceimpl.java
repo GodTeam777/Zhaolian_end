@@ -2,6 +2,7 @@ package com.zhaolian.demo.service.front.jun.Impl;
 
 import ch.qos.logback.core.joran.spi.InterpretationContext;
 import com.zhaolian.demo.data.dao.BankMapper;
+import com.zhaolian.demo.data.dao.EducationMapper;
 import com.zhaolian.demo.data.dao.IdcardMapper;
 import com.zhaolian.demo.data.dao.UsersMapper;
 import com.zhaolian.demo.data.entity.*;
@@ -18,6 +19,8 @@ import java.util.List;
 @Service
 public class UserServiceimpl implements IUserService {
 
+    @Resource
+    EducationMapper educationMapper;
     @Resource
     UsersMapper Usersdao;
     @Resource
@@ -158,6 +161,16 @@ public class UserServiceimpl implements IUserService {
         return i;
     }
 
+    //学历是否验证
+    public Education select_att_education(BigDecimal eduid){
+        return educationMapper.selectByPrimaryKey(eduid);
+    }
+
+    //添加银行卡
+    @Override
+    public int AddBankCard(Bank bank){
+        return bankMapper.insertSelective(bank);
+    }
     //查询银行卡
     @Override
     public List<Bank> selectBank(Users user){

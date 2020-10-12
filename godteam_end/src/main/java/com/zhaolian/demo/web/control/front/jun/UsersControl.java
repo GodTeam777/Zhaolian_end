@@ -2,6 +2,7 @@ package com.zhaolian.demo.web.control.front.jun;
 
 
 import com.zhaolian.demo.data.entity.Bank;
+import com.zhaolian.demo.data.entity.Education;
 import com.zhaolian.demo.data.entity.Idcard;
 import com.zhaolian.demo.data.entity.Users;
 import com.zhaolian.demo.service.front.jun.IUserService;
@@ -129,13 +130,49 @@ public class UsersControl {
     }
 
 
-    @RequestMapping("updatezfpws")
+    //添加银行卡
+    @RequestMapping("AddBankCard")
+    public @ResponseBody int AddBankCard(@RequestBody Map data,HttpSession session){
+        Users users= (Users) session.getAttribute("myuser");
+        Bank bank=new Bank();
+        bank.setUsersid(users.getUsersid());
+        bank.setBankcard(new BigDecimal(data.get("brankcard").toString()));
+        bank.setBid(new BigDecimal(data.get("region").toString()));
+        bank.setBrankphone(data.get("brankphone").toString());
+        System.out.println("添加银行卡："+bank.toString());
+        return userService.AddBankCard(bank);
+    }
+
+    //学历是否验证
+    @RequestMapping("select_att_education")
+    public @ResponseBody Education  select_att_education(HttpSession session){
+        Users users= (Users) session.getAttribute("myuser");
+        Education education=null;
+        if(users.getEdusersid()!=null){
+            if(new Integer(users.getEdusersid().toString())>0) {
+                education = userService.select_att_education(users.getEdusersid());
+                education.setSpath("http://localhost:10086/img/"+education.getSpath());
+                System.out.println("学历信息："+education.toString());
+                return education;
+            }
+        }
+        System.out.println("学历信息："+education.toString());
+        return education;
+    }
+    //学历验证
+    @RequestMapping("att_education")
+    public @ResponseBody int att_education(@RequestBody Map data){
+
+        return 1;
+    }
+
     //修改密码（支付密码）
+    @RequestMapping("updatezfpws")
     public @ResponseBody int updatezfpws(@RequestBody Map data,HttpSession session){
         System.out.println("修改登录密码");
         Users myuser= (Users) session.getAttribute("myuser");
         int i=0;
-        if(myuser.getZfpws()==data.get("Ozfpws")){
+        if(myuser.getZfpws().toString().equals(data.get("Ozfpws").toString())){
             Users user=new Users();
             user.setUsersid(myuser.getUsersid());
             user.setZfpws(new BigDecimal((String)data.get("Newzfpwsd")));
