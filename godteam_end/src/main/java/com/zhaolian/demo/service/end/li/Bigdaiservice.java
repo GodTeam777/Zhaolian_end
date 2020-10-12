@@ -4,6 +4,8 @@ import com.zhaolian.demo.data.entity.Bigdai;
 import com.zhaolian.demo.web.util.BigdaiDTO;
 import com.zhaolian.demo.web.util.PageBean;
 
+import java.math.BigDecimal;
+
 public interface Bigdaiservice {
     int insert(Bigdai record);
 
@@ -11,5 +13,5 @@ public interface Bigdaiservice {
 
     public  Integer updateByPrimaryKeySelective(Bigdai record);
 
-    public  Integer deleteByPrimaryKey(int bdid);
+    public  Integer deleteByPrimaryKey(BigDecimal bdid);
 }

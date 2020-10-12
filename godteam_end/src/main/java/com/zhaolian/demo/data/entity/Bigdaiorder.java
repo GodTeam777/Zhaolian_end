@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Bigdaiorder implements Serializable {
-    private int boid;
+    private BigDecimal boid;
 
     private BigDecimal usersid;
 
@@ -57,11 +57,11 @@ public class Bigdaiorder implements Serializable {
                 '}';
     }
 
-    public int getBoid() {
+    public BigDecimal getBoid() {
         return boid;
     }
 
-    public void setBoid(int boid) {
+    public void setBoid(BigDecimal boid) {
         this.boid = boid;
     }
 
@@ -165,7 +165,7 @@ public class Bigdaiorder implements Serializable {
         return serialVersionUID;
     }
 
-    public Bigdaiorder(int boid, BigDecimal usersid, BigDecimal bdid, BigDecimal bigmoney, BigDecimal bigdaiDate, BigDecimal yihuan, BigDecimal huanCard, BigDecimal shouCard, Date daiDate, BigDecimal onemoney, BigDecimal status, Bigdai bigdai, Users users) {
+    public Bigdaiorder(BigDecimal boid, BigDecimal usersid, BigDecimal bdid, BigDecimal bigmoney, BigDecimal bigdaiDate, BigDecimal yihuan, BigDecimal huanCard, BigDecimal shouCard, Date daiDate, BigDecimal onemoney, BigDecimal status, Bigdai bigdai, Users users) {
         this.boid = boid;
         this.usersid = usersid;
         this.bdid = bdid;

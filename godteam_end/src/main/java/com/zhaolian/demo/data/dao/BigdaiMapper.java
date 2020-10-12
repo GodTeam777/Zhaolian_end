@@ -22,7 +22,7 @@ public interface BigdaiMapper {
 
     int deleteByExample(BigdaiExample example);
 
-    int deleteByPrimaryKey(int bdid);
+    int deleteByPrimaryKey(BigDecimal bdid);
 
     int insert(Bigdai record);
 

@@ -131,7 +131,7 @@ on b.BDID = d.BDID
 			and  d.BDNAME like '%'||#{Bdname}||'%'
 			</if>
 			<if test='status != null and status!=""'>
-			and  b.STATUS like '%'||#{status}||'%'
+			and  b.STATUS=#{status}
 			</if>
 </where>
 
@@ -141,15 +141,15 @@ on b.BDID = d.BDID
 select * from (select row_number()
   over(order by Boid)no,b.* ,u.UNAME ,d.BDNAME from BIGDAIORDER b  join USERS u on  b.USERSID=u.USERSID join BIGDAI d
 on b.BDID = d.BDID
-  <where><if test='bdname != null and bdname!=""'>
-			u.UNAME like '%'||#{uuname}||'%'
+  <where><if test='dto.uuname != null and dto.uuname!=""'>
+			u.UNAME like '%'||#{dto.uuname}||'%'
 			</if>
 
-			<if test='Bdname != null and Bdname!=""'>
-			and  d.BDNAME like '%'||#{Bdname}||'%'
+			<if test='dto.Bdname != null and dto.Bdname!=""'>
+			and  d.BDNAME like '%'||#{dto.Bdname}||'%'
 			</if>
-			<if test='status != null and status!=""'>
-			and  b.STATUS like '%'||#{status}||'%'
+			<if test='dto.status != null and dto.status!=""'>
+			and  b.STATUS=#{dto.status}
 			</if>
 
 		</where>

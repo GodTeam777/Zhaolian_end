@@ -12,6 +12,42 @@
     <result column="NEWS_DATE" jdbcType="TIMESTAMP" property="newsDate" />
     <result column="NTYPE" jdbcType="DECIMAL" property="ntype" />
   </resultMap>
+
+<!--  自定义-->
+  <!--  新闻记录总数  -->
+  <select id="getNewsCount" parameterType="com.zhaolian.demo.web.dto.zuo.NewsDTO" resultType="int">
+    select count(*) from newes
+    <where>
+      <if test='search_title != null and search_title != ""'>
+        news_title like '%'||#{search_title}||'%'
+      </if>
+      <if test='search_name != null and search_name != ""'>
+        and fabiaoname like '%'||#{search_name}||'%'
+      </if>
+    </where>
+  </select>
+
+  <!--  新闻组合分页查询  -->
+  <select id="SelectNewsPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from (select row_number() over(order by nid desc) no,n.* from newes n
+    <where>
+      <if test='dto.search_title != null and dto.search_title != ""'>
+        news_title like '%'||#{dto.search_title}||'%'
+      </if>
+      <if test='dto.search_name != null and dto.search_name != ""'>
+        and fabiaoname like '%'||#{dto.search_name}||'%'
+      </if>
+    </where>
+    ) temp
+    <if test='end != null and end != ""'>
+      <![CDATA[where no <=#{end}]]>
+    </if>
+    <if test='start != null and start != ""'>
+      and no>=#{start}
+    </if>
+  </select>
+
+<!-- -->
   <sql id="Example_Where_Clause">
     <!--@mbg.generated-->
     <where>
@@ -112,10 +148,10 @@
   </delete>
   <insert id="insert" parameterType="com.zhaolian.demo.data.entity.Newes">
     <!--@mbg.generated-->
-    insert into NEWES (NID, NEWS_TITLE, NEWS_BODY, 
+    insert into NEWES (NEWS_TITLE, NEWS_BODY,
       CHUBANSHE, FABIAONAME, NEWS_DATE, 
       NTYPE)
-    values (#{nid,jdbcType=DECIMAL}, #{newsTitle,jdbcType=VARCHAR}, #{newsBody,jdbcType=VARCHAR}, 
+    values (#{newsTitle,jdbcType=VARCHAR}, #{newsBody,jdbcType=VARCHAR},
       #{chubanshe,jdbcType=VARCHAR}, #{fabiaoname,jdbcType=VARCHAR}, #{newsDate,jdbcType=TIMESTAMP}, 
       #{ntype,jdbcType=DECIMAL})
   </insert>

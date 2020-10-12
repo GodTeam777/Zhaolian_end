@@ -3,7 +3,7 @@ package com.zhaolian.demo.web.util;
 public class BigdaiordeDTO {
     String uuname;
     String Bdname;
-    int status;
+    String status;
 
     public BigdaiordeDTO() {
     }
@@ -33,15 +33,15 @@ public class BigdaiordeDTO {
         Bdname = bdname;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public BigdaiordeDTO(String uuname, String bdname, int status) {
+    public BigdaiordeDTO(String uuname, String bdname, String status) {
         this.uuname = uuname;
         Bdname = bdname;
         this.status = status;

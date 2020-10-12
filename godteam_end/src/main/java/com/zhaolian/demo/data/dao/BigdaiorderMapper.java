@@ -25,7 +25,7 @@ public interface BigdaiorderMapper {
 
     int deleteByExample(BigdaiorderExample example);
 
-    int deleteByPrimaryKey(int boid);
+    int deleteByPrimaryKey(BigDecimal boid);
 
     int insert(Bigdaiorder record);
 

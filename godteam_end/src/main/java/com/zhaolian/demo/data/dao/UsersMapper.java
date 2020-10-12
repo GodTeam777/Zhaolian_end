@@ -4,11 +4,16 @@ import com.zhaolian.demo.data.entity.Users;
 import com.zhaolian.demo.data.entity.UsersExample;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UsersMapper {
+
+    Users LoginBypetnameAnduspws(Map<String,Object> map);
+
     long countByExample(UsersExample example);
 
     int deleteByExample(UsersExample example);

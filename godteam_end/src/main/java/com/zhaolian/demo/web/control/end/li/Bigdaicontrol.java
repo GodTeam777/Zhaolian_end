@@ -23,16 +23,26 @@ public class Bigdaicontrol {
     public @ResponseBody
     PageBean<Bigdai> listByPage
             (@RequestBody Map<String,Object> bigdaimap) {
+       String a= (String)bigdaimap.get("name");
+        String b= (String)bigdaimap.get("type");
+        System.out.println("数据："+bigdaimap);
 
-        System.out.println("数据："+bigdaimap.toString());
+
         Integer pageNo = Integer.parseInt(bigdaimap.get("pageNumber").toString());
         Integer pageSize = Integer.parseInt(bigdaimap.get("pageSize").toString()) ;
         BigdaiDTO dto=new BigdaiDTO();
+        if(a!=""){
+            dto.setBdname(a);
+        }
+        if(b!=""){
+            dto.setBdtype(b);
+        }
         System.out.println("进入控制器");
         System.out.println("进入查询");
         PageBean<Bigdai> pb =
                 this.bigdaiService.getByPage(dto, pageNo, pageSize);
         System.out.println("分页结果PageBean:"+pb.getTotal());
+
         return pb;
     }
     public @ResponseBody Integer daiupdate(@RequestBody Bigdai dai){

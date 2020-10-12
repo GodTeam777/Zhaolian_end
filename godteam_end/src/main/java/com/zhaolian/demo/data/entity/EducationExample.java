@@ -555,6 +555,66 @@ public class EducationExample {
             addCriterion("\"STATUS\" not between", value1, value2, "status");
             return (Criteria) this;
         }
+
+        public Criteria andNdateIsNull() {
+            addCriterion("NDATE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNdateIsNotNull() {
+            addCriterion("NDATE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNdateEqualTo(Date value) {
+            addCriterion("NDATE =", value, "ndate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNdateNotEqualTo(Date value) {
+            addCriterion("NDATE <>", value, "ndate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNdateGreaterThan(Date value) {
+            addCriterion("NDATE >", value, "ndate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNdateGreaterThanOrEqualTo(Date value) {
+            addCriterion("NDATE >=", value, "ndate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNdateLessThan(Date value) {
+            addCriterion("NDATE <", value, "ndate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNdateLessThanOrEqualTo(Date value) {
+            addCriterion("NDATE <=", value, "ndate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNdateIn(List<Date> values) {
+            addCriterion("NDATE in", values, "ndate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNdateNotIn(List<Date> values) {
+            addCriterion("NDATE not in", values, "ndate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNdateBetween(Date value1, Date value2) {
+            addCriterion("NDATE between", value1, value2, "ndate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNdateNotBetween(Date value1, Date value2) {
+            addCriterion("NDATE not between", value1, value2, "ndate");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

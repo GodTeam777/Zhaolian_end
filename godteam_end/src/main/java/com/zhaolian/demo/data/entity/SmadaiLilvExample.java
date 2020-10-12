@@ -4,14 +4,14 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllbrankExample {
+public class SmadaiLilvExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public AllbrankExample() {
+    public SmadaiLilvExample() {
         oredCriteria = new ArrayList<>();
     }
 
@@ -105,203 +105,123 @@ public class AllbrankExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andBidIsNull() {
-            addCriterion("BID is null");
+        public Criteria andUsidIsNull() {
+            addCriterion("USID is null");
             return (Criteria) this;
         }
 
-        public Criteria andBidIsNotNull() {
-            addCriterion("BID is not null");
+        public Criteria andUsidIsNotNull() {
+            addCriterion("USID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBidEqualTo(BigDecimal value) {
-            addCriterion("BID =", value, "bid");
+        public Criteria andUsidEqualTo(BigDecimal value) {
+            addCriterion("USID =", value, "usid");
             return (Criteria) this;
         }
 
-        public Criteria andBidNotEqualTo(BigDecimal value) {
-            addCriterion("BID <>", value, "bid");
+        public Criteria andUsidNotEqualTo(BigDecimal value) {
+            addCriterion("USID <>", value, "usid");
             return (Criteria) this;
         }
 
-        public Criteria andBidGreaterThan(BigDecimal value) {
-            addCriterion("BID >", value, "bid");
+        public Criteria andUsidGreaterThan(BigDecimal value) {
+            addCriterion("USID >", value, "usid");
             return (Criteria) this;
         }
 
-        public Criteria andBidGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("BID >=", value, "bid");
+        public Criteria andUsidGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("USID >=", value, "usid");
             return (Criteria) this;
         }
 
-        public Criteria andBidLessThan(BigDecimal value) {
-            addCriterion("BID <", value, "bid");
+        public Criteria andUsidLessThan(BigDecimal value) {
+            addCriterion("USID <", value, "usid");
             return (Criteria) this;
         }
 
-        public Criteria andBidLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("BID <=", value, "bid");
+        public Criteria andUsidLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("USID <=", value, "usid");
             return (Criteria) this;
         }
 
-        public Criteria andBidIn(List<BigDecimal> values) {
-            addCriterion("BID in", values, "bid");
+        public Criteria andUsidIn(List<BigDecimal> values) {
+            addCriterion("USID in", values, "usid");
             return (Criteria) this;
         }
 
-        public Criteria andBidNotIn(List<BigDecimal> values) {
-            addCriterion("BID not in", values, "bid");
+        public Criteria andUsidNotIn(List<BigDecimal> values) {
+            addCriterion("USID not in", values, "usid");
             return (Criteria) this;
         }
 
-        public Criteria andBidBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("BID between", value1, value2, "bid");
+        public Criteria andUsidBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("USID between", value1, value2, "usid");
             return (Criteria) this;
         }
 
-        public Criteria andBidNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("BID not between", value1, value2, "bid");
+        public Criteria andUsidNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("USID not between", value1, value2, "usid");
             return (Criteria) this;
         }
 
-        public Criteria andBnameIsNull() {
-            addCriterion("BNAME is null");
+        public Criteria andLilvIsNull() {
+            addCriterion("LILV is null");
             return (Criteria) this;
         }
 
-        public Criteria andBnameIsNotNull() {
-            addCriterion("BNAME is not null");
+        public Criteria andLilvIsNotNull() {
+            addCriterion("LILV is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBnameEqualTo(String value) {
-            addCriterion("BNAME =", value, "bname");
+        public Criteria andLilvEqualTo(BigDecimal value) {
+            addCriterion("LILV =", value, "lilv");
             return (Criteria) this;
         }
 
-        public Criteria andBnameNotEqualTo(String value) {
-            addCriterion("BNAME <>", value, "bname");
+        public Criteria andLilvNotEqualTo(BigDecimal value) {
+            addCriterion("LILV <>", value, "lilv");
             return (Criteria) this;
         }
 
-        public Criteria andBnameGreaterThan(String value) {
-            addCriterion("BNAME >", value, "bname");
+        public Criteria andLilvGreaterThan(BigDecimal value) {
+            addCriterion("LILV >", value, "lilv");
             return (Criteria) this;
         }
 
-        public Criteria andBnameGreaterThanOrEqualTo(String value) {
-            addCriterion("BNAME >=", value, "bname");
+        public Criteria andLilvGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("LILV >=", value, "lilv");
             return (Criteria) this;
         }
 
-        public Criteria andBnameLessThan(String value) {
-            addCriterion("BNAME <", value, "bname");
+        public Criteria andLilvLessThan(BigDecimal value) {
+            addCriterion("LILV <", value, "lilv");
             return (Criteria) this;
         }
 
-        public Criteria andBnameLessThanOrEqualTo(String value) {
-            addCriterion("BNAME <=", value, "bname");
+        public Criteria andLilvLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("LILV <=", value, "lilv");
             return (Criteria) this;
         }
 
-        public Criteria andBnameLike(String value) {
-            addCriterion("BNAME like", value, "bname");
+        public Criteria andLilvIn(List<BigDecimal> values) {
+            addCriterion("LILV in", values, "lilv");
             return (Criteria) this;
         }
 
-        public Criteria andBnameNotLike(String value) {
-            addCriterion("BNAME not like", value, "bname");
+        public Criteria andLilvNotIn(List<BigDecimal> values) {
+            addCriterion("LILV not in", values, "lilv");
             return (Criteria) this;
         }
 
-        public Criteria andBnameIn(List<String> values) {
-            addCriterion("BNAME in", values, "bname");
+        public Criteria andLilvBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("LILV between", value1, value2, "lilv");
             return (Criteria) this;
         }
 
-        public Criteria andBnameNotIn(List<String> values) {
-            addCriterion("BNAME not in", values, "bname");
-            return (Criteria) this;
-        }
-
-        public Criteria andBnameBetween(String value1, String value2) {
-            addCriterion("BNAME between", value1, value2, "bname");
-            return (Criteria) this;
-        }
-
-        public Criteria andBnameNotBetween(String value1, String value2) {
-            addCriterion("BNAME not between", value1, value2, "bname");
-            return (Criteria) this;
-        }
-
-        public Criteria andBpathIsNull() {
-            addCriterion("BPATH is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBpathIsNotNull() {
-            addCriterion("BPATH is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBpathEqualTo(String value) {
-            addCriterion("BPATH =", value, "bpath");
-            return (Criteria) this;
-        }
-
-        public Criteria andBpathNotEqualTo(String value) {
-            addCriterion("BPATH <>", value, "bpath");
-            return (Criteria) this;
-        }
-
-        public Criteria andBpathGreaterThan(String value) {
-            addCriterion("BPATH >", value, "bpath");
-            return (Criteria) this;
-        }
-
-        public Criteria andBpathGreaterThanOrEqualTo(String value) {
-            addCriterion("BPATH >=", value, "bpath");
-            return (Criteria) this;
-        }
-
-        public Criteria andBpathLessThan(String value) {
-            addCriterion("BPATH <", value, "bpath");
-            return (Criteria) this;
-        }
-
-        public Criteria andBpathLessThanOrEqualTo(String value) {
-            addCriterion("BPATH <=", value, "bpath");
-            return (Criteria) this;
-        }
-
-        public Criteria andBpathLike(String value) {
-            addCriterion("BPATH like", value, "bpath");
-            return (Criteria) this;
-        }
-
-        public Criteria andBpathNotLike(String value) {
-            addCriterion("BPATH not like", value, "bpath");
-            return (Criteria) this;
-        }
-
-        public Criteria andBpathIn(List<String> values) {
-            addCriterion("BPATH in", values, "bpath");
-            return (Criteria) this;
-        }
-
-        public Criteria andBpathNotIn(List<String> values) {
-            addCriterion("BPATH not in", values, "bpath");
-            return (Criteria) this;
-        }
-
-        public Criteria andBpathBetween(String value1, String value2) {
-            addCriterion("BPATH between", value1, value2, "bpath");
-            return (Criteria) this;
-        }
-
-        public Criteria andBpathNotBetween(String value1, String value2) {
-            addCriterion("BPATH not between", value1, value2, "bpath");
+        public Criteria andLilvNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("LILV not between", value1, value2, "lilv");
             return (Criteria) this;
         }
     }

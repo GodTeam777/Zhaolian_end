@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Bigdai implements Serializable {
-    private int bdid;
+    private BigDecimal bdid;
 
     private BigDecimal vid;
 
@@ -15,7 +15,7 @@ public class Bigdai implements Serializable {
 
     private String bdpath;
 
-    private Double interest;
+    private BigDecimal interest;
 
     private String bigdaiTitle;
 
@@ -23,19 +23,19 @@ public class Bigdai implements Serializable {
 
     private String bdtype;
 
-    private int bddate;
+    private BigDecimal bddate;
 
-    private int smallMoney;
+    private BigDecimal smallMoney;
 
-    private int bigMoney;
+    private BigDecimal bigMoney;
 
     private static final long serialVersionUID = 1L;
 
-    public int getBdid() {
+    public BigDecimal getBdid() {
         return bdid;
     }
 
-    public void setBdid(int bdid) {
+    public void setBdid(BigDecimal bdid) {
         this.bdid = bdid;
     }
 
@@ -63,11 +63,11 @@ public class Bigdai implements Serializable {
         this.bdpath = bdpath;
     }
 
-    public Double getInterest() {
+    public BigDecimal getInterest() {
         return interest;
     }
 
-    public void setInterest(Double interest) {
+    public void setInterest(BigDecimal interest) {
         this.interest = interest;
     }
 
@@ -95,27 +95,27 @@ public class Bigdai implements Serializable {
         this.bdtype = bdtype;
     }
 
-    public int getBddate() {
+    public BigDecimal getBddate() {
         return bddate;
     }
 
-    public void setBddate(int bddate) {
+    public void setBddate(BigDecimal bddate) {
         this.bddate = bddate;
     }
 
-    public int getSmallMoney() {
+    public BigDecimal getSmallMoney() {
         return smallMoney;
     }
 
-    public void setSmallMoney(int smallMoney) {
+    public void setSmallMoney(BigDecimal smallMoney) {
         this.smallMoney = smallMoney;
     }
 
-    public int getBigMoney() {
+    public BigDecimal getBigMoney() {
         return bigMoney;
     }
 
-    public void setBigMoney(int bigMoney) {
+    public void setBigMoney(BigDecimal bigMoney) {
         this.bigMoney = bigMoney;
     }
 

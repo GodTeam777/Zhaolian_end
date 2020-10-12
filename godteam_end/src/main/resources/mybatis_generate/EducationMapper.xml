@@ -11,6 +11,7 @@
     <result column="DEGREE" jdbcType="VARCHAR" property="degree" />
     <result column="SPATH" jdbcType="VARCHAR" property="spath" />
     <result column="STATUS" jdbcType="DECIMAL" property="status" />
+    <result column="NDATE" jdbcType="TIMESTAMP" property="ndate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--@mbg.generated-->
@@ -74,7 +75,7 @@
   </sql>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    EDUSERSID, SCHOOLNAME, BEGIN_DATE, END_DATE, "DEGREE", SPATH, "STATUS"
+    EDUSERSID, SCHOOLNAME, BEGIN_DATE, END_DATE, "DEGREE", SPATH, "STATUS", NDATE
   </sql>
   <select id="selectByExample" parameterType="com.zhaolian.demo.data.entity.EducationExample" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -114,10 +115,10 @@
     <!--@mbg.generated-->
     insert into EDUCATION (EDUSERSID, SCHOOLNAME, BEGIN_DATE, 
       END_DATE, "DEGREE", SPATH, 
-      "STATUS")
+      "STATUS", NDATE)
     values (#{edusersid,jdbcType=DECIMAL}, #{schoolname,jdbcType=VARCHAR}, #{beginDate,jdbcType=TIMESTAMP}, 
       #{endDate,jdbcType=TIMESTAMP}, #{degree,jdbcType=VARCHAR}, #{spath,jdbcType=VARCHAR}, 
-      #{status,jdbcType=DECIMAL})
+      #{status,jdbcType=DECIMAL}, #{ndate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.zhaolian.demo.data.entity.Education">
     <!--@mbg.generated-->
@@ -144,6 +145,9 @@
       <if test="status != null">
         "STATUS",
       </if>
+      <if test="ndate != null">
+        NDATE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="edusersid != null">
@@ -166,6 +170,9 @@
       </if>
       <if test="status != null">
         #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="ndate != null">
+        #{ndate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -201,6 +208,9 @@
       <if test="record.status != null">
         "STATUS" = #{record.status,jdbcType=DECIMAL},
       </if>
+      <if test="record.ndate != null">
+        NDATE = #{record.ndate,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -215,7 +225,8 @@
       END_DATE = #{record.endDate,jdbcType=TIMESTAMP},
       "DEGREE" = #{record.degree,jdbcType=VARCHAR},
       SPATH = #{record.spath,jdbcType=VARCHAR},
-      "STATUS" = #{record.status,jdbcType=DECIMAL}
+      "STATUS" = #{record.status,jdbcType=DECIMAL},
+      NDATE = #{record.ndate,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -242,6 +253,9 @@
       <if test="status != null">
         "STATUS" = #{status,jdbcType=DECIMAL},
       </if>
+      <if test="ndate != null">
+        NDATE = #{ndate,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where EDUSERSID = #{edusersid,jdbcType=DECIMAL}
   </update>
@@ -253,7 +267,8 @@
       END_DATE = #{endDate,jdbcType=TIMESTAMP},
       "DEGREE" = #{degree,jdbcType=VARCHAR},
       SPATH = #{spath,jdbcType=VARCHAR},
-      "STATUS" = #{status,jdbcType=DECIMAL}
+      "STATUS" = #{status,jdbcType=DECIMAL},
+      NDATE = #{ndate,jdbcType=TIMESTAMP}
     where EDUSERSID = #{edusersid,jdbcType=DECIMAL}
   </update>
 </mapper>

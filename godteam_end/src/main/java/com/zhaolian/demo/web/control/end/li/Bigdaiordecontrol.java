@@ -29,6 +29,19 @@ public class Bigdaiordecontrol {
         Integer pageNo = Integer.parseInt(bigdaimap.get("pageNumber").toString());
         Integer pageSize = Integer.parseInt(bigdaimap.get("pageSize").toString()) ;
         BigdaiordeDTO dto=new BigdaiordeDTO();
+        String a=(String) bigdaimap.get("name");
+        String b=(String) bigdaimap.get("aname");
+        String c=(String) bigdaimap.get("stua");
+
+        if (a!=""){
+            dto.setUuname(a);
+        }
+        if (b!=""){
+            dto.setBdname(b);
+        }
+        if (c!=""){
+            dto.setStatus(c);
+        }
         System.out.println("进入控制器");
         System.out.println("进入查询");
         PageBean<Bigdaiorder> pb =
