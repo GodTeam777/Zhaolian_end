@@ -42,4 +42,9 @@ public interface UsersMapper {
     int updateByPrimaryKeySelective(Users record);
 
     int updateByPrimaryKey(Users record);
+
+    //客服管理的高级查询分页DAO接口
+    Integer selectQueryAndPageCount(Map<String,Object> map);
+
+    public List<Users> selectServiceByPage(Map<String,Object> param);
 }

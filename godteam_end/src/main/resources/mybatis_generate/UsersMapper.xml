@@ -531,4 +531,28 @@ select * from USERS where PETNAME=#{Uname} and USPWS=#{Upass}
     </set>
     where      HID = #{hid,jdbcType=DECIMAL}
   </update>
+  <select id="selectQueryAndPageCount" parameterType="java.util.Map"  resultType="int">
+    select count(*) from USERS
+    <where>
+			<if test='dto.search_name != null and dto.search_name!=""'>
+				PETNAME like '%'||#{dto.search_name}||'%'
+			</if>
+		</where>
+</select>
+  <select id="selectServiceByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select temp.* from (select row_number() over (order by USERSID) no,u.* from USERS u
+    <where>
+        <if test='dto.search_name !=null and dto.search_name!=""'>
+            PETNAME like '%'||#{dto.search_name}||'%'
+        </if>
+    </where>
+    ) temp
+		<if test='end != null and end!=""'>
+			<![CDATA[where no <=#{end}]]>
+		</if>
+
+		<if test='start != null and start!=""'>
+			and no>=#{start}
+		</if>
+</select>
 </mapper>
