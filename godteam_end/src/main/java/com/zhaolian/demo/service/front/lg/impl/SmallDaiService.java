@@ -45,6 +45,9 @@ public class SmallDaiService implements ISmallDaiService {
         BigDecimal smalldaicount=new BigDecimal(0);
         for (SamlldaiOrder order : smadaiorderlist
              ) {
+            if(order.getMou().equals(order.getYihuan())){
+                continue;
+            }
             smalldaicount=smalldaicount.add(order.getDaimoney());
         }
         smadai.put("newedu",users.getSmalldai().subtract(smalldaicount));

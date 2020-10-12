@@ -4,6 +4,8 @@ import com.zhaolian.demo.data.entity.Bigdai;
 import com.zhaolian.demo.data.entity.BigdaiExample;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -30,4 +32,7 @@ public interface BigdaiMapper {
     int updateByPrimaryKeySelective(Bigdai record);
 
     int updateByPrimaryKey(Bigdai record);
+
+    //分页
+    List<Bigdai> lgselectByPage(Map map);
 }
