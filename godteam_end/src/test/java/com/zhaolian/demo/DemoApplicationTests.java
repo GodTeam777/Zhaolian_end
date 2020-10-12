@@ -1,63 +1,91 @@
 package com.zhaolian.demo;
 
-import com.zhaolian.demo.data.dao.BankMapper;
-import com.zhaolian.demo.data.dao.UsersMapper;
-import com.zhaolian.demo.data.entity.Bank;
-import com.zhaolian.demo.data.entity.Bighuankuan;
-import com.zhaolian.demo.data.entity.Users;
-import com.zhaolian.demo.data.entity.UsersExample;
-<<<<<<< HEAD
-import com.zhaolian.demo.service.end.zuo.LoansService;
-=======
-import com.zhaolian.demo.service.front.jun.IUserService;
->>>>>>> fa6ec94ef662a75da0f56ed970089c10f7b3e2fc
-import org.apache.ibatis.annotations.Mapper;
+import com.zhaolian.demo.data.dao.SamlldaiOrderMapper;
+import com.zhaolian.demo.data.entity.*;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.web.multipart.MultipartFile;
-
-
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @SpringBootTest
 class DemoApplicationTests {
 
-
     @Resource
-    UsersMapper Usersdao;
+    SamlldaiOrderMapper samlldaiOrderMapper;
 
-    @Resource
-<<<<<<< HEAD
-    LoansService loansService;
+
+    public String getCurrYearLast(Integer month, Integer year) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.clear();
+        calendar.set(month ,year);
+        calendar.roll(Calendar.DAY_OF_YEAR, -1);
+        Date time = calendar.getTime();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        return format.format(time);
+    }
+
+    public String getCurrYearFirst(Integer month, Integer year) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.clear();
+        calendar.set(month ,year);
+        Date time = calendar.getTime();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        return format.format(time);
+    }
+
 
     @Test
-    void contextLoads() {
-        List<Bighuankuan> all_huankuan = loansService.huankuan_chart();
-        for (Bighuankuan huankuan : all_huankuan) {
-            for (int j = 0; j < all_huankuan.size(); j++) {
-                System.err.println(huankuan.getHuanDate());
+    void chart() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+        String chart_date = "2020-01";
+        //获取天数
+        Integer format_year = Integer.valueOf(chart_date.substring(0, 4));
+        Integer format_month = Integer.valueOf(chart_date.substring(5, 7));
+        String yearFirst = getCurrYearFirst(format_month, format_year);
+        String yearLast = getCurrYearLast(format_month, format_year);
+
+        System.err.println("前端传递的日期："+chart_date+"，"+format_year+"年第一天："+yearFirst+",最后一天："+yearLast);
+        List<SamlldaiOrder> samll_all = samlldaiOrderMapper.samll_dk_all(yearFirst, yearLast);
+        int M=0;
+        List<Map> list=new ArrayList<>();
+        Map data=null;
+        Boolean flag=true;
+
+        List<String> listNew = new ArrayList<String>();
+        //去重
+        for (SamlldaiOrder samlldaiOrder : samll_all) {
+            if (!listNew.contains(sdf.format(samlldaiOrder.getDaiDate()))) {
+                listNew.add(sdf.format(samlldaiOrder.getDaiDate()));
             }
         }
-=======
-    IUserService service;
+        System.err.println("去重结果："+listNew.toString());
 
-    @Test
-    void contextLoads(HttpServletRequest request) throws FileNotFoundException {
-        Users user=service.UserLogin("wangwu",456);
-        System.out.println(user.toString());
-
->>>>>>> fa6ec94ef662a75da0f56ed970089c10f7b3e2fc
+        for (int j = 1; j <= 12; j++){
+            for (String set : listNew) {
+                M = Integer.valueOf(set.substring(5,7));
+                if (j == Integer.valueOf(M)) {
+                    data=new HashMap();
+                    data.put("samll_date",j);
+                    int count = samlldaiOrderMapper.samll_month_count(M);
+                    data.put("samll_count",count);
+                    list.add(data);
+                    flag=false;
+                }
+            }
+            if(flag){
+                data=new HashMap();
+                data.put("samll_date",j);
+                data.put("samll_count"," ");
+                list.add(data);
+            }else {
+                flag=true;
+            }
+        }
+        for (Map map1 : list) {
+            System.err.println(map1.toString());
+        }
     }
 
 }

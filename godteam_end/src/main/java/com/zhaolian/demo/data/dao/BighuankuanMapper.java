@@ -1,5 +1,6 @@
 package com.zhaolian.demo.data.dao;
 
+import com.zhaolian.demo.data.entity.Bigdaiorder;
 import com.zhaolian.demo.data.entity.Bighuankuan;
 import com.zhaolian.demo.data.entity.BighuankuanExample;
 import java.math.BigDecimal;
@@ -10,8 +11,14 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface BighuankuanMapper {
 
-    //查询大额贷款还款
-    List<Bighuankuan> huankuangChart();
+    //查询大额还款
+    List<Bighuankuan> big_hk_all(String start, String end);
+
+    //查询大额还款一天的总数
+    int big_hk_count(String dates, String datesOne);
+
+    //查询大额还款一月的总数
+    int big_month_count(Integer month);
 
     long countByExample(BighuankuanExample example);
 

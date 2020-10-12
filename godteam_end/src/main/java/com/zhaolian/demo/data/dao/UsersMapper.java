@@ -12,12 +12,10 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface UsersMapper {
 
-<<<<<<< HEAD
     //系统登录
     List<Users> SystemLogin(Users user);
-=======
+
     Users LoginBypetnameAnduspws(Map<String,Object> map);
->>>>>>> fa6ec94ef662a75da0f56ed970089c10f7b3e2fc
 
     long countByExample(UsersExample example);
 

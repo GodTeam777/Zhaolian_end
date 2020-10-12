@@ -9,6 +9,16 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface ProorderMapper {
+
+    //查询理财产品
+    List<Proorder> pro_order_all(String start, String end);
+
+    //查询理财产品一天的总数
+    int pro_order_day_count(String dates, String datesOne);
+
+    //查询理财产品一月的总数
+    int pro_order_month_count(Integer month);
+
     long countByExample(ProorderExample example);
 
     int deleteByExample(ProorderExample example);

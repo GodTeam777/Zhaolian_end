@@ -21,7 +21,6 @@
     <result column="PETNAME" jdbcType="VARCHAR" property="petname" />
   </resultMap>
 
-
 <!--  系统登录-->
   <select id="SystemLogin" parameterType="com.zhaolian.demo.data.entity.Users" resultMap="BaseResultMap">
     select * from users where uname = #{name, jdbcType = VARCHAR} and uspws = #{pass, jdbcType = DECIMAL}

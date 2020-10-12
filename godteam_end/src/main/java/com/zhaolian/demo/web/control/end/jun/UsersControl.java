@@ -25,9 +25,6 @@ public class UsersControl {
     @Resource
     IUserService userService;
 
-
-
-
     @RequestMapping("Login")
         public @ResponseBody
     Users UsersLogin(HttpSession session,@RequestBody Map data) {

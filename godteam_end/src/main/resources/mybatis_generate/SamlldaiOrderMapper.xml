@@ -14,6 +14,22 @@
     <result column="YIHUAN" jdbcType="DECIMAL" property="yihuan" />
     <result column="ONEMONEY" jdbcType="DECIMAL" property="onemoney" />
   </resultMap>
+
+<!--  自定义 查询小额贷款-->
+  <select id="samll_dk_all" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from samlldai_order where DAI_DATE between to_date(#{start},'yyyy-MM-dd') and to_date(#{end},'yyyy-MM-dd')
+  </select>
+
+  <!--  自定义 查询小额贷款一天的总数-->
+  <select id="samll_dk_count" parameterType="java.lang.String" resultType="int">
+    select count(*) from samlldai_order where DAI_DATE >= to_date(#{dates},'yyyy-MM-dd hh24:mi:ss') and <![CDATA[ DAI_DATE < to_date(#{datesOne},'yyyy-MM-dd hh24:mi:ss')]]>
+  </select>
+
+  <!--  自定义 查询小额贷款一月的总数-->
+  <select id="samll_month_count" parameterType="java.lang.Integer" resultType="int">
+    select count(*) from samlldai_order where to_number(to_char(DAI_DATE,'MM')) = #{month}
+  </select>
+
   <sql id="Example_Where_Clause">
     <!--@mbg.generated-->
     <where>

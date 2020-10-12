@@ -13,9 +13,19 @@
     <result column="HUAN_DATE" jdbcType="TIMESTAMP" property="huanDate" />
   </resultMap>
 
-<!--  自定义-->
-  <select id="huankuangChart" resultMap="BaseResultMap">
-    select * from BIGHUANKUAN
+  <!--  自定义 查询大额还款-->
+  <select id="big_hk_all" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from bighuankuan where HUAN_DATE between to_date(#{start},'yyyy-MM-dd') and to_date(#{end},'yyyy-MM-dd')
+  </select>
+
+  <!--  自定义 查询大额还款一天的总数-->
+  <select id="big_hk_count" parameterType="java.lang.String" resultType="int">
+    select count(*) from bighuankuan where HUAN_DATE >= to_date(#{dates},'yyyy-MM-dd hh24:mi:ss') and <![CDATA[ HUAN_DATE < to_date(#{datesOne},'yyyy-MM-dd hh24:mi:ss')]]>
+  </select>
+
+  <!--  自定义 查询大额还款一月的总数-->
+  <select id="big_month_count" parameterType="java.lang.Integer" resultType="int">
+    select count(*) from bighuankuan where to_number(to_char(HUAN_DATE,'MM')) = #{month}
   </select>
 
   <sql id="Example_Where_Clause">

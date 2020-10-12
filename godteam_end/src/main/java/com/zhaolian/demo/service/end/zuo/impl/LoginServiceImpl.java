@@ -1,7 +1,8 @@
-package com.zhaolian.demo.service.end.zuo;
+package com.zhaolian.demo.service.end.zuo.impl;
 
 import com.zhaolian.demo.data.dao.UsersMapper;
 import com.zhaolian.demo.data.entity.Users;
+import com.zhaolian.demo.service.end.zuo.LoginService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
