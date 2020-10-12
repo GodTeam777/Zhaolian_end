@@ -529,6 +529,33 @@ select * from USERS where PETNAME=#{Uname} and USPWS=#{Upass}
         PETNAME = #{petname,jdbcType=VARCHAR},
       </if>
     </set>
-    where      HID = #{hid,jdbcType=DECIMAL}
+    where   HID = #{hid,jdbcType=DECIMAL}
   </update>
+  <!--总记录数：-->
+  <select id="getTotalCount" parameterType="com.zhaolian.demo.web.util.SearchUsersDTO" resultType="int">
+    select count(*) from USERS use
+    <where>
+    <if test='search_name != null and search_name!=""'>
+         use.UNAME like '%'||#{search_name}||'%'
+   </if>
+   </where>
+  </select>
+<!--高级查询和分页：-->
+<select id="selectByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+ select * from (select row_number() over(order by USERSID) no, t.* from USERS t
+<where>
+             <!--根据姓名查询拼接-->
+             <if test='dto.search_name != null and dto.search_name!=""'>
+				t.UNAME like '%'||#{dto.search_name}||'%'
+			</if>
+</where>
+) temp
+		<if test='endIndex != null and endIndex!=""'>
+			<![CDATA[where no <=#{endIndex}]]>
+		</if>
+
+		<if test='startIndex != null and startIndex!=""'>
+			and no>=#{startIndex}
+		</if>
+</select>
 </mapper>
