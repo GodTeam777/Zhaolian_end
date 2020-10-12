@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -25,15 +26,34 @@ public class UserServiceimpl implements IUserService {
     BankMapper bankMapper;
     private InterpretationContext EmptyUtil;
 
-    @Override
-    public Users UserLogin(String UName,Integer UPass) {
+    //根据id查询用户
+    public Users UserSelectByid(Users user){
         UsersExample ex=new UsersExample();
-        ex.createCriteria().andPetnameEqualTo(UName);
-        ex.createCriteria().andUspwsEqualTo(new BigDecimal(UPass));
-        Users user=Usersdao.selectByExample(ex).get(0);
+        ex.createCriteria().andUsersidEqualTo(user.getUsersid());
+        user=Usersdao.selectByExample(ex).get(0);
+
+        Idcard idcard=idcardMapper.selectByPrimaryKey(user.getCardid());
+        user.setPetname("http://localhost:10086/img/"+idcard.getFan());
+
+
         IdcardExample iex=new IdcardExample();
         iex.createCriteria().andCardidEqualTo(user.getCardid());
         user.setCardid(new BigDecimal( idcardMapper.selectByExample(iex).get(0).getIdcard()));
+        return user;
+    }
+    //登录
+    @Override
+    public Users UserLogin(String UName,Integer UPass) {
+        UsersExample ex=new UsersExample();
+        ex.createCriteria().andPetnameEqualTo(UName).andUspwsEqualTo(new BigDecimal(UPass)).andTypeEqualTo(new BigDecimal(1));
+        Users user=Usersdao.selectByExample(ex).get(0);
+
+        Idcard idcard=idcardMapper.selectByPrimaryKey(user.getCardid());
+        user.setPetname("http://localhost:10086/img/"+idcard.getFan());
+
+        IdcardExample iex=new IdcardExample();
+        iex.createCriteria().andCardidEqualTo(user.getCardid());
+        user.setCardid(new BigDecimal(idcardMapper.selectByExample(iex).get(0).getIdcard()));
         return user;
     }
     //注册
@@ -43,10 +63,12 @@ public class UserServiceimpl implements IUserService {
         //身份证
         //插入
         Idcard idcard=new Idcard();
-        idcard.setName(users.getUname());
+        idcard.setName(card.getName());
         idcard.setIdcard(card.getIdcard());
         idcard.setFront(card.getFront());
-        idcard.setFan(card.getFan());
+
+        //头像
+        idcard.setFan("moren.jpg");
         i=idcardMapper.insertSelective(idcard);
         if(i==0){
             return i;
@@ -94,6 +116,7 @@ public class UserServiceimpl implements IUserService {
         if(i==0){
             return i;
         }
+
         return i;
     }
     //修改登录密码
@@ -108,8 +131,31 @@ public class UserServiceimpl implements IUserService {
     }
     //修改个人信息
     @Override
-    public int updateuserinfo(Users user){
-        return Usersdao.updateByPrimaryKeySelective(user);
+    public int updateuserinfo(HttpSession session, Users user, Idcard idcard){
+        Users u= (Users) session.getAttribute("myuser");
+        System.out.println("修改： "+user.toString());
+        int i=0;
+        if(idcard!=null){
+            Idcard cid=idcardMapper.selectByPrimaryKey(Usersdao.selectByPrimaryKey(u.getUsersid()).getCardid());
+            Idcard c=new Idcard();
+            c.setCardid(cid.getCardid());
+            c.setFan(idcard.getFan());
+
+            if(cid.getFan()!=""&&cid.getFan()!="moren.jpg"){
+                String path=System.getProperty("user.dir")+"\\upload\\"+cid.getFan();
+                File file=new File(path);
+                file.delete();
+            }
+            cid.setFan(idcard.getFan());
+
+
+            System.out.println("业务层身份证信息："+c.toString());
+            idcardMapper.updateByPrimaryKeySelective(c);
+        }
+
+        System.out.println("业务层执行修改用户信息");
+        i=Usersdao.updateByPrimaryKeySelective(user);
+        return i;
     }
 
     //查询银行卡

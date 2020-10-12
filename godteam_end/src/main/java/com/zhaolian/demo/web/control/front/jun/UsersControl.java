@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -35,10 +36,9 @@ public class UsersControl {
     @RequestMapping("register")
     public @ResponseBody int UsersReigster(@RequestBody Map data) throws ParseException {
         Idcard idcard=new Idcard();
-        idcard.setName((String) data.get("uname"));
+        idcard.setName((String) data.get("name"));
         idcard.setIdcard((String) data.get("idcard"));
         idcard.setFront(this.img1);
-        idcard.setFan(this.img2);
 
         Users user=new Users();
         user.setUname((String) data.get("uname"));
@@ -71,13 +71,28 @@ public class UsersControl {
         this.img2="";
         System.out.println("进入控制器");
         System.out.println("传输的数据："+data.toString());
-        Users user=userService.UserLogin((String)data.get("petname"),Integer.parseInt((String)data.get("uspws")));
-        System.out.println("会话："+session.toString());
-        session.setAttribute("myuser",user);
-        System.out.println(user.toString());
+        Users user=null;
+        try {
+             user=userService.UserLogin((String)data.get("petname"),Integer.parseInt((String)data.get("uspws")));
+            System.out.println("会话："+session.toString());
+            session.setAttribute("myuser",user);
+            System.out.println(user.toString());
+        }catch (Exception e){
+          e.printStackTrace();
+            user=new Users();
+            user.setUsersid(new BigDecimal(-1));
+            return user;
+        }
             return user;
     }
 
+    //注销
+    @RequestMapping("logout")
+    public void LoginOut(HttpSession session){
+        Users users=new Users();
+        users.setUsersid(new BigDecimal(-1));
+        session.setAttribute("myuser",users);
+    }
 
     //刷新页面
     @RequestMapping("refresh")
@@ -88,9 +103,11 @@ public class UsersControl {
         System.out.println("进入控制器:刷新页面");
         System.out.println("会话："+session.toString());
         Users user= (Users) session.getAttribute("myuser");
-        System.out.println(user.toString());
         if(user==null){
             user.setUsersid(new BigDecimal(-1));
+        }else{
+            user=userService.UserSelectByid(user);
+            session.setAttribute("myuser",user);
         }
         return user;
 }
@@ -101,8 +118,7 @@ public class UsersControl {
         Users myuser= (Users) session.getAttribute("myuser");
         int i=0;
         System.out.println(myuser.toString());
-        System.out.println(myuser.getUspws()+":"+data.get("OPassword"));
-      if(myuser.getUspws()==data.get("OPassword")){
+      if(myuser.getUspws().toString().equals(data.get("OPassword").toString())){
           Users user=new Users();
           user.setUsersid(myuser.getUsersid());
           user.setUspws(new BigDecimal((String)data.get("NewPassword")));
@@ -114,7 +130,7 @@ public class UsersControl {
 
 
     @RequestMapping("updatezfpws")
-    //修改密码（登录密码）
+    //修改密码（支付密码）
     public @ResponseBody int updatezfpws(@RequestBody Map data,HttpSession session){
         System.out.println("修改登录密码");
         Users myuser= (Users) session.getAttribute("myuser");
@@ -132,6 +148,12 @@ public class UsersControl {
     //修改个人信息
     @RequestMapping("UpdateUserinfo")
     public @ResponseBody int updateuserinfo(@RequestBody Map data,HttpSession session) throws ParseException {
+        System.out.println("进入修改控制器");
+        Idcard idcard=null;
+        if(this.img1!=""){
+            idcard=new Idcard();
+            idcard.setFan(this.img1);
+        }
         Users myuser= (Users) session.getAttribute("myuser");
         System.out.println("修改： "+myuser.toString());
         Users user=new Users();
@@ -140,11 +162,14 @@ public class UsersControl {
         user.setSex((String) data.get("radio"));
         user.setPhone((String) data.get("phone"));
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
-        user.setBirthday(format.parse((String) data.get("birthday")));
+        Date date=format.parse((String) data.get("birthday"));
+        date.setDate(new Integer(date.getDate())+1);
+        user.setBirthday(date);
         System.out.println(user.toString());
-        return userService.updateuserinfo(user);
+        return userService.updateuserinfo(session,user,idcard);
     }
 
+    //图片上传
     @RequestMapping("upload")
     public @ResponseBody
         String upload(@RequestParam("file") MultipartFile upload,HttpSession session) {
@@ -197,8 +222,9 @@ public class UsersControl {
     @RequestMapping("Test")
     public @ResponseBody
     File Test(HttpSession sessios) {
-        String path=System.getProperty("user.dir")+"\\upload\\"+"c909bf30-849c-448c-bc5b-3d374401a987luluxiu.jpg";
+        String path=System.getProperty("user.dir")+"\\upload\\"+"375bb4cd-5394-4216-a0e1-de174f6c297cmy.jpg";
         File file=new File(path);
+        file.delete();
 //        System.out.println("第三步");
 //        System.out.println(data.get("petname"));
 //        System.out.println(data.get("uspws"));
