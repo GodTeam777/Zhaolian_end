@@ -1,8 +1,10 @@
 package com.zhaolian.demo;
 
 import com.zhaolian.demo.data.entity.Idcard;
+import com.zhaolian.demo.data.entity.SamlldaiOrder;
 import com.zhaolian.demo.data.entity.Users;
 import com.zhaolian.demo.service.front.yjh.IUsers;
+import com.zhaolian.demo.service.front.yjh.impl.ISamlldaiOrderimpl;
 import com.zhaolian.demo.service.front.yjh.impl.Idcardimpl;
 import com.zhaolian.demo.service.util.PageBean;
 import com.zhaolian.demo.web.util.SearchUsersDTO;
@@ -20,8 +22,12 @@ public class yjhTest {
 //    @Resource
 //    IUsers serve;
 
+//    @Resource
+//    Idcardimpl Idcarserve;
+
+
     @Resource
-    Idcardimpl Idcarserve;
+    ISamlldaiOrderimpl server;
     @Test
     void Mytest(){
 //        SearchUsersDTO dto=new SearchUsersDTO();
@@ -39,9 +45,11 @@ public class yjhTest {
 //        Users all= serve.selectAll(user);
 //        System.out.println("查询结果id:"+all.getEdusersid());
 
-       Idcard all= (Idcard) Idcarserve.selectByid(3);
-        System.out.println(all);
+//       Idcard all= (Idcard) Idcarserve.selectByid(3);
+//        System.out.println(all);
 
+//      List<SamlldaiOrder>  all=server.selectByid(4);
+//        System.out.println("查询到的记录"+all.toString());
 
     }
 

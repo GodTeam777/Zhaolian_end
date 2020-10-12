@@ -93,6 +93,11 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByid" parameterType="java.util.List" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select * from SAMLLDAI_ORDER
+    where USERSID = #{usersid,jdbcType=DECIMAL}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select 
