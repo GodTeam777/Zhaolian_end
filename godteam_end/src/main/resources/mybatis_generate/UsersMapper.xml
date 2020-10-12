@@ -388,4 +388,147 @@ select * from USERS where PETNAME=#{Uname} and USPWS=#{Upass}
       PETNAME = #{petname,jdbcType=VARCHAR}
     where USERSID = #{usersid,jdbcType=DECIMAL}
   </update>
+  <!--叶金豪  学历认证-->
+    <update id="update" parameterType="com.zhaolian.demo.data.entity.Users">
+    <!--@mbg.generated-->
+    update USERS
+    <set>
+      <if test="cid != null">
+        CID = #{cid,jdbcType=DECIMAL},
+      </if>
+      <if test="hid != null">
+        HID = #{hid,jdbcType=DECIMAL},
+      </if>
+      <if test="cardid != null">
+        CARDID = #{cardid,jdbcType=DECIMAL},
+      </if>
+      <if test="uname != null">
+        UNAME = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        BIRTHDAY = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="smalldai != null">
+        SMALLDAI = #{smalldai,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        "TYPE" = #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        "STATUS" = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="uspws != null">
+        USPWS = #{uspws,jdbcType=DECIMAL},
+      </if>
+      <if test="zfpws != null">
+        ZFPWS = #{zfpws,jdbcType=DECIMAL},
+      </if>
+      <if test="petname != null">
+        PETNAME = #{petname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where   EDUSERSID = #{edusersid,jdbcType=DECIMAL}
+  </update>
+  <!--车辆认证 -->
+      <update id="updateCAR" parameterType="com.zhaolian.demo.data.entity.Users">
+    <!--@mbg.generated-->
+    update USERS
+    <set>
+      <if test="edusersid != null">
+      EDUSERSID = #{edusersid,jdbcType=DECIMAL}
+
+      </if>
+      <if test="hid != null">
+        HID = #{hid,jdbcType=DECIMAL},
+      </if>
+      <if test="cardid != null">
+        CARDID = #{cardid,jdbcType=DECIMAL},
+      </if>
+      <if test="uname != null">
+        UNAME = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        BIRTHDAY = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="smalldai != null">
+        SMALLDAI = #{smalldai,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        "TYPE" = #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        "STATUS" = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="uspws != null">
+        USPWS = #{uspws,jdbcType=DECIMAL},
+      </if>
+      <if test="zfpws != null">
+        ZFPWS = #{zfpws,jdbcType=DECIMAL},
+      </if>
+      <if test="petname != null">
+        PETNAME = #{petname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where    CID = #{cid,jdbcType=DECIMAL}
+  </update>
+    <!--房屋认证 -->
+      <update id="updateHome" parameterType="com.zhaolian.demo.data.entity.Users">
+    <!--@mbg.generated-->
+    update USERS
+    <set>
+      <if test="edusersid != null">
+      EDUSERSID = #{edusersid,jdbcType=DECIMAL}
+
+      </if>
+      <if test="cid != null">
+        CID = #{cid,jdbcType=DECIMAL}
+      </if>
+      <if test="cardid != null">
+        CARDID = #{cardid,jdbcType=DECIMAL},
+      </if>
+      <if test="uname != null">
+        UNAME = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        BIRTHDAY = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="smalldai != null">
+        SMALLDAI = #{smalldai,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        "TYPE" = #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        "STATUS" = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="uspws != null">
+        USPWS = #{uspws,jdbcType=DECIMAL},
+      </if>
+      <if test="zfpws != null">
+        ZFPWS = #{zfpws,jdbcType=DECIMAL},
+      </if>
+      <if test="petname != null">
+        PETNAME = #{petname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where      HID = #{hid,jdbcType=DECIMAL}
+  </update>
 </mapper>

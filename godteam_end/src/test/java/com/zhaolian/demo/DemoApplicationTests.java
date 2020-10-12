@@ -4,24 +4,15 @@ package com.zhaolian.demo;
 import com.zhaolian.demo.data.dao.BankMapper;
 import com.zhaolian.demo.data.dao.IdcardMapper;
 import com.zhaolian.demo.data.dao.UsersMapper;
-
 import com.zhaolian.demo.data.entity.*;
-
-import com.zhaolian.demo.service.front.jun.IUserService;
-
 import org.junit.jupiter.api.Test;
-
 import org.springframework.boot.test.context.SpringBootTest;
 
-
-
 import javax.annotation.Resource;
-
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 
 @SpringBootTest
