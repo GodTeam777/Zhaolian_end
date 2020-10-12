@@ -103,6 +103,30 @@
     from BIGDAI
     where BDID = #{bdid,jdbcType=DECIMAL}
   </select>
+
+  <select id="lgselectByPage" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+        select * from (select row_number() over (order by t.BDID) no,t.* from BIGDAI t
+        <where>
+            <if test='dto.seach_type!= null and dto.seach_type!= ""'>
+               and BDTYPE = #{dto.seach_type}
+            </if>
+            <if test='dto.seach_date!= null and dto.seach_date!=""'>
+               and BDDATE = #{dto.seach_date}
+            </if>
+            <if test='dto.seach_lilv1!= null and dto.seach_lilv1!="" and dto.seach_lilv2!= null and dto.seach_lilv2!=""'>
+               and INTEREST between #{dto.seach_lilv1} and #{dto.seach_lilv2}
+            </if>
+            <if test='dto.seach_money1!= null and dto.seach_money1!="" and dto.seach_money2!= null and dto.seach_money2!=""'>
+               and BIG_MONEY between #{dto.seach_money1} and #{dto.seach_money2}
+            </if>
+        </where>) temp
+        <if test='endIndex != null and endIndex!=""'>
+			<![CDATA[where temp.no <=#{endIndex}]]>
+		</if>
+		<if test='startIndex != null and startIndex!=""'>
+			and temp.no>=#{startIndex}
+		</if>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     <!--@mbg.generated-->
     delete from BIGDAI
