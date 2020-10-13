@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 
@@ -27,6 +28,7 @@ public class Bigdaicontrol {
             (@RequestBody Map<String,Object> bigdaimap) {
        String a= (String)bigdaimap.get("name");
         String b= (String)bigdaimap.get("type");
+
         System.out.println("数据："+bigdaimap);
 
 
@@ -43,7 +45,11 @@ public class Bigdaicontrol {
         System.out.println("进入查询");
         PageBean<Bigdai> pb =
                 this.bigdaiService.getByPage(dto, pageNo, pageSize);
+        for(Bigdai bigdai:pb.getRows()){
+            bigdai.setBdpath("http://localhost:10086/img/"+bigdai.getBdpath());
+        }
         System.out.println("分页结果PageBean:"+pb.getTotal());
+
 
         return pb;
     }

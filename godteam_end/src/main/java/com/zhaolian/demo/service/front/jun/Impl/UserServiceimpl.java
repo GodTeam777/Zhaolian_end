@@ -1,17 +1,9 @@
 package com.zhaolian.demo.service.front.jun.Impl;
 
 import ch.qos.logback.core.joran.spi.InterpretationContext;
-<<<<<<< HEAD
-import com.zhaolian.demo.data.dao.UsersMapper;
-import com.zhaolian.demo.data.entity.Users;
-import com.zhaolian.demo.data.entity.UsersExample;
-import com.zhaolian.demo.data.dao.BankMapper;
-import com.zhaolian.demo.data.dao.EducationMapper;
-import com.zhaolian.demo.data.dao.IdcardMapper;
-import com.zhaolian.demo.data.dao.UsersMapper;
-=======
+
+
 import com.zhaolian.demo.data.dao.*;
->>>>>>> 795cdf6023a11adcf3d4f441e3e7040ce0da4683
 import com.zhaolian.demo.data.entity.*;
 import com.zhaolian.demo.service.front.jun.IUserService;
 import org.springframework.stereotype.Service;

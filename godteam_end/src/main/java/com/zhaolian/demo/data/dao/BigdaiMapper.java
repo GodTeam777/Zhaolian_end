@@ -5,12 +5,8 @@ import com.zhaolian.demo.data.entity.BigdaiExample;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
-<<<<<<< HEAD
 
-import com.zhaolian.demo.data.entity.Bigdaiorder;
 import com.zhaolian.demo.web.util.BigdaiDTO;
-=======
->>>>>>> 02566c226c928678cd03245929b015cb862339fd
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
