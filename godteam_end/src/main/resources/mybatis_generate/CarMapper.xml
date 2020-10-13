@@ -256,6 +256,7 @@
       NDATE = #{ndate,jdbcType=TIMESTAMP}
     where CID = #{cid,jdbcType=DECIMAL}
   </update>
+
      <!--总记录数：-->
    <select id="getTotalCount"
 		resultType="int">
@@ -275,4 +276,5 @@ select * from (select row_number() over(order by CID desc) no, t.* from CAR t
 			and no>=#{startIndex}
 		</if>
 </select>
+
 </mapper>

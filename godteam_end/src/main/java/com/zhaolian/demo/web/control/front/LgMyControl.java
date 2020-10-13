@@ -1,5 +1,9 @@
 package com.zhaolian.demo.web.control.front;
 
+import com.zhaolian.demo.data.dao.UsersMapper;
+import com.zhaolian.demo.data.entity.SamlldaiOrder;
+import com.zhaolian.demo.data.entity.Users;
+import com.zhaolian.demo.service.front.lg.ISmallDaiService;
 import com.github.pagehelper.Page;
 import com.zhaolian.demo.data.dao.CarMapper;
 import com.zhaolian.demo.data.dao.EducationMapper;
@@ -17,6 +21,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 import java.util.*;
 
 @Controller
@@ -26,6 +35,7 @@ public class LgMyControl {
     UsersMapper userDao;
     @Resource
     ISmallDaiService smallDaiService;
+
     @Resource
     IBigDaiService bigDaiService;
     @Resource
@@ -34,6 +44,9 @@ public class LgMyControl {
     CarMapper carDao;
     @Resource
     HomeMapper homeDao;
+
+
+
     @ModelAttribute
     public void myInit(HttpSession session){
 
@@ -42,6 +55,7 @@ public class LgMyControl {
     @RequestMapping("/smalldai_home")
     public @ResponseBody
     Map smalldaihome(HttpSession session){
+
 //        Users user1 = userDao.selectByPrimaryKey(new BigDecimal(4));
 //        session.setAttribute("myuser",user1);
         Users user =(Users) session.getAttribute("myuser");
@@ -92,6 +106,7 @@ public class LgMyControl {
         so.setYihuan(new BigDecimal(0));
         return this.smallDaiService.smalldai(user,so);
     }
+
 
     //记录大额贷款
     @RequestMapping("/bigdaiall_home")
@@ -166,4 +181,5 @@ public class LgMyControl {
     List gundong(@RequestBody Map datas){
         return bigDaiService.bigdaihository(new BigDecimal(datas.get("bid").toString()));
     }
+
 }

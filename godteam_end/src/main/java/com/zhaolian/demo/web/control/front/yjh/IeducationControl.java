@@ -1,6 +1,7 @@
 package com.zhaolian.demo.web.control.front.yjh;
 
 import com.zhaolian.demo.data.entity.Education;
+import com.zhaolian.demo.data.entity.Idcard;
 import com.zhaolian.demo.data.entity.Users;
 import com.zhaolian.demo.service.front.yjh.impl.Educationimpl;
 import com.zhaolian.demo.service.util.PageBean;

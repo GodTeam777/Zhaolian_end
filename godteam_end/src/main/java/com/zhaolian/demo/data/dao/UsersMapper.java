@@ -6,12 +6,23 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
+
+import com.zhaolian.demo.web.util.SearchUsersDTO;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UsersMapper {
 
+
+    //系统登录
+    List<Users> SystemLogin(Users user);
+
+    //查询记录总数
+    public int getTotalCount(SearchUsersDTO dto);
+    //分页
+    public List<Users> selectByPage(Map<String, Object> param);
     //房屋认证修改额度
     int updateHome(Users record);
     //车辆认证修改额度

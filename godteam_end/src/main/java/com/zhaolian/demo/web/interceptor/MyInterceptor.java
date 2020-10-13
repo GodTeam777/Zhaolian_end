@@ -3,6 +3,16 @@ package com.zhaolian.demo.web.interceptor;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ConcurrentTaskExecutor;
+import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+
+import java.util.concurrent.Executors;
+
+
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.concurrent.ConcurrentTaskExecutor;
 
 import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -37,14 +47,12 @@ public class MyInterceptor extends WebMvcConfigurationSupport {
 				.allowedHeaders("*")
 				.allowedMethods("*")
 				.allowedOrigins("*");
-
 	}
 
 	@Override
 	protected void configureAsyncSupport(AsyncSupportConfigurer configurer){
 		configurer.setTaskExecutor(new ConcurrentTaskExecutor(Executors.newFixedThreadPool(3)));
 		configurer.setDefaultTimeout(30000);
-
 
 	}
 
@@ -57,7 +65,6 @@ public class MyInterceptor extends WebMvcConfigurationSupport {
 //		response.setHeader("Access-Control-Allow-Headers", "Authorization,Origin, X-Requested-With, Content-Type, Accept,Access-Token");//Origin, X-Requested-With, Content-Type, Accept,Access-Token
 //		return true;
 //	}
-
 
 }
 
