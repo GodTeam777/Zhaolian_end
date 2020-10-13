@@ -5,10 +5,10 @@ import com.zhaolian.demo.data.entity.*;
 import com.zhaolian.demo.service.front.yjh.IUsers;
 import com.zhaolian.demo.service.util.PageBean;
 import com.zhaolian.demo.web.util.SearchUsersDTO;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,15 +52,21 @@ public class IUsersimpl  implements IUsers {
     }
 
     @Override
-    public Users selectAll(Users user) {
-        Users all=this.Usersdao.selectByPrimaryKey(user.getUsersid());
+    public Users selectByid(Integer id) {
+        Users all=this.Usersdao.selectByPrimaryKey(new BigDecimal(id));
+        return all;
+    }
 
 
-            //根据个人信息id查询车辆信息
-            this.Cardao.selectByPrimaryKey(all.getCid());
-            //根据个人信息id查询房产信息
-            this.homedao.selectByPrimaryKey(all.getHid());
-
-     return  all;
+    //修改小额贷款额度
+    @Override
+    public boolean updatedaikuan(Users users) {
+        boolean isFlag = false;
+        int count= this.Usersdao.updateByPrimaryKeySelective(users);
+        if (count > 0) {
+            isFlag = true;
+            System.out.println("修改成功");
+        }
+        return isFlag;
     }
 }

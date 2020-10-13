@@ -100,6 +100,7 @@ select * from USERS where PETNAME=#{Uname} and USPWS=#{Upass}
     from USERS
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
+
     </if>
     <if test="orderByClause != null">
       order by ${orderByClause}
@@ -542,7 +543,7 @@ select * from USERS where PETNAME=#{Uname} and USPWS=#{Upass}
   </select>
 <!--高级查询和分页：-->
 <select id="selectByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
- select * from (select row_number() over(order by USERSID) no, t.* from USERS t
+ select * from (select row_number() over(order by USERSID desc) no, t.* from USERS t
 <where>
              <!--根据姓名查询拼接-->
              <if test='dto.search_name != null and dto.search_name!=""'>
@@ -556,6 +557,9 @@ select * from USERS where PETNAME=#{Uname} and USPWS=#{Upass}
 
 		<if test='startIndex != null and startIndex!=""'>
 			and no>=#{startIndex}
+		</if>
+		<if test='1==1'>
+			and TYPE=1
 		</if>
 </select>
 </mapper>

@@ -86,6 +86,14 @@
       order by ${orderByClause}
     </if>
   </select>
+  <!--按编号查询-->
+  <select id="selectByid" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <include refid="Base_Column_List" />
+    from SMADAI_LILV
+    where USID = #{usid,jdbcType=DECIMAL}
+  </select>
   <delete id="deleteByExample" parameterType="com.zhaolian.demo.data.entity.SmadaiLilvExample">
     <!--@mbg.generated-->
     delete from SMADAI_LILV
@@ -149,4 +157,9 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+
+  <!--修改利率-->
+  <update id="updateByidlilv" parameterType="com.zhaolian.demo.data.entity.SmadaiLilv">
+   update  SMADAI_LILV  set LILV = #{lilv,jdbcType=DECIMAL} where   USID = #{usid,jdbcType=DECIMAL}
+</update>
 </mapper>

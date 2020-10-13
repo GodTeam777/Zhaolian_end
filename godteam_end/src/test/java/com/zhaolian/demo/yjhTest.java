@@ -2,7 +2,9 @@ package com.zhaolian.demo;
 
 import com.zhaolian.demo.data.entity.Idcard;
 import com.zhaolian.demo.data.entity.SamlldaiOrder;
+import com.zhaolian.demo.data.entity.SmadaiLilv;
 import com.zhaolian.demo.data.entity.Users;
+import com.zhaolian.demo.service.front.yjh.ISmadaiLilv;
 import com.zhaolian.demo.service.front.yjh.IUsers;
 import com.zhaolian.demo.service.front.yjh.impl.ISamlldaiOrderimpl;
 import com.zhaolian.demo.service.front.yjh.impl.Idcardimpl;
@@ -19,15 +21,18 @@ import java.util.List;
 public class yjhTest {
 
 
-//    @Resource
-//    IUsers serve;
+    @Resource
+    IUsers serve;
 
 //    @Resource
 //    Idcardimpl Idcarserve;
 
 
-    @Resource
-    ISamlldaiOrderimpl server;
+//    @Resource
+//    ISamlldaiOrderimpl server;
+
+//    @Resource
+//    ISmadaiLilv server;
     @Test
     void Mytest(){
 //        SearchUsersDTO dto=new SearchUsersDTO();
@@ -50,6 +55,13 @@ public class yjhTest {
 
 //      List<SamlldaiOrder>  all=server.selectByid(4);
 //        System.out.println("查询到的记录"+all.toString());
+
+//        SmadaiLilv a= server.selectlilv(4);
+//        System.out.println(a);
+        Users user=new Users();
+        user.setUsersid(new BigDecimal(62));
+        user.setStatus(new BigDecimal(0));
+        this.serve.updatedaikuan(user);
 
     }
 
