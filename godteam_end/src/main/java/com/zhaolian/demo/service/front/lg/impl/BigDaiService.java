@@ -2,8 +2,9 @@ package com.zhaolian.demo.service.front.lg.impl;
 
 import com.zhaolian.demo.data.dao.BigdaiMapper;
 import com.zhaolian.demo.data.dao.BigdaiVlidateMapper;
-import com.zhaolian.demo.data.entity.Bigdai;
-import com.zhaolian.demo.data.entity.BigdaiExample;
+import com.zhaolian.demo.data.dao.BigdaiorderMapper;
+import com.zhaolian.demo.data.dao.UsersMapper;
+import com.zhaolian.demo.data.entity.*;
 import com.zhaolian.demo.service.front.lg.IBigDaiService;
 import com.zhaolian.demo.service.util.PageBean;
 import com.zhaolian.demo.web.dto.lg.BigDaiDTO;
@@ -22,6 +23,10 @@ public class BigDaiService implements IBigDaiService {
     BigdaiMapper bigdaiDao;
     @Resource
     BigdaiVlidateMapper bdvDao;
+    @Resource
+    BigdaiorderMapper boderDao;
+    @Resource
+    UsersMapper userDao;
     //查询所有大额贷款产品
     @Override
     public PageBean allBigdai(BigDaiDTO dto, Integer pageNo, Integer pageSize) {
@@ -50,5 +55,41 @@ public class BigDaiService implements IBigDaiService {
         pages.setPageNo(pageNo);
         pages.setPageSize(pageSize);
         return pages;
+    }
+
+    @Override
+    public Map bigdaiinfo(BigDecimal bid) {
+        Map<String,Object> maps=new HashMap<String, Object>();
+        Bigdai bigdai=bigdaiDao.selectByPrimaryKey(bid);
+        maps.put("big",bigdai);
+        maps.put("vlidate",bdvDao.selectByPrimaryKey(bigdai.getVid()));
+        return maps;
+    }
+
+    @Override
+    public boolean bigdaiimp(Users user, Bigdaiorder boder) {
+        boolean msg=false;
+        int u2=boderDao.insertSelective(boder);
+        if (u2==1){
+            msg=true;
+        }
+        return msg;
+    }
+
+    @Override
+    public List bigdaihository(BigDecimal bid) {
+        List list=new ArrayList();
+        BigdaiorderExample be=new BigdaiorderExample();
+        be.createCriteria().andBdidEqualTo(bid);
+        List<Bigdaiorder> res=boderDao.selectByExample(be);
+        for (Bigdaiorder o:res
+             ) {
+            Users user=userDao.selectByPrimaryKey( o.getUsersid());
+            Map map=new HashMap();
+            map.put("name",user.getUname());
+            map.put("money",o.getBigmoney());
+            list.add(map);
+        }
+        return list;
     }
 }
