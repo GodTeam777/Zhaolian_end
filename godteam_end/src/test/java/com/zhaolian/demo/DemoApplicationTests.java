@@ -1,7 +1,7 @@
 package com.zhaolian.demo;
 
 
-<<<<<<< HEAD
+
 import com.zhaolian.demo.data.dao.BigdaiMapper;
 import com.zhaolian.demo.data.dao.BigdaiorderMapper;
 import com.zhaolian.demo.data.entity.*;
@@ -11,7 +11,7 @@ import com.zhaolian.demo.web.util.BigdaiDTO;
 import com.zhaolian.demo.web.util.BigdaiordeDTO;
 import com.zhaolian.demo.web.util.PageBean;
 import org.junit.jupiter.api.Test;
-=======
+
 import com.zhaolian.demo.data.dao.SamlldaiOrderMapper;
 import com.zhaolian.demo.data.entity.*;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
->>>>>>> 02566c226c928678cd03245929b015cb862339fd
+
 
 
 import com.zhaolian.demo.data.dao.BankMapper;
@@ -31,20 +31,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 02566c226c928678cd03245929b015cb862339fd
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-<<<<<<< HEAD
+
 import java.util.List;
-=======
->>>>>>> 02566c226c928678cd03245929b015cb862339fd
+
 
 
 @SpringBootTest
@@ -58,132 +53,132 @@ class DemoApplicationTests {
 //    @Resource
 //
 //    Bigdaiservice ser;
-    @Resource
-<<<<<<< HEAD
-    BigdaiMapper dao;
 //    @Resource
-//    BigdaiorderMapper dao1;
 //
+//    BigdaiMapper dao;
+////    @Resource
+////    BigdaiorderMapper dao1;
+////
+////    BankMapper bankMapper;
+////
+////
+////
+////
+////    //已完成
+//    @Test
+////
+//    void contextLoads() {
+//        Bigdai dai = new Bigdai();
+//        dai.setBdname("农行抵押贷");
+//        dai.setBdpath("5.jpg");
+//        dai.setInterest(new BigDecimal(16.00));
+//        dai.setBigdaiTitle("qw");
+//        dai.setBigdaiBody("er");
+//        dai.setBdtype("质押贷");
+//        dai.setBddate(new BigDecimal(6));
+//        dai.setSmallMoney(new BigDecimal(300000));
+//        dai.setBigMoney(new BigDecimal(3000000));
+//        int a = dao.insert(dai);
+//        System.out.println(a);
+//
+//    SamlldaiOrderMapper samlldaiOrderMapper;
+//
+//
+//    public String getCurrYearLast(Integer month, Integer year) {
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.clear();
+//        calendar.set(month ,year);
+//        calendar.roll(Calendar.DAY_OF_YEAR, -1);
+//        Date time = calendar.getTime();
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//        return format.format(time);
+//    }
+//
+//    public String getCurrYearFirst(Integer month, Integer year) {
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.clear();
+//        calendar.set(month ,year);
+//        Date time = calendar.getTime();
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//        return format.format(time);
+//    }
+//
+//
+//    @Test
+//    void chart() throws ParseException {
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+//        String chart_date = "2020-01";
+//        //获取天数
+//        Integer format_year = Integer.valueOf(chart_date.substring(0, 4));
+//        Integer format_month = Integer.valueOf(chart_date.substring(5, 7));
+//        String yearFirst = getCurrYearFirst(format_month, format_year);
+//        String yearLast = getCurrYearLast(format_month, format_year);
+//
+//        System.err.println("前端传递的日期：" + chart_date + "，" + format_year + "年第一天：" + yearFirst + ",最后一天：" + yearLast);
+//        List<SamlldaiOrder> samll_all = samlldaiOrderMapper.samll_dk_all(yearFirst, yearLast);
+//        int M = 0;
+//        List<Map> list = new ArrayList<>();
+//        Map data = null;
+//        Boolean flag = true;
+//
+//        List<String> listNew = new ArrayList<String>();
+//        //去重
+//        for (SamlldaiOrder samlldaiOrder : samll_all) {
+//            if (!listNew.contains(sdf.format(samlldaiOrder.getDaiDate()))) {
+//                listNew.add(sdf.format(samlldaiOrder.getDaiDate()));
+//            }
+//        }
+//        System.err.println("去重结果：" + listNew.toString());
+//
+//        for (int j = 1; j <= 12; j++) {
+//            for (String set : listNew) {
+//                M = Integer.valueOf(set.substring(5, 7));
+//                if (j == Integer.valueOf(M)) {
+//                    data = new HashMap();
+//                    data.put("samll_date", j);
+//                    int count = samlldaiOrderMapper.samll_month_count(M);
+//                    data.put("samll_count", count);
+//                    list.add(data);
+//                    flag = false;
+//                }
+//            }
+//            if (flag) {
+//                data = new HashMap();
+//                data.put("samll_date", j);
+//                data.put("samll_count", " ");
+//                list.add(data);
+//            } else {
+//                flag = true;
+//            }
+//        }
+//        for (Map map1 : list) {
+//            System.err.println(map1.toString());
+//        }
+//    }
+
+//    @Resource
+//    UsersMapper Usersdao;
+//    @Resource
+//    IdcardMapper idcardMapper;
+//    @Resource
 //    BankMapper bankMapper;
-//
-//
-//
-//
-//    //已完成
-    @Test
-//
-    void contextLoads() {
-        Bigdai dai = new Bigdai();
-        dai.setBdname("农行抵押贷");
-        dai.setBdpath("5.jpg");
-        dai.setInterest(new BigDecimal(16.00));
-        dai.setBigdaiTitle("qw");
-        dai.setBigdaiBody("er");
-        dai.setBdtype("质押贷");
-        dai.setBddate(new BigDecimal(6));
-        dai.setSmallMoney(new BigDecimal(300000));
-        dai.setBigMoney(new BigDecimal(3000000));
-        int a = dao.insert(dai);
-        System.out.println(a);
-=======
-    SamlldaiOrderMapper samlldaiOrderMapper;
-
-
-    public String getCurrYearLast(Integer month, Integer year) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.clear();
-        calendar.set(month ,year);
-        calendar.roll(Calendar.DAY_OF_YEAR, -1);
-        Date time = calendar.getTime();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        return format.format(time);
-    }
-
-    public String getCurrYearFirst(Integer month, Integer year) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.clear();
-        calendar.set(month ,year);
-        Date time = calendar.getTime();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        return format.format(time);
-    }
-
-
-    @Test
-    void chart() throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
-        String chart_date = "2020-01";
-        //获取天数
-        Integer format_year = Integer.valueOf(chart_date.substring(0, 4));
-        Integer format_month = Integer.valueOf(chart_date.substring(5, 7));
-        String yearFirst = getCurrYearFirst(format_month, format_year);
-        String yearLast = getCurrYearLast(format_month, format_year);
-
-        System.err.println("前端传递的日期：" + chart_date + "，" + format_year + "年第一天：" + yearFirst + ",最后一天：" + yearLast);
-        List<SamlldaiOrder> samll_all = samlldaiOrderMapper.samll_dk_all(yearFirst, yearLast);
-        int M = 0;
-        List<Map> list = new ArrayList<>();
-        Map data = null;
-        Boolean flag = true;
-
-        List<String> listNew = new ArrayList<String>();
-        //去重
-        for (SamlldaiOrder samlldaiOrder : samll_all) {
-            if (!listNew.contains(sdf.format(samlldaiOrder.getDaiDate()))) {
-                listNew.add(sdf.format(samlldaiOrder.getDaiDate()));
-            }
-        }
-        System.err.println("去重结果：" + listNew.toString());
-
-        for (int j = 1; j <= 12; j++) {
-            for (String set : listNew) {
-                M = Integer.valueOf(set.substring(5, 7));
-                if (j == Integer.valueOf(M)) {
-                    data = new HashMap();
-                    data.put("samll_date", j);
-                    int count = samlldaiOrderMapper.samll_month_count(M);
-                    data.put("samll_count", count);
-                    list.add(data);
-                    flag = false;
-                }
-            }
-            if (flag) {
-                data = new HashMap();
-                data.put("samll_date", j);
-                data.put("samll_count", " ");
-                list.add(data);
-            } else {
-                flag = true;
-            }
-        }
-        for (Map map1 : list) {
-            System.err.println(map1.toString());
-        }
-    }
-
-    @Resource
-    UsersMapper Usersdao;
-    @Resource
-    IdcardMapper idcardMapper;
-    @Resource
-    BankMapper bankMapper;
 
 
 
     //已完成
-    @Test
-    void contextLoads() throws ParseException {
-        Users user=new Users();
-        user.setUsersid(new BigDecimal(4));
-        user.setUname("木兰兰");
-        user.setSex("女");
-        user.setPhone("12332112312");
-        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
-        user.setBirthday(format.parse("2000-01-01"));
-        System.out.println(user.toString());
-        int i=Usersdao.updateByPrimaryKeySelective(user);
-        System.out.println(i);
-
+//    @Test
+//    void contextLoads() throws ParseException {
+//        Users user=new Users();
+//        user.setUsersid(new BigDecimal(4));
+//        user.setUname("木兰兰");
+//        user.setSex("女");
+//        user.setPhone("12332112312");
+//        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+//        user.setBirthday(format.parse("2000-01-01"));
+//        System.out.println(user.toString());
+//        int i=Usersdao.updateByPrimaryKeySelective(user);
+//        System.out.println(i);
+//
 
 
 
@@ -270,7 +265,7 @@ class DemoApplicationTests {
 //        us.createCriteria().andPetnameEqualTo("lisan");
 //        int i=Usersdao.deleteByExample(us);
 //        System.out.println(i);
->>>>>>> 02566c226c928678cd03245929b015cb862339fd
+
     }
 
 ////int a=dao.getBigdaiCount(dto);
@@ -364,4 +359,4 @@ class DemoApplicationTests {
 //    }
 
 //}
-}
+
