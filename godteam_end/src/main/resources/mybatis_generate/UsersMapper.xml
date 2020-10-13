@@ -21,6 +21,14 @@
     <result column="PETNAME" jdbcType="VARCHAR" property="petname" />
 
   </resultMap>
+
+
+<!--  系统登录-->
+  <select id="SystemLogin" parameterType="com.zhaolian.demo.data.entity.Users" resultMap="BaseResultMap">
+    select * from users where uname = #{name, jdbcType = VARCHAR} and uspws = #{pass, jdbcType = DECIMAL}
+  </select>
+
+
   <sql id="Example_Where_Clause">
     <!--@mbg.generated-->
     <where>
@@ -389,4 +397,175 @@ select * from USERS where PETNAME=#{Uname} and USPWS=#{Upass}
       PETNAME = #{petname,jdbcType=VARCHAR}
     where USERSID = #{usersid,jdbcType=DECIMAL}
   </update>
+
+  <!--叶金豪  学历认证-->
+    <update id="update" parameterType="com.zhaolian.demo.data.entity.Users">
+    <!--@mbg.generated-->
+    update USERS
+    <set>
+      <if test="cid != null">
+        CID = #{cid,jdbcType=DECIMAL},
+      </if>
+      <if test="hid != null">
+        HID = #{hid,jdbcType=DECIMAL},
+      </if>
+      <if test="cardid != null">
+        CARDID = #{cardid,jdbcType=DECIMAL},
+      </if>
+      <if test="uname != null">
+        UNAME = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        BIRTHDAY = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="smalldai != null">
+        SMALLDAI = #{smalldai,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        "TYPE" = #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        "STATUS" = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="uspws != null">
+        USPWS = #{uspws,jdbcType=DECIMAL},
+      </if>
+      <if test="zfpws != null">
+        ZFPWS = #{zfpws,jdbcType=DECIMAL},
+      </if>
+      <if test="petname != null">
+        PETNAME = #{petname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where   EDUSERSID = #{edusersid,jdbcType=DECIMAL}
+  </update>
+  <!--车辆认证 -->
+      <update id="updateCAR" parameterType="com.zhaolian.demo.data.entity.Users">
+    <!--@mbg.generated-->
+    update USERS
+    <set>
+      <if test="edusersid != null">
+      EDUSERSID = #{edusersid,jdbcType=DECIMAL}
+
+      </if>
+      <if test="hid != null">
+        HID = #{hid,jdbcType=DECIMAL},
+      </if>
+      <if test="cardid != null">
+        CARDID = #{cardid,jdbcType=DECIMAL},
+      </if>
+      <if test="uname != null">
+        UNAME = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        BIRTHDAY = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="smalldai != null">
+        SMALLDAI = #{smalldai,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        "TYPE" = #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        "STATUS" = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="uspws != null">
+        USPWS = #{uspws,jdbcType=DECIMAL},
+      </if>
+      <if test="zfpws != null">
+        ZFPWS = #{zfpws,jdbcType=DECIMAL},
+      </if>
+      <if test="petname != null">
+        PETNAME = #{petname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where    CID = #{cid,jdbcType=DECIMAL}
+  </update>
+    <!--房屋认证 -->
+      <update id="updateHome" parameterType="com.zhaolian.demo.data.entity.Users">
+    <!--@mbg.generated-->
+    update USERS
+    <set>
+      <if test="edusersid != null">
+      EDUSERSID = #{edusersid,jdbcType=DECIMAL}
+
+      </if>
+      <if test="cid != null">
+        CID = #{cid,jdbcType=DECIMAL}
+      </if>
+      <if test="cardid != null">
+        CARDID = #{cardid,jdbcType=DECIMAL},
+      </if>
+      <if test="uname != null">
+        UNAME = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        BIRTHDAY = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="smalldai != null">
+        SMALLDAI = #{smalldai,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        "TYPE" = #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        "STATUS" = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="uspws != null">
+        USPWS = #{uspws,jdbcType=DECIMAL},
+      </if>
+      <if test="zfpws != null">
+        ZFPWS = #{zfpws,jdbcType=DECIMAL},
+      </if>
+      <if test="petname != null">
+        PETNAME = #{petname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where   HID = #{hid,jdbcType=DECIMAL}
+  </update>
+  <!--总记录数：-->
+  <select id="getTotalCount" parameterType="com.zhaolian.demo.web.util.SearchUsersDTO" resultType="int">
+    select count(*) from USERS use
+    <where>
+    <if test='search_name != null and search_name!=""'>
+         use.UNAME like '%'||#{search_name}||'%'
+   </if>
+   </where>
+  </select>
+<!--高级查询和分页：-->
+<select id="selectByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+ select * from (select row_number() over(order by USERSID) no, t.* from USERS t
+<where>
+             <!--根据姓名查询拼接-->
+             <if test='dto.search_name != null and dto.search_name!=""'>
+				t.UNAME like '%'||#{dto.search_name}||'%'
+			</if>
+</where>
+) temp
+		<if test='endIndex != null and endIndex!=""'>
+			<![CDATA[where no <=#{endIndex}]]>
+		</if>
+
+		<if test='startIndex != null and startIndex!=""'>
+			and no>=#{startIndex}
+		</if>
+</select>
 </mapper>

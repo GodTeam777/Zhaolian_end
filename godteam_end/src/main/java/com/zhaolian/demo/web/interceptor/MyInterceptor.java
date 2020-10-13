@@ -3,12 +3,24 @@ package com.zhaolian.demo.web.interceptor;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ConcurrentTaskExecutor;
+import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+
+import java.util.concurrent.Executors;
+
+
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.concurrent.ConcurrentTaskExecutor;
 
 import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.concurrent.Executors;
 
 
@@ -35,7 +47,6 @@ public class MyInterceptor extends WebMvcConfigurationSupport {
 				.allowedHeaders("*")
 				.allowedMethods("*")
 				.allowedOrigins("*");
-
 	}
 
 	@Override
@@ -43,8 +54,18 @@ public class MyInterceptor extends WebMvcConfigurationSupport {
 		configurer.setTaskExecutor(new ConcurrentTaskExecutor(Executors.newFixedThreadPool(3)));
 		configurer.setDefaultTimeout(30000);
 
-
 	}
+
+	//防止session变化
+//	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
+//
+//		response.setHeader("Access-Control-Allow-Origin",request.getHeader("Origin"));
+//		response.setHeader("Access-Control-Allow-Methods", "*");
+//		response.setHeader("Access-Control-Allow-Credentials", "true");
+//		response.setHeader("Access-Control-Allow-Headers", "Authorization,Origin, X-Requested-With, Content-Type, Accept,Access-Token");//Origin, X-Requested-With, Content-Type, Accept,Access-Token
+//		return true;
+//	}
+
 }
 
 

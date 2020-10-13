@@ -1,5 +1,8 @@
 package com.zhaolian.demo.data.dao;
 
+
+import com.zhaolian.demo.data.entity.SamlldaiOrder;
+
 import com.zhaolian.demo.data.entity.Smallhuankuan;
 import com.zhaolian.demo.data.entity.SmallhuankuanExample;
 import java.math.BigDecimal;
@@ -9,6 +12,16 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface SmallhuankuanMapper {
+
+    //查询小额还款
+    List<Smallhuankuan> samll_hk_all(String start, String end);
+
+    //查询一天的总数
+    int small_hk_count(String dates, String datesOne);
+
+    //查询一个月的总数
+    int small_month_count(Integer month);
+
     long countByExample(SmallhuankuanExample example);
 
     int deleteByExample(SmallhuankuanExample example);
