@@ -1,9 +1,6 @@
 package com.zhaolian.demo.service.front.jun;
 
-import com.zhaolian.demo.data.entity.Bank;
-import com.zhaolian.demo.data.entity.Education;
-import com.zhaolian.demo.data.entity.Idcard;
-import com.zhaolian.demo.data.entity.Users;
+import com.zhaolian.demo.data.entity.*;
 
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
@@ -19,4 +16,9 @@ public interface IUserService {
     public Users UserSelectByid(Users users);
     public int AddBankCard(Bank bank);
     public Education select_att_education(BigDecimal eduid);
+    public int att_education(HttpSession session,Education education);
+    public Home select_att_house(BigDecimal hid);
+    public int att_house(HttpSession session,Home home);
+    public Car select_att_car(BigDecimal cid);
+    public int att_car(HttpSession session,Car car);
 }

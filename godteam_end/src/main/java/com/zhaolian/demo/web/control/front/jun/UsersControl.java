@@ -1,10 +1,7 @@
 package com.zhaolian.demo.web.control.front.jun;
 
 
-import com.zhaolian.demo.data.entity.Bank;
-import com.zhaolian.demo.data.entity.Education;
-import com.zhaolian.demo.data.entity.Idcard;
-import com.zhaolian.demo.data.entity.Users;
+import com.zhaolian.demo.data.entity.*;
 import com.zhaolian.demo.service.front.jun.IUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -143,28 +140,7 @@ public class UsersControl {
         return userService.AddBankCard(bank);
     }
 
-    //学历是否验证
-    @RequestMapping("select_att_education")
-    public @ResponseBody Education  select_att_education(HttpSession session){
-        Users users= (Users) session.getAttribute("myuser");
-        Education education=null;
-        if(users.getEdusersid()!=null){
-            if(new Integer(users.getEdusersid().toString())>0) {
-                education = userService.select_att_education(users.getEdusersid());
-                education.setSpath("http://localhost:10086/img/"+education.getSpath());
-                System.out.println("学历信息："+education.toString());
-                return education;
-            }
-        }
-        System.out.println("学历信息："+education.toString());
-        return education;
-    }
-    //学历验证
-    @RequestMapping("att_education")
-    public @ResponseBody int att_education(@RequestBody Map data){
 
-        return 1;
-    }
 
     //修改密码（支付密码）
     @RequestMapping("updatezfpws")
@@ -255,6 +231,118 @@ public class UsersControl {
         List<Bank> Banks=userService.selectBank(user);
         return Banks;
     }
+
+
+    //学历是否提交验证
+    @RequestMapping("select_att_education")
+    public @ResponseBody Education  select_att_education(HttpSession session){
+        Users users= (Users) session.getAttribute("myuser");
+        Education education=null;
+        if(users.getEdusersid()!=null){
+            if(new Integer(users.getEdusersid().toString())>0) {
+                education = userService.select_att_education(users.getEdusersid());
+                education.setSpath("http://localhost:10086/img/"+education.getSpath());
+                System.out.println("学历信息："+education.toString());
+                return education;
+            }
+        }
+        return education;
+    }
+    //提交学历验证
+    @RequestMapping("att_education")
+    public @ResponseBody int att_education(@RequestBody Map data,HttpSession session) throws ParseException {
+        Education education=new Education();
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+        Date date=null;
+        education.setSpath(this.img1);
+        education.setSchoolname((String) data.get("schoolname"));
+
+        date=format.parse((String) data.get("startDate"));
+        date.setDate(new Integer(date.getDate())+1);
+        education.setBeginDate(date);
+
+        date=format.parse((String) data.get("endDate"));
+        date.setDate(new Integer(date.getDate())+1);
+        education.setEndDate(date);
+
+        education.setNdate(new Date());
+
+        education.setDegree((String) data.get("degree"));
+        education.setStatus(new BigDecimal(0));
+        System.out.println(education.toString());
+        int i=userService.att_education(session,education);
+        return i;
+    }
+
+    //房屋是否提交验证
+    @RequestMapping("select_att_house")
+    public @ResponseBody
+    Home select_att_house(HttpSession session){
+        Users users= (Users) session.getAttribute("myuser");
+        Home home=null;
+        if(users.getHid()!=null){
+            if(new Integer(users.getEdusersid().toString())>0) {
+                home = userService.select_att_house(users.getHid());
+                home.setHpath("http://localhost:10086/img/"+home.getHpath());
+                System.out.println("学历信息："+home.toString());
+                return home;
+            }
+        }
+        return home;
+    }
+    //提交房屋验证
+    @RequestMapping("att_house")
+    public @ResponseBody int att_house(@RequestBody Map data,HttpSession session) throws ParseException {
+        Home home=new Home();
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+        Date date=null;
+        home.setHpath(this.img1);
+        home.setHname((String) data.get("hname"));
+
+        date=format.parse((String) data.get("hdate"));
+        date.setDate(new Integer(date.getDate())+1);
+        home.setHdate(date);
+
+        home.setHaddress((String) data.get("haddress"));
+        home.setStatus(new BigDecimal(0));
+        System.out.println(home.toString());
+        int i=userService.att_house(session,home);
+        return i;
+    }
+
+    //车辆是否提交验证
+    @RequestMapping("select_att_car")
+    public @ResponseBody
+    Car select_att_car(HttpSession session){
+        Users users= (Users) session.getAttribute("myuser");
+        Car car=null;
+        if(users.getCid()!=null){
+            if(new Integer(users.getCid().toString())>0) {
+                car = userService.select_att_car(users.getCid());
+                car.setCpath("http://localhost:10086/img/"+car.getCpath());
+                System.out.println("学历信息："+car.toString());
+                return car;
+            }
+        }
+        return car;
+    }
+    //提交车辆验证
+    @RequestMapping("att_car")
+    public @ResponseBody int att_car(@RequestBody Map data,HttpSession session) throws ParseException {
+        Car car=new Car();
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+        Date date=null;
+        car.setCpath(this.img1);
+        car.setCarbrand((String) data.get("carbran"));
+        car.setCarid((String) data.get("carid"));
+        car.setCaraddress((String) data.get("caraddress"));
+        car.setNdate(new Date());
+        car.setStatus(new BigDecimal(0));
+        System.out.println(car.toString());
+        int i=userService.att_car(session,car);
+        return i;
+    }
+
 
     @RequestMapping("Test")
     public @ResponseBody
