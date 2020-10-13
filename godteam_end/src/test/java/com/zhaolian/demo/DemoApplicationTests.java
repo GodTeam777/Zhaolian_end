@@ -3,6 +3,9 @@ package com.zhaolian.demo;
 
 import com.zhaolian.demo.data.dao.SamlldaiOrderMapper;
 import com.zhaolian.demo.data.entity.*;
+import com.zhaolian.demo.service.end.zuo.BigService;
+import com.zhaolian.demo.service.end.zuo.SamllService;
+import com.zhaolian.demo.service.end.zuo.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import javax.annotation.Resource;
@@ -217,4 +220,11 @@ class DemoApplicationTests {
 //        System.out.println(i);
     }
 
+    @Resource
+    SamllService userService;
+
+    @Test
+    void UserTest(){
+        System.err.println(userService.SmallDaiKuanCount());
+    }
 }

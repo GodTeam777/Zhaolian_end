@@ -21,6 +21,10 @@
     <result column="PETNAME" jdbcType="VARCHAR" property="petname" />
   </resultMap>
 
+<!--  查询用户总数  -->
+  <select id="getUserCount" resultType="int">
+    select count(*) from users
+  </select>
 
 <!--  系统登录-->
   <select id="SystemLogin" parameterType="com.zhaolian.demo.data.entity.Users" resultMap="BaseResultMap">

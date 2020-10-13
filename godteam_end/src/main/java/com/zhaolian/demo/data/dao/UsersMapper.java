@@ -15,6 +15,8 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface UsersMapper {
 
+    //查询用户总数
+    int getUserCount();
 
     //系统登录
     List<Users> SystemLogin(Users user);

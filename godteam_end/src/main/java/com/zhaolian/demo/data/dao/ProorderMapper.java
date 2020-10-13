@@ -20,6 +20,8 @@ public interface ProorderMapper {
     //查询理财产品一月的总数
     int pro_order_month_count(Integer month);
 
+    //理财产品总数
+    int getProCount();
 
     long countByExample(ProorderExample example);
 
