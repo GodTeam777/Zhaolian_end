@@ -20,12 +20,12 @@
 
   <!--  自定义 查询小额还款一天的总数-->
   <select id="small_hk_count" parameterType="java.lang.String" resultType="int">
-    select count(*) from smallhuankuan where huan_date >= to_date(#{dates},'yyyy-MM-dd hh24:mi:ss') and <![CDATA[ huan_date < to_date(#{datesOne},'yyyy-MM-dd hh24:mi:ss')]]>
+    select sum(MONEY) from smallhuankuan where huan_date >= to_date(#{dates},'yyyy-MM-dd hh24:mi:ss') and <![CDATA[ huan_date < to_date(#{datesOne},'yyyy-MM-dd hh24:mi:ss')]]>
   </select>
 
   <!--  自定义 查询小额还款一月的总数-->
   <select id="small_month_count" parameterType="java.lang.Integer" resultType="int">
-    select count(*) from smallhuankuan where to_number(to_char(huan_date,'MM')) = #{month}
+    select sum(MONEY) from smallhuankuan where to_number(to_char(huan_date,'MM')) = #{month}
   </select>
 
 

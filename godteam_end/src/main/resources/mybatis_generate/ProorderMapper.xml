@@ -22,12 +22,12 @@
 
   <!--  自定义 查询理财产品一天的总数-->
   <select id="pro_order_day_count" parameterType="java.lang.String" resultType="int">
-    select count(*) from PROORDER where LICAI_DATE >= to_date(#{dates},'yyyy-MM-dd hh24:mi:ss') and <![CDATA[ LICAI_DATE < to_date(#{datesOne},'yyyy-MM-dd hh24:mi:ss')]]>
+    select sum (MONEY) from PROORDER where LICAI_DATE >= to_date(#{dates},'yyyy-MM-dd hh24:mi:ss') and <![CDATA[ LICAI_DATE < to_date(#{datesOne},'yyyy-MM-dd hh24:mi:ss')]]>
   </select>
 
   <!--  自定义 查询理财产品一月的总数-->
   <select id="pro_order_month_count" parameterType="java.lang.Integer" resultType="int">
-    select count(*) from PROORDER where to_number(to_char(LICAI_DATE,'MM')) = #{month}
+    select sum (MONEY) from PROORDER where to_number(to_char(LICAI_DATE,'MM')) = #{month}
   </select>
 
 

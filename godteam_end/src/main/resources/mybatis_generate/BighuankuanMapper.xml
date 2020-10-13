@@ -21,12 +21,12 @@
 
   <!--  自定义 查询大额还款一天的总数-->
   <select id="big_hk_count" parameterType="java.lang.String" resultType="int">
-    select count(*) from bighuankuan where HUAN_DATE >= to_date(#{dates},'yyyy-MM-dd hh24:mi:ss') and <![CDATA[ HUAN_DATE < to_date(#{datesOne},'yyyy-MM-dd hh24:mi:ss')]]>
+    select sum (MONEY) from bighuankuan where HUAN_DATE >= to_date(#{dates},'yyyy-MM-dd hh24:mi:ss') and <![CDATA[ HUAN_DATE < to_date(#{datesOne},'yyyy-MM-dd hh24:mi:ss')]]>
   </select>
 
   <!--  自定义 查询大额还款一月的总数-->
   <select id="big_month_count" parameterType="java.lang.Integer" resultType="int">
-    select count(*) from bighuankuan where to_number(to_char(HUAN_DATE,'MM')) = #{month}
+    select sum (MONEY) from bighuankuan where to_number(to_char(HUAN_DATE,'MM')) = #{month}
   </select>
 
 
