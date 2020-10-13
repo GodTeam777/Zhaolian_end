@@ -1,9 +1,15 @@
 package com.zhaolian.demo.web.control.front;
 
-import com.github.pagehelper.Page;
 import com.zhaolian.demo.data.dao.UsersMapper;
 import com.zhaolian.demo.data.entity.SamlldaiOrder;
 import com.zhaolian.demo.data.entity.Users;
+import com.zhaolian.demo.service.front.lg.ISmallDaiService;
+import com.github.pagehelper.Page;
+import com.zhaolian.demo.data.dao.CarMapper;
+import com.zhaolian.demo.data.dao.EducationMapper;
+import com.zhaolian.demo.data.dao.HomeMapper;
+import com.zhaolian.demo.data.dao.UsersMapper;
+import com.zhaolian.demo.data.entity.*;
 import com.zhaolian.demo.service.front.lg.IBigDaiService;
 import com.zhaolian.demo.service.front.lg.ISmallDaiService;
 import com.zhaolian.demo.service.util.PageBean;
@@ -15,6 +21,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 import java.util.*;
 
 @Controller
@@ -24,8 +35,17 @@ public class LgMyControl {
     UsersMapper userDao;
     @Resource
     ISmallDaiService smallDaiService;
+
     @Resource
     IBigDaiService bigDaiService;
+    @Resource
+    EducationMapper eduDao;
+    @Resource
+    CarMapper carDao;
+    @Resource
+    HomeMapper homeDao;
+
+
 
     @ModelAttribute
     public void myInit(HttpSession session){
@@ -35,6 +55,7 @@ public class LgMyControl {
     @RequestMapping("/smalldai_home")
     public @ResponseBody
     Map smalldaihome(HttpSession session){
+
 //        Users user1 = userDao.selectByPrimaryKey(new BigDecimal(4));
 //        session.setAttribute("myuser",user1);
         Users user =(Users) session.getAttribute("myuser");
@@ -86,6 +107,7 @@ public class LgMyControl {
         return this.smallDaiService.smalldai(user,so);
     }
 
+
     //记录大额贷款
     @RequestMapping("/bigdaiall_home")
     public @ResponseBody
@@ -108,4 +130,56 @@ public class LgMyControl {
         Integer pageSize=(Integer)query.get("pageSize");
         return bigDaiService.allBigdai(dto,pageNo,pageSize);
     }
+
+    //查看大额贷款详情
+    @RequestMapping("/bigdaiall_info")
+    public @ResponseBody
+    Map smalldaiinfo(@RequestBody Map query){
+        return bigDaiService.bigdaiinfo(new BigDecimal(query.get("bid").toString()));
+    }
+
+    @RequestMapping("/user_Renzhen")
+    public @ResponseBody
+    Map userRenzhen(HttpSession session){
+        Map map=new HashMap();
+        Users user =null;
+
+        user =(Users) session.getAttribute("myuser");
+            Education edu=eduDao.selectByPrimaryKey(user.getEdusersid());
+            Car car=carDao.selectByPrimaryKey(user.getCid());
+            Home home=homeDao.selectByPrimaryKey(user.getHid());
+            map.put("edu",edu);
+            map.put("car",car);
+            map.put("home",home);
+
+        return map;
+    }
+
+    @RequestMapping("/bigdaiimp")
+    public @ResponseBody
+    boolean bigdaiimp(HttpSession session,@RequestBody Map datas){
+        Map form=(Map) datas.get("form");
+        System.out.println("大额带跨的数据："+form.toString());
+        Users  user =(Users) session.getAttribute("myuser");
+        Bigdaiorder boder=new Bigdaiorder();
+            boder.setBdid(new BigDecimal(form.get("bdid").toString()));
+            boder.setBigmoney(new BigDecimal(form.get("smalldai").toString()));
+            boder.setBigdaiDate(new BigDecimal(form.get("dai_date").toString()));
+            boder.setOnemoney(new BigDecimal(form.get("meiri").toString()));
+            boder.setShouCard(new BigDecimal(form.get("brank1").toString()));
+            boder.setHuanCard(new BigDecimal(form.get("brank2").toString()));
+        boder.setDaiDate(new Date());
+        boder.setYihuan(new BigDecimal(0));
+        boder.setStatus(new BigDecimal(0));
+        boder.setUsersid(user.getUsersid());
+        System.out.println("分装的数据+"+boder);
+        return bigDaiService.bigdaiimp(user,boder);
+    }
+
+    @RequestMapping("/gundong_big")
+    public @ResponseBody
+    List gundong(@RequestBody Map datas){
+        return bigDaiService.bigdaihository(new BigDecimal(datas.get("bid").toString()));
+    }
+
 }

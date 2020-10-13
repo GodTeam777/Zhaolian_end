@@ -15,6 +15,7 @@ public interface CarMapper {
     public int getTotalCount();
     //学历分页
     public List<Car> selectByPage(Map<String, Object> param);
+
     long countByExample(CarExample example);
 
     int deleteByExample(CarExample example);

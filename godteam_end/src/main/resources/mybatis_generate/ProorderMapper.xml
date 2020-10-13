@@ -13,6 +13,29 @@
     <result column="SHOU_DATE" jdbcType="TIMESTAMP" property="shouDate" />
     <result column="STATUS" jdbcType="DECIMAL" property="status" />
   </resultMap>
+
+
+  <!--  自定义 查询理财产品-->
+  <select id="pro_order_all" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from PROORDER where LICAI_DATE between to_date(#{start},'yyyy-MM-dd') and to_date(#{end},'yyyy-MM-dd')
+  </select>
+
+  <!--  自定义 查询理财产品一天的总数-->
+  <select id="pro_order_day_count" parameterType="java.lang.String" resultType="int">
+    select sum (MONEY) from PROORDER where LICAI_DATE >= to_date(#{dates},'yyyy-MM-dd hh24:mi:ss') and <![CDATA[ LICAI_DATE < to_date(#{datesOne},'yyyy-MM-dd hh24:mi:ss')]]>
+  </select>
+
+  <!--  自定义 查询理财产品一月的总数-->
+  <select id="pro_order_month_count" parameterType="java.lang.Integer" resultType="int">
+    select sum (MONEY) from PROORDER where to_number(to_char(LICAI_DATE,'MM')) = #{month}
+  </select>
+
+
+  <select id="getProCount" resultType="int">
+    select sum (MONEY) from PROORDER
+  </select>
+
+
   <sql id="Example_Where_Clause">
     <!--@mbg.generated-->
     <where>

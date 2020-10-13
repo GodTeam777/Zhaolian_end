@@ -104,6 +104,7 @@
     where BDID = #{bdid,jdbcType=DECIMAL}
   </select>
 
+
   <select id="lgselectByPage" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
         select * from (select row_number() over (order by t.BDID) no,t.* from BIGDAI t
         <where>

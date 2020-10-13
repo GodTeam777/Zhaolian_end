@@ -20,6 +20,7 @@ public class NewsControl {
     @Resource
     NewsService news_service;
 
+
     @RequestMapping(value = "news_delete")
     public @ResponseBody String News_Delete(@RequestBody String[] array_tid){
         String message = "";

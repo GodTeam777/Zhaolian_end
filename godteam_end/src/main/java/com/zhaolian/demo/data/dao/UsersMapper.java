@@ -6,12 +6,21 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
+
 import com.zhaolian.demo.web.util.SearchUsersDTO;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UsersMapper {
+
+    //查询用户总数
+    int getUserCount();
+
+    //系统登录
+    List<Users> SystemLogin(Users user);
+
     //查询记录总数
     public int getTotalCount(SearchUsersDTO dto);
     //分页
