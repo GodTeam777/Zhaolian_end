@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.math.BigDecimal;
 import java.util.Map;
 import javax.annotation.Resource;
 
@@ -45,9 +47,36 @@ public class Bigdaicontrol {
 
         return pb;
     }
+    @RequestMapping(value = "update",method = RequestMethod.POST)
     public @ResponseBody Integer daiupdate(@RequestBody Bigdai dai){
-        
+        System.out.println("进入修改方法");
+        System.out.println(dai.toString());
+        if(bigdaiService.updateByPrimaryKeySelective(dai)>0){
+            System.out.println("修改成功");
+        }else {
+            System.out.println("修改失败");
+            System.out.println(dai.getBdname());
+        }
+
         return bigdaiService.updateByPrimaryKeySelective(dai);
+
+    }
+    @RequestMapping(value = "delect",method = RequestMethod.POST)
+    public @ResponseBody Integer daidelect(@RequestBody Map data){
+
+        int id=(int)data.get("dbid");
+        System.out.println(id);
+        int i=bigdaiService.deleteByPrimaryKey(new BigDecimal(id));
+       if(i>0){
+
+           System.out.println("删除成功");
+
+       }else{
+           System.out.println("删除失败");
+       }
+
+
+        return 1;
 
     }
 }

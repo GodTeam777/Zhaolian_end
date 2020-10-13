@@ -46,8 +46,8 @@ class DemoApplicationTests {
 //    @Resource
 //
 //    Bigdaiservice ser;
-//    @Resource
-//    BigdaiMapper dao;
+    @Resource
+    BigdaiMapper dao;
 //    @Resource
 //    BigdaiorderMapper dao1;
 //
@@ -57,24 +57,23 @@ class DemoApplicationTests {
 //
 //
 //    //已完成
-//    @Test
+    @Test
 //
-//    void contextLoads() {
-////        Bigdai dai=new Bigdai();
-////        dai.setBdname("农行抵押贷");
-////        dai.setBdpath("5.jpg");
-////        dai.setInterest(16.00);
-////        dai.setBigdaiTitle("qw");
-////        dai.setBigdaiBody("er");
-////        dai.setBdtype("质押贷");
-////        dai.setBddate(6);
-////        dai.setSmallMoney(300000);
-////        dai.setBigMoney(3000000);
-//// int a= dao.insert(dai);
-////        System.out.println(a);
-////        BigdaiDTO dto=new BigdaiDTO();
-////        dto.setBdname("农行抵押贷");
-////        dto.setBdtype("抵押贷");
+    void contextLoads() {
+        Bigdai dai = new Bigdai();
+        dai.setBdname("农行抵押贷");
+        dai.setBdpath("5.jpg");
+        dai.setInterest(new BigDecimal(16.00));
+        dai.setBigdaiTitle("qw");
+        dai.setBigdaiBody("er");
+        dai.setBdtype("质押贷");
+        dai.setBddate(new BigDecimal(6));
+        dai.setSmallMoney(new BigDecimal(300000));
+        dai.setBigMoney(new BigDecimal(3000000));
+        int a = dao.insert(dai);
+        System.out.println(a);
+    }
+
 ////int a=dao.getBigdaiCount(dto);
 ////        System.out.println(a);
 ////        PageBean<Bigdai> pb=   ser.getByPage(dto,1,2);

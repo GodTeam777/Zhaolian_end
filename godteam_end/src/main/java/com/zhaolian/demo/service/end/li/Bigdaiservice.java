@@ -13,5 +13,5 @@ public interface Bigdaiservice {
 
     public  Integer updateByPrimaryKeySelective(Bigdai record);
 
-    public  Integer deleteByPrimaryKey(BigDecimal bdid);
+    public  int deleteByPrimaryKey(BigDecimal bdid);
 }

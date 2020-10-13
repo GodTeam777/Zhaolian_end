@@ -49,8 +49,8 @@ a=dao.insert(record);
         return a;
     };
     @Override
-    public  Integer deleteByPrimaryKey(BigDecimal bdid){
-      int a=  dao.deleteByPrimaryKey(bdid);
-      return a;
+    public  int deleteByPrimaryKey(BigDecimal bdid){
+         dao.deleteByPrimaryKey(bdid);
+      return 1;
     };
 }
