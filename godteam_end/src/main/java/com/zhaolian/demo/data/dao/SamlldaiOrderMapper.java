@@ -34,6 +34,7 @@ public interface SamlldaiOrderMapper {
     int insertSelective(SamlldaiOrder record);
 
     List<SamlldaiOrder> selectByExample(SamlldaiOrderExample example);
+    List<SamlldaiOrder> selectByid(Integer id);
 
     SamlldaiOrder selectByPrimaryKey(BigDecimal sdoid);
 

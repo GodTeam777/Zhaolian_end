@@ -68,14 +68,4 @@ public class IeducationControl {
         this.service.EducationAdd(edu,null);
         return edu;
     }
-
-    //根据id查询学历信息
-    @RequestMapping(value="selectEducationByid",method = RequestMethod.POST)
-    public @ResponseBody
-    Education selectByid (String id){
-        System.out.println("前端传递的id:"+id);
-        Education all=this.service.selectByid(new Integer(id));
-        System.out.println("查询结果"+all.toString());
-        return all;
-    }
 }
