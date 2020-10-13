@@ -1,14 +1,23 @@
 package com.zhaolian.demo.service.front.jun;
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> bc777596ef7e207a8d7674bd298088feb9e11151
 import com.zhaolian.demo.data.entity.Users;
 
 import com.zhaolian.demo.data.entity.Bank;
 import com.zhaolian.demo.data.entity.Education;
 import com.zhaolian.demo.data.entity.Idcard;
+<<<<<<< HEAD
 
 import com.zhaolian.demo.data.entity.*;
 
+=======
+import com.zhaolian.demo.data.entity.Users;
+
+import com.zhaolian.demo.data.entity.*;
+>>>>>>> bc777596ef7e207a8d7674bd298088feb9e11151
 
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
