@@ -7,6 +7,7 @@ import com.zhaolian.demo.data.entity.UsersExample;
 import com.zhaolian.demo.data.dao.BankMapper;
 import com.zhaolian.demo.data.dao.EducationMapper;
 import com.zhaolian.demo.data.dao.IdcardMapper;
+import com.zhaolian.demo.data.dao.UsersMapper;
 import com.zhaolian.demo.data.dao.*;
 import com.zhaolian.demo.data.entity.*;
 import com.zhaolian.demo.service.front.jun.IUserService;
@@ -24,6 +25,8 @@ import java.util.List;
 @Service
 public class UserServiceimpl implements IUserService {
 
+    @Resource
+    SmadaiLilvMapper smadaiLilvMapper;
     @Resource
     HomeMapper homeMapper;
     @Resource
@@ -79,6 +82,8 @@ public class UserServiceimpl implements IUserService {
         idcard.setIdcard(card.getIdcard());
         idcard.setFront(card.getFront());
 
+
+
         //头像
         idcard.setFan("moren.jpg");
         i=idcardMapper.insertSelective(idcard);
@@ -87,7 +92,7 @@ public class UserServiceimpl implements IUserService {
         }
         //查询
         IdcardExample ides=new IdcardExample();
-        ides.createCriteria().andIdcardEqualTo(card.getIdcard());
+        ides.createCriteria().  andIdcardEqualTo(card.getIdcard());
         //插入成功的身份证idcard
         idcard=idcardMapper.selectByExample(ides).get(0);
 //        //用户
@@ -107,6 +112,7 @@ public class UserServiceimpl implements IUserService {
         user.setZfpws(users.getZfpws());
         user.setPhone(users.getPhone());
         i=Usersdao.insertSelective(user);
+
         if(i==0){
             return i;
         }
@@ -116,6 +122,11 @@ public class UserServiceimpl implements IUserService {
         //插入完后的用户user
         user=Usersdao.selectByExample(usersExample).get(0);
 
+        SmadaiLilv smadaiLilv=new SmadaiLilv();
+        smadaiLilv.setUsid(user.getUsersid());
+        smadaiLilv.setLilv(new BigDecimal(0.097));
+        //插入利率
+        smadaiLilvMapper.insert(smadaiLilv);
 
         //银行卡
         //插入
