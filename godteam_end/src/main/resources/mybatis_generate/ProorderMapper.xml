@@ -31,6 +31,10 @@
   </select>
 
 
+  <select id="getsumbyid" parameterType="java.util.Map" resultType="java.math.BigDecimal">
+    select sum (MONEY) from PROORDER where LICAI_DATE >= to_date(#{dates},'yyyy-MM-dd hh24:mi:ss') and <![CDATA[ LICAI_DATE < to_date(#{datesOne},'yyyy-MM-dd hh24:mi:ss')]]> and mpid=#{mpid}
+  </select>
+
   <sql id="Example_Where_Clause">
     <!--@mbg.generated-->
     <where>

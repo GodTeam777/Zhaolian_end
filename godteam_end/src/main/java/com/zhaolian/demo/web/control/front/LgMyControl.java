@@ -3,18 +3,16 @@ package com.zhaolian.demo.web.control.front;
 import com.zhaolian.demo.data.dao.UsersMapper;
 import com.zhaolian.demo.data.entity.SamlldaiOrder;
 import com.zhaolian.demo.data.entity.Users;
+import com.zhaolian.demo.service.front.lg.IMoneyProService;
 import com.zhaolian.demo.service.front.lg.ISmallDaiService;
-import com.github.pagehelper.Page;
 import com.zhaolian.demo.data.dao.CarMapper;
 import com.zhaolian.demo.data.dao.EducationMapper;
 import com.zhaolian.demo.data.dao.HomeMapper;
-import com.zhaolian.demo.data.dao.UsersMapper;
 import com.zhaolian.demo.data.entity.*;
 import com.zhaolian.demo.service.front.lg.IBigDaiService;
-import com.zhaolian.demo.service.front.lg.ISmallDaiService;
 import com.zhaolian.demo.service.util.PageBean;
 import com.zhaolian.demo.web.dto.lg.BigDaiDTO;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
+import com.zhaolian.demo.web.dto.lg.ProDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,7 +42,8 @@ public class LgMyControl {
     CarMapper carDao;
     @Resource
     HomeMapper homeDao;
-
+    @Resource
+    IMoneyProService moneyPro;
 
 
     @ModelAttribute
@@ -114,17 +113,17 @@ public class LgMyControl {
     PageBean smalldaio(@RequestBody Map query){
         System.out.println("大额贷款传递的值："+query.toString());
         BigDaiDTO dto=new BigDaiDTO();
-        if(query.get("seach_type")!=null&&query.get("seach_type")!=""){
+        if(query.get("seach_type")!=null&&query.get("seach_type").toString()!=""){
         dto.setSeach_type(query.get("seach_type").toString());}
-        if(query.get("seach_date")!=null&&query.get("seach_date")!=""){
+        if(query.get("seach_date")!=null&&query.get("seach_date").toString()!=""){
         dto.setSeach_date(new BigDecimal(query.get("seach_date").toString()));}
-        if(query.get("seach_lilv1")!=null&&query.get("seach_lilv1")!=""){
+        if(query.get("seach_lilv1")!=null&&query.get("seach_lilv1").toString()!=""){
         dto.setSeach_lilv1(new BigDecimal(query.get("seach_lilv1").toString()));}
-        if(query.get("seach_lilv2")!=null&&query.get("seach_lilv2")!=""){
+        if(query.get("seach_lilv2")!=null&&query.get("seach_lilv2").toString()!=""){
         dto.setSeach_lilv2(new BigDecimal(query.get("seach_lilv2").toString()));}
-        if(query.get("seach_money1")!=null&&query.get("seach_money1")!=""){
+        if(query.get("seach_money1")!=null&&query.get("seach_money1").toString()!=""){
         dto.setSeach_money1(new BigDecimal(query.get("seach_money1").toString()));}
-        if(query.get("seach_money2")!=null&&query.get("seach_money2")!=""){
+        if(query.get("seach_money2")!=null&&query.get("seach_money2").toString()!=""){
         dto.setSeach_money2(new BigDecimal(query.get("seach_money2").toString()));}
         Integer pageNo=(Integer) query.get("pageNo");
         Integer pageSize=(Integer)query.get("pageSize");
@@ -182,4 +181,60 @@ public class LgMyControl {
         return bigDaiService.bigdaihository(new BigDecimal(datas.get("bid").toString()));
     }
 
+    //理财产品
+    @RequestMapping("/moneypro_home")
+    public @ResponseBody
+    PageBean moneypro(@RequestBody Map query){
+        System.out.println("理财产品携带的值："+query.toString());
+        ProDTO dto=new ProDTO();
+        if(query.get("seach_mptype")!=null&&query.get("seach_mptype").toString()!=""){
+            dto.setSeach_mptype(query.get("seach_mptype").toString());
+        }
+        if(query.get("seach_lilv1")!=null&&query.get("seach_lilv1").toString()!=""){
+            dto.setSeach_lilv1(new BigDecimal(query.get("seach_lilv1").toString()));
+        }
+        if(query.get("seach_lilv2")!=null&&query.get("seach_lilv2").toString()!=""){
+            dto.setSeach_lilv2(new BigDecimal(query.get("seach_lilv2").toString()));
+        }
+        if(query.get("seach_money")!=null&&query.get("seach_money").toString()!=""){
+            dto.setSeach_money(new BigDecimal(query.get("seach_money").toString()));
+        }
+        if(query.get("seach_zhouqi")!=null&&query.get("seach_zhouqi").toString()!=""){
+            dto.setSeach_zhouqi(new BigDecimal(query.get("seach_zhouqi").toString()));
+        }
+        Integer pageNo=(Integer) query.get("pageNo");
+        Integer pageSize=(Integer)query.get("pageSize");
+        return moneyPro.allpro(dto,pageNo,pageSize);
+    };
+
+    @RequestMapping("/moneypro_info")
+    public @ResponseBody
+    Moneypro moneyproinfo(@RequestBody Map query){
+        //return moneyPro.proinfo(new BigDecimal(1));
+        return moneyPro.proinfo(new BigDecimal(query.get("mpid").toString()));
+    }
+    @RequestMapping("/moneypro_gund")
+    public @ResponseBody
+    Map moneyprogund(@RequestBody Map query){
+        //return moneyPro.getorder(new BigDecimal(1));
+        return moneyPro.getorder(new BigDecimal(query.get("mpid").toString()));
+    }
+
+    @RequestMapping("/addmoneypro")
+    public @ResponseBody
+    boolean addmoneypro(@RequestBody Map query){
+        Proorder order=new Proorder();
+        order.setMoney(new BigDecimal(query.get("money").toString()));
+        order.setMpid(new BigDecimal(query.get("mpid").toString()));
+        order.setUsersid(new BigDecimal(query.get("usersid").toString()));
+        order.setLicaiDate(new Date());
+        order.setZhifutype(query.get("zhifutype").toString());
+        Calendar rightNow = Calendar.getInstance();
+        rightNow.setTime(new Date());
+        rightNow.add(Calendar.MONTH, Integer.parseInt(query.get("zhouqi").toString()));
+        Date dt1 = rightNow.getTime();
+        order.setShouDate(dt1);
+        order.setStatus(new BigDecimal(0));
+        return moneyPro.charu(order);
+    }
 }
