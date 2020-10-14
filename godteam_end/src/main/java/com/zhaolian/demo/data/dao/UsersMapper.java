@@ -15,13 +15,13 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface UsersMapper {
 
-
+    //查询用户总数
+    int getUserCount();
     //系统登录
     List<Users> SystemLogin(Users user);
-
     //查询记录总数
     public int getTotalCount(SearchUsersDTO dto);
-    //分页
+    //用户分页
     public List<Users> selectByPage(Map<String, Object> param);
     //房屋认证修改额度
     int updateHome(Users record);
@@ -29,6 +29,10 @@ public interface UsersMapper {
     int updateCAR(Users record);
     //学历认证修改额度
     int update(Users record);
+    //查询客服分页
+    public List<Users> selectByPageService(Map<String, Object> param);
+    //查询管理员分页
+    public List<Users> selectByPageAdmin(Map<String, Object> param);
 
     Users LoginBypetnameAnduspws(Map<String,Object> map);
 

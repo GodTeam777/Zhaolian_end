@@ -11,4 +11,7 @@ public interface ProService {
 
     //按月查询，理财产品
     List<Map<String, Object>> Pro_month_Chart(String chart_date) throws ParseException;
+
+    //查询理财产品总数
+    int Pro_Count();
 }

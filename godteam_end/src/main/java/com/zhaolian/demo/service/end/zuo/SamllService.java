@@ -19,4 +19,7 @@ public interface SamllService {
 
     //按月查询小额还款
     List<Map<String, Object>> Small_HuanKuan_month_Chart(String chart_date) throws ParseException;
+
+    //查询小额贷款的总数
+    int SmallDaiKuanCount();
 }

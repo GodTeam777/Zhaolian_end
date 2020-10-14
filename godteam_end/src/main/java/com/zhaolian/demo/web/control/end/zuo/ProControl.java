@@ -27,4 +27,10 @@ public class ProControl {
         List<Map<String, Object>> pro_all = proService.Pro_day_Chart(change_year+"-"+change_month);
         return pro_all;
     }
+
+    //查询理财产品的总数
+    @RequestMapping(value = "pro_count", method = RequestMethod.POST)
+    public @ResponseBody int ProCount() {
+        return proService.Pro_Count();
+    }
 }

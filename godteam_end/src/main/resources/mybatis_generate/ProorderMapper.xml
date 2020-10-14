@@ -35,6 +35,11 @@
     select sum (MONEY) from PROORDER where LICAI_DATE >= to_date(#{dates},'yyyy-MM-dd hh24:mi:ss') and <![CDATA[ LICAI_DATE < to_date(#{datesOne},'yyyy-MM-dd hh24:mi:ss')]]> and mpid=#{mpid}
   </select>
 
+  <select id="getProCount" resultType="int">
+    select sum (MONEY) from PROORDER
+  </select>
+
+
   <sql id="Example_Where_Clause">
     <!--@mbg.generated-->
     <where>

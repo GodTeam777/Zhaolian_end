@@ -88,4 +88,9 @@ public class ProServiceImpl implements ProService {
     public List<Map<String, Object>> Pro_month_Chart(String chart_date) throws ParseException {
         return null;
     }
+
+    @Override
+    public int Pro_Count() {
+        return proorderMapper.getProCount();
+    }
 }

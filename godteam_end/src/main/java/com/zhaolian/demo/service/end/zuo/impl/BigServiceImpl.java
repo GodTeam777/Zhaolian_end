@@ -246,4 +246,9 @@ public class BigServiceImpl implements BigService {
         }
         return list;
     }
+
+    @Override
+    public int BigDaiKuanCount() {
+        return bigdaiorderMapper.getBigDaiCount();
+    }
 }

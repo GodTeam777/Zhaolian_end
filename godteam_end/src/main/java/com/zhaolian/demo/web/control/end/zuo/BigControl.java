@@ -52,4 +52,10 @@ public class BigControl {
         return big_all;
     }
 
+
+    //查询大额贷款的总数
+    @RequestMapping(value = "big_dai_count", method = RequestMethod.POST)
+    public @ResponseBody Integer BigDaiKuanCount() {
+        return bigService.BigDaiKuanCount();
+    }
 }

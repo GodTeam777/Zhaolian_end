@@ -25,6 +25,9 @@ public interface ProorderMapper {
     //查询单个理财产品一天的总数String dates, String datesOne,BigDecimal mpid
     BigDecimal getsumbyid(Map mpas);
 
+    //理财产品总数
+    int getProCount();
+
     long countByExample(ProorderExample example);
 
     int deleteByExample(ProorderExample example);
