@@ -554,7 +554,7 @@ select * from USERS where PETNAME=#{Uname} and USPWS=#{Upass}
    </if>
    </where>
   </select>
-<!--高级查询和分页：-->
+<!--用户高级查询和分页：-->
 <select id="selectByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
  select * from (select row_number() over(order by USERSID desc) no, t.* from USERS t
 <where>
@@ -562,6 +562,7 @@ select * from USERS where PETNAME=#{Uname} and USPWS=#{Upass}
              <if test='dto.search_name != null and dto.search_name!=""'>
 				t.UNAME like '%'||#{dto.search_name}||'%'
 			</if>
+			and type=1
 </where>
 ) temp
 		<if test='endIndex != null and endIndex!=""'>
@@ -571,8 +572,43 @@ select * from USERS where PETNAME=#{Uname} and USPWS=#{Upass}
 		<if test='startIndex != null and startIndex!=""'>
 			and no>=#{startIndex}
 		</if>
-		<if test='1==1'>
-			and TYPE=1
+</select>
+<!--客服高级查询和分页：-->
+<select id="selectByPageService" parameterType="java.util.Map" resultMap="BaseResultMap">
+ select * from (select row_number() over(order by USERSID desc) no, t.* from USERS t
+<where>
+             <!--根据姓名查询拼接-->
+             <if test='dto.search_name != null and dto.search_name!=""'>
+				t.UNAME like '%'||#{dto.search_name}||'%'
+			</if>
+			and type=2
+</where>
+) temp
+		<if test='endIndex != null and endIndex!=""'>
+			<![CDATA[where no <=#{endIndex}]]>
+		</if>
+
+		<if test='startIndex != null and startIndex!=""'>
+			and no>=#{startIndex}
+		</if>
+</select>
+<!--管理员高级查询和分页：-->
+<select id="selectByPageAdmin" parameterType="java.util.Map" resultMap="BaseResultMap">
+ select * from (select row_number() over(order by USERSID desc) no, t.* from USERS t
+<where>
+             <!--根据姓名查询拼接-->
+             <if test='dto.search_name != null and dto.search_name!=""'>
+				t.UNAME like '%'||#{dto.search_name}||'%'
+			</if>
+			and type=3
+</where>
+) temp
+		<if test='endIndex != null and endIndex!=""'>
+			<![CDATA[where no <=#{endIndex}]]>
+		</if>
+
+		<if test='startIndex != null and startIndex!=""'>
+			and no>=#{startIndex}
 		</if>
 </select>
 </mapper>

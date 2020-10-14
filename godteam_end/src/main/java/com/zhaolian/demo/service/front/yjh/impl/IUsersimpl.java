@@ -33,6 +33,11 @@ public class IUsersimpl  implements IUsers {
 
 
     @Override
+    public int AddSerivce(Users user) {
+        return Usersdao.insert(user);
+    }
+
+    @Override
     public PageBean<Users> getByPage(SearchUsersDTO dto, Integer pageNo, Integer pageSize) {
         PageBean<Users> pb = new PageBean<Users>();
         Map<String, Object> parms = new HashMap<String, Object>();
@@ -43,6 +48,44 @@ public class IUsersimpl  implements IUsers {
         parms.put("endIndex", end);
 
         List<Users>  data=this.Usersdao.selectByPage(parms);
+        pb.setData(data);
+        pb.setPageNo(pageNo);
+        pb.setPageSize(pageSize);
+        //统计按条件查询的总记录数
+        pb.setTotalRecords(this.Usersdao.getTotalCount(dto));
+        return pb;
+    }
+
+    @Override
+    public PageBean<Users> getByPageService(SearchUsersDTO dto, Integer pageNo, Integer pageSize) {
+        PageBean<Users> pb = new PageBean<Users>();
+        Map<String, Object> parms = new HashMap<String, Object>();
+        parms.put("dto", dto);
+        int start = (pageNo - 1) * pageSize + 1;
+        int end = pageNo * pageSize;
+        parms.put("startIndex", start);
+        parms.put("endIndex", end);
+
+        List<Users>  data=this.Usersdao.selectByPageService(parms);
+        pb.setData(data);
+        pb.setPageNo(pageNo);
+        pb.setPageSize(pageSize);
+        //统计按条件查询的总记录数
+        pb.setTotalRecords(this.Usersdao.getTotalCount(dto));
+        return pb;
+    }
+
+    @Override
+    public PageBean<Users> getByPageAdmin(SearchUsersDTO dto, Integer pageNo, Integer pageSize) {
+        PageBean<Users> pb = new PageBean<Users>();
+        Map<String, Object> parms = new HashMap<String, Object>();
+        parms.put("dto", dto);
+        int start = (pageNo - 1) * pageSize + 1;
+        int end = pageNo * pageSize;
+        parms.put("startIndex", start);
+        parms.put("endIndex", end);
+
+        List<Users>  data=this.Usersdao.selectByPageAdmin(parms);
         pb.setData(data);
         pb.setPageNo(pageNo);
         pb.setPageSize(pageSize);
