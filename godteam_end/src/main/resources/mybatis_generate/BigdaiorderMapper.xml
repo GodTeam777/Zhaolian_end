@@ -16,37 +16,6 @@
     <result column="ONEMONEY" jdbcType="DECIMAL" property="onemoney" />
     <result column="STATUS" jdbcType="DECIMAL" property="status" />
 
-
-    <association property="users" javaType="com.zhaolian.demo.data.entity.Users"  column="">
-     <id column="USERSID" jdbcType="DECIMAL" property="usersid" />
-    <result column="EDUSERSID" jdbcType="DECIMAL" property="edusersid" />
-    <result column="CID" jdbcType="DECIMAL" property="cid" />
-    <result column="HID" jdbcType="DECIMAL" property="hid" />
-    <result column="CARDID" jdbcType="DECIMAL" property="cardid" />
-    <result column="UNAME" jdbcType="VARCHAR" property="uname" />
-    <result column="SEX" jdbcType="VARCHAR" property="sex" />
-    <result column="BIRTHDAY" jdbcType="TIMESTAMP" property="birthday" />
-    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
-    <result column="SMALLDAI" jdbcType="DECIMAL" property="smalldai" />
-    <result column="TYPE" jdbcType="DECIMAL" property="type" />
-    <result column="STATUS" jdbcType="DECIMAL" property="status" />
-    <result column="USPWS" jdbcType="DECIMAL" property="uspws" />
-    <result column="ZFPWS" jdbcType="DECIMAL" property="zfpws" />
-    <result column="PETNAME" jdbcType="VARCHAR" property="petname" />
-</association>
-<association property="bigdai" javaType="com.zhaolian.demo.data.entity.Bigdai" column="bigdaiid">
-   <id column="BDID" jdbcType="DECIMAL" property="bdid" />
-    <result column="VID" jdbcType="DECIMAL" property="vid" />
-    <result column="BDNAME" jdbcType="VARCHAR" property="bdname" />
-    <result column="BDPATH" jdbcType="VARCHAR" property="bdpath" />
-    <result column="INTEREST" jdbcType="DECIMAL" property="interest" />
-    <result column="BIGDAI_TITLE" jdbcType="VARCHAR" property="bigdaiTitle" />
-    <result column="BIGDAI_BODY" jdbcType="VARCHAR" property="bigdaiBody" />
-    <result column="BDTYPE" jdbcType="VARCHAR" property="bdtype" />
-    <result column="BDDATE" jdbcType="DECIMAL" property="bddate" />
-    <result column="SMALL_MONEY" jdbcType="DECIMAL" property="smallMoney" />
-    <result column="BIG_MONEY" jdbcType="DECIMAL" property="bigMoney" />
-</association>
   </resultMap>
 
   <!--  自定义 查询大额贷款-->
@@ -135,54 +104,6 @@
 on b.BDID = d.BDID
 
 </select>
-
-<select id="getBigdaiorderCount" parameterType="com.zhaolian.demo.web.util.BigdaiordeDTO" resultType="int">
-select count(*) from BIGDAIORDER b  join USERS u on  b.USERSID=u.USERSID join BIGDAI d
-on b.BDID = d.BDID
-<where>
-<if test='uuname != null and uuname!=""'>
-			u.UNAME like '%'||#{uuname}||'%'
-			</if>
-
-			<if test='Bdname != null and Bdname!=""'>
-			and  d.BDNAME like '%'||#{Bdname}||'%'
-			</if>
-			<if test='status != null and status!=""'>
-			and  b.STATUS=#{status}
-			</if>
-</where>
-
-</select>
-
-  <select id="selectBigdaiorderByPage" parameterType="java.util.Map"  resultMap="BaseResultMap">
-select * from (select row_number()
-  over(order by Boid)no,b.* ,u.UNAME ,d.BDNAME from BIGDAIORDER b  join USERS u on  b.USERSID=u.USERSID join BIGDAI d
-on b.BDID = d.BDID
-  <where><if test='dto.uuname != null and dto.uuname!=""'>
-			u.UNAME like '%'||#{dto.uuname}||'%'
-			</if>
-
-			<if test='dto.Bdname != null and dto.Bdname!=""'>
-			and  d.BDNAME like '%'||#{dto.Bdname}||'%'
-			</if>
-			<if test='dto.status != null and dto.status!=""'>
-			and  b.STATUS=#{dto.status}
-			</if>
-
-		</where>
-
-)temp
-<if test='endIndex != null and endIndex!=""'>
-			<![CDATA[where temp.no <=#{endIndex}]]>
-		</if>
-		<if test='startIndex != null and startIndex!=""'>
-			and temp.no>=#{startIndex}
-		</if>
-
-</select>
-
-
-
 
 
 
@@ -425,4 +346,31 @@ on b.BDID = d.BDID
       "STATUS" = #{status,jdbcType=DECIMAL}
     where BOID = #{boid,jdbcType=DECIMAL}
   </update>
+
+  <select id="getBigdaiorderCount" parameterType="com.zhaolian.demo.web.util.BigdaiordeDTO" resultType="int">
+select count(*) from BIGDAIORDER
+
+</select>
+
+  <select id="selectBigdaiorderByPage" parameterType="java.util.Map"  resultMap="BaseResultMap">
+select * from (select row_number()
+  over(order by Boid desc)no,b.* from BIGDAIORDER b
+)temp
+<if test='endIndex != null and endIndex!=""'>
+			<![CDATA[where temp.no <=#{endIndex}]]>
+		</if>
+		<if test='startIndex != null and startIndex!=""'>
+			and temp.no>=#{startIndex}
+		</if>
+
+</select>
+
+<select id="selectalla" resultMap="BaseResultMap"  parameterType="java.lang.String">
+select * from BIGDAIORDER
+where boid in
+<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        #{item}
+    </foreach>
+</select>
+
 </mapper>

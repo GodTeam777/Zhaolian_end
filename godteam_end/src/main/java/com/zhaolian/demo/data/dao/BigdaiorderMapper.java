@@ -16,6 +16,7 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface BigdaiorderMapper {
+    public List<Bigdaiorder> selectalla(@Param("list") String list);
 
 
     public int getBigdaiorderCount(BigdaiordeDTO dto);

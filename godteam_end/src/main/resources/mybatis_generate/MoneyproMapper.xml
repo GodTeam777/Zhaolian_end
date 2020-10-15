@@ -303,4 +303,43 @@
       BIG_MONEY = #{bigMoney,jdbcType=DECIMAL}
     where MPID = #{mpid,jdbcType=DECIMAL}
   </update>
+  <select id="getmoneyproCount" parameterType="com.zhaolian.demo.web.util.MoneyproDTO" resultType="int">
+  select count(*) from MONEYPRO m
+<where>
+<if test='mpname != null and mpname!=""'>
+			m.MPNAME like '%'||#{mpname}||'%'
+			</if>
+
+			<if test='mptype != null and mptype!=""'>
+			and  m.MPTYPE like '%'||#{mptype}||'%'
+			</if>
+</where>
+
+
+</select>
+
+  <select id="selectmoneyproByPage" parameterType="java.util.Map"  resultMap="BaseResultMap">
+
+  select * from (select row_number()
+  over(order by mpid desc)no,m.* from moneypro m
+  <where>
+  <if test='dto.mpname != null and dto.mpname!=""'>
+			m.MPNAME like '%'||#{dto.mpname}||'%'
+			</if>
+
+			<if test='dto.mptype != null and dto.mptype!=""'>
+			and  m.MPTYPE like '%'||#{dto.mptype}||'%'
+			</if>
+</where>
+
+
+
+)temp
+<if test='endIndex != null and endIndex!=""'>
+			<![CDATA[where temp.no <=#{endIndex}]]>
+		</if>
+		<if test='startIndex != null and startIndex!=""'>
+			and temp.no>=#{startIndex}
+		</if>
+</select>
 </mapper>

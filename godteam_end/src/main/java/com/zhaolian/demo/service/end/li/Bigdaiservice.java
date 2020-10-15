@@ -7,11 +7,14 @@ import com.zhaolian.demo.web.util.PageBean;
 import java.math.BigDecimal;
 
 public interface Bigdaiservice {
-    int insert(Bigdai record);
+    int daiinsert(Bigdai record);
 
     public PageBean<Bigdai> getByPage(BigdaiDTO dto, int pageNo, int pageSize);
 
     public  Integer updateByPrimaryKeySelective(Bigdai record);
 
     public  int deleteByPrimaryKey(BigDecimal bdid);
+
+    public  int insert(Bigdai record);
+
 }

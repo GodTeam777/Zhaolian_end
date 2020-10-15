@@ -289,4 +289,17 @@
       "STATUS" = #{status,jdbcType=DECIMAL}
     where POID = #{poid,jdbcType=DECIMAL}
   </update>
+
+   <select id="getProorderCount" parameterType="com.zhaolian.demo.web.util.ProoderDTO" resultType="int">
+select count(*) from PROORDER
+
+</select>
+
+  <select id="selectProorderByPage" parameterType="java.util.Map"  resultMap="BaseResultMap">
+select * from (select row_number()
+  over(order by poid desc)no,p.* from PROORDER p
+)temp
+
+
+</select>
 </mapper>

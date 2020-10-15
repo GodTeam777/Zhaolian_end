@@ -1,16 +1,22 @@
 package com.zhaolian.demo.data.dao;
 
+import com.zhaolian.demo.data.entity.Bigdaiorder;
 import com.zhaolian.demo.data.entity.Proorder;
 import com.zhaolian.demo.data.entity.ProorderExample;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
+
+import com.zhaolian.demo.web.util.BigdaiordeDTO;
+import com.zhaolian.demo.web.util.ProoderDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface ProorderMapper {
+    public int getProorderCount(ProoderDTO dto);
 
-
+    public List<Proorder> selectProorderByPage(Map<String, Object> param);
     //查询理财产品
     List<Proorder> pro_order_all(String start, String end);
 

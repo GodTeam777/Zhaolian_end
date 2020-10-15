@@ -5,11 +5,14 @@ package com.zhaolian.demo;
 import com.zhaolian.demo.data.dao.BigdaiMapper;
 import com.zhaolian.demo.data.dao.BigdaiorderMapper;
 import com.zhaolian.demo.data.entity.*;
+import com.zhaolian.demo.service.end.li.Bigdaiordeservice;
 import com.zhaolian.demo.service.end.li.Bigdaiservice;
+import com.zhaolian.demo.service.end.li.Prooderservice;
 import com.zhaolian.demo.web.util.BigdaiDTO;
 
 import com.zhaolian.demo.web.util.BigdaiordeDTO;
 import com.zhaolian.demo.web.util.PageBean;
+import com.zhaolian.demo.web.util.ProoderDTO;
 import org.junit.jupiter.api.Test;
 
 import com.zhaolian.demo.data.dao.SamlldaiOrderMapper;
@@ -53,7 +56,14 @@ class DemoApplicationTests {
 //    @Resource
 //
 //    Bigdaiservice ser;
+    @Resource
+    Bigdaiordeservice service;
+    @Resource
+    Prooderservice pro;
 //    @Resource
+//    BigdaiorderMapper dao;
+    @Resource
+    BigdaiMapper dao;
 //
 //    BigdaiMapper dao;
 ////    @Resource
@@ -65,9 +75,36 @@ class DemoApplicationTests {
 ////
 ////
 ////    //已完成
-//    @Test
+   @Test
 ////
-//    void contextLoads() {
+    void contextLoads() {
+//        BigdaiordeDTO dto=new BigdaiordeDTO();
+//        //dto.setUuname("木");
+//       dto.setBdname("中");
+       ProoderDTO dto=new ProoderDTO();
+//       //dto.setUuname("木");
+       dto.setMpname("国");
+       PageBean<Map> pb=new PageBean<>();
+       pb=pro.getByPage(dto,1,3);
+       System.out.println(pb.getRows().toString());
+//        PageBean<Map> pb=new PageBean<>();
+//        pb=service.getByPage(dto,1,3);
+//       System.out.println(pb.getRows().toString());
+//               Bigdai dai = new Bigdai();
+//               dai.setVid(new BigDecimal(26));
+//        dai.setBdname("农行抵押贷");
+//        dai.setBdpath("5.jpg");
+//        dai.setInterest(new BigDecimal(16.00));
+//        dai.setBigdaiTitle("qw");
+//        dai.setBigdaiBody("er");
+//        dai.setBdtype("质押贷");
+//        dai.setBddate(new BigDecimal(6));
+//        dai.setSmallMoney(new BigDecimal(300000));
+//        dai.setBigMoney(new BigDecimal(3000000));
+//        int a = dao.insert(dai);
+//        System.out.println(a);
+
+    }
 //        Bigdai dai = new Bigdai();
 //        dai.setBdname("农行抵押贷");
 //        dai.setBdpath("5.jpg");

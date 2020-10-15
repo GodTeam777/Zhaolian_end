@@ -22,16 +22,13 @@ public class Bigdaiorder implements Serializable {
     private BigDecimal huanCard;
 
     private BigDecimal shouCard;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date daiDate;
 
     private BigDecimal onemoney;
 
     private BigDecimal status;
 
-    private Bigdai bigdai;
-
-    private Users users;
 
     private static final long serialVersionUID = 1L;
 
@@ -52,8 +49,6 @@ public class Bigdaiorder implements Serializable {
                 ", daiDate=" + daiDate +
                 ", onemoney=" + onemoney +
                 ", status=" + status +
-                ", bigdai=" + bigdai +
-                ", users=" + users +
                 '}';
     }
 
@@ -145,21 +140,6 @@ public class Bigdaiorder implements Serializable {
         this.status = status;
     }
 
-    public Bigdai getBigdai() {
-        return bigdai;
-    }
-
-    public void setBigdai(Bigdai bigdai) {
-        this.bigdai = bigdai;
-    }
-
-    public Users getUsers() {
-        return users;
-    }
-
-    public void setUsers(Users users) {
-        this.users = users;
-    }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -177,7 +157,6 @@ public class Bigdaiorder implements Serializable {
         this.daiDate = daiDate;
         this.onemoney = onemoney;
         this.status = status;
-        this.bigdai = bigdai;
-        this.users = users;
+
     }
 }
