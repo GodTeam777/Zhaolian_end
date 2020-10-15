@@ -19,7 +19,20 @@
     <result column="USPWS" jdbcType="DECIMAL" property="uspws" />
     <result column="ZFPWS" jdbcType="DECIMAL" property="zfpws" />
     <result column="PETNAME" jdbcType="VARCHAR" property="petname" />
+
   </resultMap>
+
+<!--  查询用户总数  -->
+  <select id="getUserCount" resultType="int">
+    select count(*) from users
+  </select>
+
+<!--  系统登录-->
+  <select id="SystemLogin" parameterType="com.zhaolian.demo.data.entity.Users" resultMap="BaseResultMap">
+    select * from users where PETNAME = #{petname} and USPWS = #{uspws}
+  </select>
+
+
   <sql id="Example_Where_Clause">
     <!--@mbg.generated-->
     <where>
@@ -100,6 +113,7 @@ select * from USERS where PETNAME=#{Uname} and USPWS=#{Upass}
     from USERS
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
+
     </if>
     <if test="orderByClause != null">
       order by ${orderByClause}
@@ -388,6 +402,7 @@ select * from USERS where PETNAME=#{Uname} and USPWS=#{Upass}
       PETNAME = #{petname,jdbcType=VARCHAR}
     where USERSID = #{usersid,jdbcType=DECIMAL}
   </update>
+
   <!--叶金豪  学历认证-->
     <update id="update" parameterType="com.zhaolian.demo.data.entity.Users">
     <!--@mbg.generated-->
@@ -540,14 +555,53 @@ select * from USERS where PETNAME=#{Uname} and USPWS=#{Upass}
    </if>
    </where>
   </select>
-<!--高级查询和分页：-->
+<!--用户高级查询和分页：-->
 <select id="selectByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
- select * from (select row_number() over(order by USERSID) no, t.* from USERS t
+ select * from (select row_number() over(order by USERSID desc) no, t.* from USERS t
 <where>
              <!--根据姓名查询拼接-->
              <if test='dto.search_name != null and dto.search_name!=""'>
 				t.UNAME like '%'||#{dto.search_name}||'%'
 			</if>
+			and type=1
+</where>
+) temp
+		<if test='endIndex != null and endIndex!=""'>
+			<![CDATA[where no <=#{endIndex}]]>
+		</if>
+
+		<if test='startIndex != null and startIndex!=""'>
+			and no>=#{startIndex}
+		</if>
+</select>
+<!--客服高级查询和分页：-->
+<select id="selectByPageService" parameterType="java.util.Map" resultMap="BaseResultMap">
+ select * from (select row_number() over(order by USERSID desc) no, t.* from USERS t
+<where>
+             <!--根据姓名查询拼接-->
+             <if test='dto.search_name != null and dto.search_name!=""'>
+				t.UNAME like '%'||#{dto.search_name}||'%'
+			</if>
+			and type=2
+</where>
+) temp
+		<if test='endIndex != null and endIndex!=""'>
+			<![CDATA[where no <=#{endIndex}]]>
+		</if>
+
+		<if test='startIndex != null and startIndex!=""'>
+			and no>=#{startIndex}
+		</if>
+</select>
+<!--管理员高级查询和分页：-->
+<select id="selectByPageAdmin" parameterType="java.util.Map" resultMap="BaseResultMap">
+ select * from (select row_number() over(order by USERSID desc) no, t.* from USERS t
+<where>
+             <!--根据姓名查询拼接-->
+             <if test='dto.search_name != null and dto.search_name!=""'>
+				t.UNAME like '%'||#{dto.search_name}||'%'
+			</if>
+			and type=3
 </where>
 ) temp
 		<if test='endIndex != null and endIndex!=""'>

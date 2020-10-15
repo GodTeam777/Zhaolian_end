@@ -1,7 +1,8 @@
-package com.zhaolian.demo.service.end.zuo;
+package com.zhaolian.demo.service.end.zuo.impl;
 
 import com.zhaolian.demo.data.dao.NewesMapper;
 import com.zhaolian.demo.data.entity.Newes;
+import com.zhaolian.demo.service.end.zuo.NewsService;
 import com.zhaolian.demo.web.dto.zuo.NewsDTO;
 import com.zhaolian.demo.web.util.PageBean;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service("NewsService")
-public class NewsServiceImpl implements NewsService{
+public class NewsServiceImpl implements NewsService {
 
     @Resource
     NewesMapper news_dao;

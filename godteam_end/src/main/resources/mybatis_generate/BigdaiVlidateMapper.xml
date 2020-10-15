@@ -86,9 +86,12 @@
       <include refid="Example_Where_Clause" />
     </if>
     <if test="orderByClause != null">
-      order by ${orderByClause}
+      order by ${orderByClause} desc
     </if>
   </select>
+  <select id="selectall" resultMap="BaseResultMap">
+  select * from BIGDAI_VLIDATE order by VID desc
+</select>
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select 

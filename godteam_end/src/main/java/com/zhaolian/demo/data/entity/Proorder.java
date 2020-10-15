@@ -1,5 +1,7 @@
 package com.zhaolian.demo.data.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -12,7 +14,7 @@ public class Proorder implements Serializable {
     private BigDecimal usersid;
 
     private BigDecimal money;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date licaiDate;
 
     private String zhifutype;

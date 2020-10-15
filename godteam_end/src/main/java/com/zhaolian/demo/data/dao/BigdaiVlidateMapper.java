@@ -30,4 +30,5 @@ public interface BigdaiVlidateMapper {
     int updateByPrimaryKeySelective(BigdaiVlidate record);
 
     int updateByPrimaryKey(BigdaiVlidate record);
-}
+    List<BigdaiVlidate> selectall();
+ }

@@ -1,7 +1,7 @@
 package com.zhaolian.demo.web.util;
 
 public class SearchUsersDTO {
-    private String search_name;//查询帖子名字
+    private String search_name;//按姓名查询
 
     public String getSearch_name() {
         return search_name;

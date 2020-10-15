@@ -1,6 +1,14 @@
 package com.zhaolian.demo.service.front.jun;
 
+import com.zhaolian.demo.data.entity.Users;
+
+import com.zhaolian.demo.data.entity.Bank;
+import com.zhaolian.demo.data.entity.Education;
+import com.zhaolian.demo.data.entity.Idcard;
+
+
 import com.zhaolian.demo.data.entity.*;
+
 
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;

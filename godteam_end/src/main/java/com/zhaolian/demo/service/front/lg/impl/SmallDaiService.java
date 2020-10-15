@@ -43,22 +43,23 @@ public class SmallDaiService implements ISmallDaiService {
         smadai.put("lilv",lilv.get(0));
         //当前可借额度
         BigDecimal smalldaicount=new BigDecimal(0);
-        for (SamlldaiOrder order : smadaiorderlist
-             ) {
-            if(order.getMou().equals(order.getYihuan())){
-                continue;
+        for (int i = 0; i <smadaiorderlist.size() ; i++) {
+            int num1=smadaiorderlist.get(i).getMou();
+            int num2=Integer.parseInt(smadaiorderlist.get(i).getYihuan().toString());
+            if(num1>num2){
+                smalldaicount=smalldaicount.add(smadaiorderlist.get(i).getDaimoney());
             }
-            smalldaicount=smalldaicount.add(order.getDaimoney());
         }
         smadai.put("newedu",users.getSmalldai().subtract(smalldaicount));
         //每月15日应还
         BigDecimal smalldaionecount=new BigDecimal(0);
         for (SamlldaiOrder order : smadaiorderlist
         ) {
-            if(order.getMou().equals(order.getYihuan())){
-                continue;
+            int num1=order.getMou();
+            int num2=Integer.parseInt(order.getYihuan().toString());
+            if(num1>num2){
+                smalldaionecount=smalldaionecount.add(order.getOnemoney());
             }
-            smalldaionecount=smalldaionecount.add(order.getOnemoney());
         }
         smadai.put("onehuan",smalldaionecount);
         return smadai;
