@@ -7,8 +7,10 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
+
 import com.zhaolian.demo.web.util.BigdaiDTO;
 import com.zhaolian.demo.web.util.MoneyproDTO;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -39,4 +41,7 @@ public interface MoneyproMapper {
     int updateByPrimaryKeySelective(Moneypro record);
 
     int updateByPrimaryKey(Moneypro record);
+
+    //分页+高级查询
+    List<Moneypro> lgselectByPage(Map map);
 }

@@ -18,10 +18,14 @@ public interface SamlldaiOrderMapper {
     //查询小额贷款
     List<SamlldaiOrder> samll_dk_all(String start, String end);
 
+    //查询小额贷款，日的总数
     int samll_dk_count(String dates, String datesOne);
 
+    //查询小额贷款，月的总数
     int samll_month_count(Integer month);
 
+    //查询小额贷款的总数
+    int getSamllCount();
 
     long countByExample(SamlldaiOrderExample example);
 

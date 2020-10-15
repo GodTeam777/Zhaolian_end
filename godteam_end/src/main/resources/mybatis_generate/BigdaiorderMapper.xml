@@ -33,6 +33,11 @@
     select sum (BIGMONEY) from bigdaiorder where to_number(to_char(DAI_DATE,'MM')) = #{month}
   </select>
 
+  <!--  自定义 查询大额贷的总数-->
+  <select id="getBigDaiCount" resultType="int">
+    select sum (BIGMONEY) from bigdaiorder
+  </select>
+
 
   <sql id="Example_Where_Clause">
     <!--@mbg.generated-->

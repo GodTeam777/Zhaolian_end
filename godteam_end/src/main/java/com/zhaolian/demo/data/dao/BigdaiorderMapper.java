@@ -34,6 +34,8 @@ public interface BigdaiorderMapper {
     //查询大额贷款一月的总数
     int big_month_count(Integer month);
 
+    //查询贷款总数
+    int getBigDaiCount();
 
     long countByExample(BigdaiorderExample example);
 

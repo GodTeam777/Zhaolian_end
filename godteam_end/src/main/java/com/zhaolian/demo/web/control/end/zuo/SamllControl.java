@@ -1,5 +1,6 @@
 package com.zhaolian.demo.web.control.end.zuo;
 
+import com.sun.org.apache.regexp.internal.RE;
 import com.zhaolian.demo.service.end.zuo.SamllService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -54,5 +55,11 @@ public class SamllControl {
         return samll_all;
     }
 
+
+    //查询小额贷款总数
+    @RequestMapping(value = "small_dai_count", method = RequestMethod.POST)
+    public @ResponseBody Integer SmallCount(){
+        return samllService.SmallDaiKuanCount();
+    }
 
 }

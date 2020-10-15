@@ -36,6 +36,8 @@ public class IDcardControl {
     @Resource
     IHomeimpl IHomeserver;
 
+
+    //查看详情信息
     @RequestMapping(value="selectByid",method = RequestMethod.POST)
     public @ResponseBody
     Map<String,Object> selectByid (@RequestBody Map data){

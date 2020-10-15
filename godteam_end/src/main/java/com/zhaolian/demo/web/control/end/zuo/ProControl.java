@@ -23,8 +23,21 @@ public class ProControl {
     public @ResponseBody List<Map<String, Object>> ProDayChart(@RequestBody Map<String, Object> map) throws ParseException {
         String change_year = String.valueOf(map.get("change_year"));
         String change_month = String.valueOf(map.get("change_month"));
-        System.err.println("传递的参数："+change_year+"-"+change_month);
         List<Map<String, Object>> pro_all = proService.Pro_day_Chart(change_year+"-"+change_month);
         return pro_all;
+    }
+
+    //按月查询，理财产品
+    @RequestMapping(value = "pro_month_chart", method = RequestMethod.POST)
+    public @ResponseBody List<Map<String, Object>> ProMonthChart(@RequestBody Map<String, Object> map) throws ParseException {
+        String change_year = String.valueOf(map.get("change_year"));
+        List<Map<String, Object>> pro_all = proService.Pro_month_Chart(change_year+"-01");
+        return pro_all;
+    }
+
+    //查询理财产品的总数
+    @RequestMapping(value = "pro_count", method = RequestMethod.POST)
+    public @ResponseBody int ProCount() {
+        return proService.Pro_Count();
     }
 }

@@ -17,6 +17,9 @@ import org.junit.jupiter.api.Test;
 
 import com.zhaolian.demo.data.dao.SamlldaiOrderMapper;
 import com.zhaolian.demo.data.entity.*;
+import com.zhaolian.demo.service.end.zuo.BigService;
+import com.zhaolian.demo.service.end.zuo.SamllService;
+import com.zhaolian.demo.service.end.zuo.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import javax.annotation.Resource;
@@ -303,7 +306,6 @@ class DemoApplicationTests {
 //        int i=Usersdao.deleteByExample(us);
 //        System.out.println(i);
 
-    }
 
 ////int a=dao.getBigdaiCount(dto);
 ////        System.out.println(a);
@@ -397,3 +399,11 @@ class DemoApplicationTests {
 
 //}
 
+    @Resource
+    SamllService userService;
+
+    @Test
+    void UserTest(){
+        System.err.println(userService.SmallDaiKuanCount());
+    }
+}

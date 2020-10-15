@@ -240,4 +240,9 @@ public class SamllServiceImpl implements SamllService {
         }
         return list;
     }
+
+    @Override
+    public int SmallDaiKuanCount() {
+        return samlldaiOrderMapper.getSamllCount();
+    }
 }
