@@ -1,8 +1,8 @@
-package com.zhaolian.demo.service.front.yjh.impl;
+package com.zhaolian.demo.service.end.yjh.impl;
 
 import com.zhaolian.demo.data.dao.IdcardMapper;
 import com.zhaolian.demo.data.entity.Idcard;
-import com.zhaolian.demo.service.front.yjh.IDcard;
+import com.zhaolian.demo.service.end.yjh.IDcard;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

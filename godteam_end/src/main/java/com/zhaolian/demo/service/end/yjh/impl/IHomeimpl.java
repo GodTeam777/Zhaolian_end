@@ -1,10 +1,10 @@
-package com.zhaolian.demo.service.front.yjh.impl;
+package com.zhaolian.demo.service.end.yjh.impl;
 
-import com.zhaolian.demo.data.dao.EducationMapper;
+import com.zhaolian.demo.data.dao.HomeMapper;
 import com.zhaolian.demo.data.dao.UsersMapper;
-import com.zhaolian.demo.data.entity.Education;
+import com.zhaolian.demo.data.entity.Home;
 import com.zhaolian.demo.data.entity.Users;
-import com.zhaolian.demo.service.front.yjh.Ieducation;
+import com.zhaolian.demo.service.end.yjh.IHome;
 import com.zhaolian.demo.service.util.PageBean;
 import org.springframework.stereotype.Service;
 
@@ -14,18 +14,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 @Service
-public class Educationimpl implements Ieducation {
-
+public class IHomeimpl implements IHome {
 
     @Resource
-    EducationMapper dao;
-
+    HomeMapper dao;
     @Resource
     UsersMapper Usersdao;
     //分页
     @Override
-    public PageBean<Education> queryReturnPage(int pageNo, int pageSize) {
-        PageBean<Education> pageBean = new PageBean<>();
+    public PageBean<Home> queryReturnPage(int pageNo, int pageSize) {
+        PageBean<Home> pageBean = new PageBean<>();
         try {
             Map<String, Object> parms = new HashMap<String, Object>();
             //第一页：pageNo:1
@@ -34,7 +32,7 @@ public class Educationimpl implements Ieducation {
             int end = pageNo * pageSize;
             parms.put("startIndex", start);//每一页第一条记录编号
             parms.put("endIndex", end);//每一页最后一条记录编号
-            List<com.zhaolian.demo.data.entity.Education> blogs = dao.selectByPage(parms);//分页查询
+            List<Home> blogs = dao.selectByPage(parms);//分页查询
             int totalCount = dao.getTotalCount();//记录总数
             pageBean.setData(blogs);
             pageBean.setTotalRecords(totalCount);
@@ -47,21 +45,18 @@ public class Educationimpl implements Ieducation {
         }
         return pageBean;
     }
-    //学历审核通过增加小额额度
+
     @Override
-    public void EducationAdd(Education edu, Users user) {
-             //修改状态
-             dao.updateByPrimaryKeySelective(edu);
-             //调用执行方法
-             Usersdao.update(user);
+    public void HomeUpdateandAdd(Home home, Users user) {
+        dao.updateByPrimaryKeySelective(home);
+        //调用执行方法
+        Usersdao.updateHome(user);
     }
 
-    //根据用户id查询学历信息
     @Override
-    public Education selectByid(Integer id) {
-        //根据个人信息id查询学历信息
-        Education all= this.dao.selectByPrimaryKey(new BigDecimal(id));
+    public Home selectByid(Integer id) {
+        //根据个人信息id查询详细信息
+        Home all=this.dao.selectByPrimaryKey(new BigDecimal(id));
         return all;
     }
 }
-

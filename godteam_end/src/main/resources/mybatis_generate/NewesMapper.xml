@@ -112,20 +112,71 @@
     <!--@mbg.generated-->
     NID, NEWS_TITLE, NEWS_BODY, CHUBANSHE, FABIAONAME, NEWS_DATE, NTYPE
   </sql>
+  <!--新闻类型1-->
   <select id="selectByExample" parameterType="com.zhaolian.demo.data.entity.NewesExample" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from NEWES
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
+ select
+    *
+from
+   ( (select
+         ROWNUM
+             line,result.*
+     from
+         (select
+              NID,NEWS_TITLE,NEWS_BODY,CHUBANSHE,FABIAONAME,NEWS_DATE,NTYPE
+          from
+              NEWES
+          where
+              NTYPE=1)result)order by NID desc)
+where
+    line
+        between
+        1
+        and
+        6
+  </select>
+  <!--新闻类型2-->
+  <select id="selectByExampletype" parameterType="com.zhaolian.demo.data.entity.NewesExample" resultMap="BaseResultMap">
+ select
+    *
+from
+   ( (select
+         ROWNUM
+             line,result.*
+     from
+         (select
+              NID,NEWS_TITLE,NEWS_BODY,CHUBANSHE,FABIAONAME,NEWS_DATE,NTYPE
+          from
+              NEWES
+          where
+              NTYPE=2)result)order by NID desc)
+where
+    line
+        between
+        1
+        and
+        6
+  </select>
+    <!--新闻类型2-->
+  <select id="selectBytype" parameterType="com.zhaolian.demo.data.entity.NewesExample" resultMap="BaseResultMap">
+ select
+    *
+from
+   ( (select
+         ROWNUM
+             line,result.*
+     from
+         (select
+              NID,NEWS_TITLE,NEWS_BODY,CHUBANSHE,FABIAONAME,NEWS_DATE,NTYPE
+          from
+              NEWES
+          where
+              NTYPE=3)result)order by NID desc)
+where
+    line
+        between
+        1
+        and
+        6
   </select>
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
     <!--@mbg.generated-->
