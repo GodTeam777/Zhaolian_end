@@ -222,13 +222,14 @@ public class LgMyControl {
 
     @RequestMapping("/addmoneypro")
     public @ResponseBody
-    boolean addmoneypro(@RequestBody Map query){
+    boolean addmoneypro(@RequestBody Map datas){
+        Map query=(Map) datas.get("form");
         Proorder order=new Proorder();
         order.setMoney(new BigDecimal(query.get("money").toString()));
         order.setMpid(new BigDecimal(query.get("mpid").toString()));
         order.setUsersid(new BigDecimal(query.get("usersid").toString()));
         order.setLicaiDate(new Date());
-        order.setZhifutype(query.get("zhifutype").toString());
+        order.setZhifutype(query.get("zfdate").toString());
         Calendar rightNow = Calendar.getInstance();
         rightNow.setTime(new Date());
         rightNow.add(Calendar.MONTH, Integer.parseInt(query.get("zhouqi").toString()));
