@@ -1,4 +1,4 @@
-package com.zhaolian.demo.service.front.yjh;
+package com.zhaolian.demo.service.end.yjh;
 
 import com.zhaolian.demo.data.entity.Education;
 import com.zhaolian.demo.data.entity.Users;

@@ -1,9 +1,8 @@
-package com.zhaolian.demo.service.front.yjh.impl;
+package com.zhaolian.demo.service.end.yjh.impl;
 
 import com.zhaolian.demo.data.dao.SmadaiLilvMapper;
 import com.zhaolian.demo.data.entity.SmadaiLilv;
-import com.zhaolian.demo.data.entity.Users;
-import com.zhaolian.demo.service.front.yjh.ISmadaiLilv;
+import com.zhaolian.demo.service.end.yjh.ISmadaiLilv;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

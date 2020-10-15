@@ -1,11 +1,8 @@
-package com.zhaolian.demo.web.control.front.yjh;
+package com.zhaolian.demo.web.control.end.yjh;
 
-import com.zhaolian.demo.data.entity.Education;
 import com.zhaolian.demo.data.entity.Home;
 import com.zhaolian.demo.data.entity.Users;
-import com.zhaolian.demo.service.front.yjh.IHome;
-import com.zhaolian.demo.service.front.yjh.impl.Educationimpl;
-import com.zhaolian.demo.service.front.yjh.impl.IHomeimpl;
+import com.zhaolian.demo.service.end.yjh.impl.IHomeimpl;
 import com.zhaolian.demo.service.util.PageBean;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -52,7 +49,7 @@ public class IHomeControl {
         Users user=new Users();
         user.setHid(home.getHid());
         //审核通过额度赋值为50000元
-        user.setSmalldai(new BigDecimal(50000));
+        user.setSmalldai(new BigDecimal(30000));
         this.service.HomeUpdateandAdd(home,user);
         return home;
     }
