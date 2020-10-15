@@ -52,12 +52,13 @@ a=dao.insert(record);
     @Override
   public   Integer updateByPrimaryKeySelective(Bigdai record){
         Bigdai bigdai=dao.selectByPrimaryKey(record.getBdid());
-        if(bigdai.getBdpath()!=""){
+        if(bigdai.getBdpath()!="" && record.getBdpath()!=null){
             System.out.println("要删除的图片"+bigdai.getBdpath());
             System.out.println("要删除的图片"+record.getBdpath());
             File file=new File(System.getProperty("user.dir")+"/upload/"+bigdai.getBdpath());
             file.delete();
         }
+
         int a= dao.updateByPrimaryKeySelective(record);
         return a;
     };
