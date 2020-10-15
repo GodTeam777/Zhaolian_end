@@ -31,6 +31,10 @@
   </select>
 
 
+  <select id="getsumbyid" parameterType="java.util.Map" resultType="java.math.BigDecimal">
+    select sum (MONEY) from PROORDER where LICAI_DATE >= to_date(#{dates},'yyyy-MM-dd hh24:mi:ss') and <![CDATA[ LICAI_DATE < to_date(#{datesOne},'yyyy-MM-dd hh24:mi:ss')]]> and mpid=#{mpid}
+  </select>
+
   <select id="getProCount" resultType="int">
     select sum (MONEY) from PROORDER
   </select>
@@ -294,4 +298,17 @@
       "STATUS" = #{status,jdbcType=DECIMAL}
     where POID = #{poid,jdbcType=DECIMAL}
   </update>
+
+   <select id="getProorderCount" parameterType="com.zhaolian.demo.web.util.ProoderDTO" resultType="int">
+select count(*) from PROORDER
+
+</select>
+
+  <select id="selectProorderByPage" parameterType="java.util.Map"  resultMap="BaseResultMap">
+select * from (select row_number()
+  over(order by poid desc)no,p.* from PROORDER p
+)temp
+
+
+</select>
 </mapper>

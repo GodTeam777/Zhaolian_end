@@ -15,6 +15,7 @@
     <result column="DAI_DATE" jdbcType="TIMESTAMP" property="daiDate" />
     <result column="ONEMONEY" jdbcType="DECIMAL" property="onemoney" />
     <result column="STATUS" jdbcType="DECIMAL" property="status" />
+
   </resultMap>
 
   <!--  自定义 查询大额贷款-->
@@ -103,6 +104,15 @@
     BOID, USERSID, BDID, BIGMONEY, BIGDAI_DATE, YIHUAN, HUAN_CARD, SHOU_CARD, DAI_DATE, 
     ONEMONEY, "STATUS"
   </sql>
+  <select id="selectall" resultMap="BaseResultMap">
+  select * from BIGDAIORDER b  join USERS u on  b.USERSID=u.USERSID join BIGDAI d
+on b.BDID = d.BDID
+
+</select>
+
+
+
+
   <select id="selectByExample" parameterType="com.zhaolian.demo.data.entity.BigdaiorderExample" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select
@@ -341,4 +351,31 @@
       "STATUS" = #{status,jdbcType=DECIMAL}
     where BOID = #{boid,jdbcType=DECIMAL}
   </update>
+
+  <select id="getBigdaiorderCount" parameterType="com.zhaolian.demo.web.util.BigdaiordeDTO" resultType="int">
+select count(*) from BIGDAIORDER
+
+</select>
+
+  <select id="selectBigdaiorderByPage" parameterType="java.util.Map"  resultMap="BaseResultMap">
+select * from (select row_number()
+  over(order by Boid desc)no,b.* from BIGDAIORDER b
+)temp
+<if test='endIndex != null and endIndex!=""'>
+			<![CDATA[where temp.no <=#{endIndex}]]>
+		</if>
+		<if test='startIndex != null and startIndex!=""'>
+			and temp.no>=#{startIndex}
+		</if>
+
+</select>
+
+<select id="selectalla" resultMap="BaseResultMap"  parameterType="java.lang.String">
+select * from BIGDAIORDER
+where boid in
+<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        #{item}
+    </foreach>
+</select>
+
 </mapper>

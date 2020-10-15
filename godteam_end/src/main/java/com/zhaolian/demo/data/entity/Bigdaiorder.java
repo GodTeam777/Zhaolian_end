@@ -1,5 +1,7 @@
 package com.zhaolian.demo.data.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -20,14 +22,35 @@ public class Bigdaiorder implements Serializable {
     private BigDecimal huanCard;
 
     private BigDecimal shouCard;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date daiDate;
 
     private BigDecimal onemoney;
 
     private BigDecimal status;
 
+
     private static final long serialVersionUID = 1L;
+
+    public Bigdaiorder() {
+    }
+
+    @Override
+    public String toString() {
+        return "Bigdaiorder{" +
+                "boid=" + boid +
+                ", usersid=" + usersid +
+                ", bdid=" + bdid +
+                ", bigmoney=" + bigmoney +
+                ", bigdaiDate=" + bigdaiDate +
+                ", yihuan=" + yihuan +
+                ", huanCard=" + huanCard +
+                ", shouCard=" + shouCard +
+                ", daiDate=" + daiDate +
+                ", onemoney=" + onemoney +
+                ", status=" + status +
+                '}';
+    }
 
     public BigDecimal getBoid() {
         return boid;
@@ -117,24 +140,23 @@ public class Bigdaiorder implements Serializable {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", boid=").append(boid);
-        sb.append(", usersid=").append(usersid);
-        sb.append(", bdid=").append(bdid);
-        sb.append(", bigmoney=").append(bigmoney);
-        sb.append(", bigdaiDate=").append(bigdaiDate);
-        sb.append(", yihuan=").append(yihuan);
-        sb.append(", huanCard=").append(huanCard);
-        sb.append(", shouCard=").append(shouCard);
-        sb.append(", daiDate=").append(daiDate);
-        sb.append(", onemoney=").append(onemoney);
-        sb.append(", status=").append(status);
-        sb.append("]");
-        return sb.toString();
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public Bigdaiorder(BigDecimal boid, BigDecimal usersid, BigDecimal bdid, BigDecimal bigmoney, BigDecimal bigdaiDate, BigDecimal yihuan, BigDecimal huanCard, BigDecimal shouCard, Date daiDate, BigDecimal onemoney, BigDecimal status, Bigdai bigdai, Users users) {
+        this.boid = boid;
+        this.usersid = usersid;
+        this.bdid = bdid;
+        this.bigmoney = bigmoney;
+        this.bigdaiDate = bigdaiDate;
+        this.yihuan = yihuan;
+        this.huanCard = huanCard;
+        this.shouCard = shouCard;
+        this.daiDate = daiDate;
+        this.onemoney = onemoney;
+        this.status = status;
+
     }
 }

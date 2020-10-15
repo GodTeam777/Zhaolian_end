@@ -3,6 +3,7 @@ package com.zhaolian.demo.service.end.zuo.impl;
 import com.zhaolian.demo.data.dao.ProorderMapper;
 import com.zhaolian.demo.data.entity.Proorder;
 import com.zhaolian.demo.data.entity.SamlldaiOrder;
+import com.zhaolian.demo.data.entity.Smallhuankuan;
 import com.zhaolian.demo.service.end.zuo.ProService;
 import com.zhaolian.demo.web.util.Chart;
 import org.springframework.stereotype.Service;
@@ -86,7 +87,47 @@ public class ProServiceImpl implements ProService {
 
     @Override
     public List<Map<String, Object>> Pro_month_Chart(String chart_date) throws ParseException {
-        return null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+        //获取天数
+        Integer format_year = Integer.valueOf(chart_date.substring(0, 4));
+        Integer format_month = Integer.valueOf(chart_date.substring(5, 7));
+        String yearFirst = chart.getCurrYearFirst(format_month, format_year);
+        String yearLast = chart.getCurrYearLast(format_month, format_year);
+        List<Proorder> pro_all = proorderMapper.pro_order_all(yearFirst, yearLast);
+        int M = 0;
+        List<Map<String, Object>> list=new ArrayList<Map<String, Object>>();
+        Map data = null;
+        Boolean flag = true;
+
+        List<String> listNew = new ArrayList<String>();
+        //去重
+        for (Proorder proorder : pro_all) {
+            if (!listNew.contains(sdf.format(proorder.getLicaiDate()))) {
+                listNew.add(sdf.format(proorder.getLicaiDate()));
+            }
+        }
+        for (int j = 1; j <= 12; j++) {
+            for (String set : listNew) {
+                M = Integer.valueOf(set.substring(5, 7));
+                if (j == Integer.valueOf(M)) {
+                    data = new HashMap();
+                    data.put("pro_month_date", j);
+                    int count = proorderMapper.pro_order_month_count(M);
+                    data.put("pro_month_count", count);
+                    list.add(data);
+                    flag = false;
+                }
+            }
+            if (flag) {
+                data = new HashMap();
+                data.put("pro_month_date", j);
+                data.put("pro_month_count", " ");
+                list.add(data);
+            } else {
+                flag = true;
+            }
+        }
+        return list;
     }
 
     @Override
