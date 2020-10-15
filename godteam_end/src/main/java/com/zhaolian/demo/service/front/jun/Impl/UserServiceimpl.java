@@ -342,7 +342,7 @@ public class UserServiceimpl implements IUserService {
         List<SamlldaiOrder> list= samlldaiOrderMapper.selectByPage(map);
         return list;
     }
-
+    //小额贷款订单总数
     public int geySamllOrderTotal(Users users){
         return samlldaiOrderMapper.getTotalCount(users.getUsersid());
     }
@@ -523,20 +523,29 @@ public class UserServiceimpl implements IUserService {
             Date LicaiDate=proorder.getLicaiDate();//买入时间
 
             //计算当前收益
-            double a = (int) ((date.getTime() - LicaiDate.getTime()) / (1000*3600*24));
-            double yesterday=(new Double(proorder.getMoney().toString())*new Double(moneypro.getIncome().toString()));
-            double sum=((yesterday/100.00)/365.00)*a;//计算当前收益
+            double a = (int) ((date.getTime() - LicaiDate.getTime()) / (1000*3600*24));//相差天数
+            double yesterday=(new Double(proorder.getMoney().toString())*new Double(moneypro.getIncome().toString()))/365/100;
+            double sum=(yesterday)*a;//计算当前收益
+
             //计算预计到截止日期的收益
             Date statrDate=proorder.getLicaiDate();
             Date endDate=proorder.getShouDate();
-              a = (int) ((endDate.getTime() - statrDate.getTime()) / (1000*3600*24));
-            double yujisum=((yesterday/100.00)/365.00)*a;//预计到截止日期的收益
+              int b = (int) ((endDate.getTime() - statrDate.getTime()) / (1000*3600*24));
+            double yujisum=yesterday*b;//预计到截止日期的收益
             double amount=a+new Double(proorder.getMoney().toString());
-            data.put("amount",amount);//昨日收益
+            if(new Integer(proorder.getStatus().toString())==1){
+                sum=yujisum;
+            }
+            if(a==0){
+                yesterday=0.00;
+            }
+            data.put("amount",amount);//总资产
             data.put("yesterday",yesterday);//昨日收益
             data.put("Expected",yujisum);//预计到截止日期的收益
             data.put("runningyield",sum);//当前收益
             data.put("mptype",moneypro.getMptype());//产品类型
+            data.put("lilv",moneypro.getIncome());//年利率
+
             data.put("poid",proorder.getPoid());//订单编号
             data.put("mpname",moneypro.getMpname());//产品名
             data.put("money",proorder.getMoney());//买入金额
@@ -554,4 +563,15 @@ public class UserServiceimpl implements IUserService {
         return proorderMapper.UsergetTotalCount(users.getUsersid());
     }
 
+
+    //活期理财产品体现
+    @Override
+    public int updateproOrder(String id){
+        Proorder proorder=new Proorder();
+        proorder.setPoid(new BigDecimal(id));
+        proorder.setStatus(new BigDecimal(1));
+        proorder.setShouDate(new Date());
+//        System.out.println("修改："+proorder.toString());
+        return proorderMapper.updateByPrimaryKeySelective(proorder);
+    }
 }

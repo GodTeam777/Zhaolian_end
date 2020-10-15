@@ -299,7 +299,7 @@
     where POID = #{poid,jdbcType=DECIMAL}
   </update>
 
-<<<<<<< HEAD
+
   <!--    获取总数-->
   <select id="UsergetTotalCount" parameterType="java.math.BigDecimal" resultType="int">
        select count(*) from proOrder
@@ -319,7 +319,7 @@ select * from (select row_number() over(order by MPID desc) no, p.* from proOrde
 			and temp.no>=#{startIndex}
 		</if>
 	</select>
-=======
+
    <select id="getProorderCount" parameterType="com.zhaolian.demo.web.util.ProoderDTO" resultType="int">
 select count(*) from PROORDER
 
@@ -332,5 +332,5 @@ select * from (select row_number()
 
 
 </select>
->>>>>>> b41f6e71d889a1c28425ba3a59cd2cf9a6031a01
+
 </mapper>

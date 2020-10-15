@@ -475,9 +475,13 @@ public class UsersControl {
         return pb;
     }
 
+    @RequestMapping("updateproOrder")
+    //活期理财产品体现
+    public @ResponseBody int  updateproOrder(@RequestBody Map data,HttpSession session){
+        return userService.updateproOrder( data.get("id").toString());
+    }
 
     @RequestMapping("Test")
-
     public @ResponseBody
     File Test(HttpSession sessios) {
         String path=System.getProperty("user.dir")+"\\upload\\"+"375bb4cd-5394-4216-a0e1-de174f6c297cmy.jpg";

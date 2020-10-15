@@ -41,4 +41,5 @@ public interface IUserService {
     public List<Bighuankuan>  selectbighuankuan(Users users,Integer pageno,Integer pagesize);
     public int addbigrepayment(Bighuankuan bighuankuan,Bigdaiorder bigdaiorder);
     public int geySamllOrderTotal(Users users);
+    public int updateproOrder(String id);
 }
