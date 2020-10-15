@@ -4,6 +4,8 @@ import com.zhaolian.demo.data.entity.Proorder;
 import com.zhaolian.demo.data.entity.ProorderExample;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -19,6 +21,9 @@ public interface ProorderMapper {
 
     //查询理财产品一月的总数
     int pro_order_month_count(Integer month);
+
+    //查询单个理财产品一天的总数String dates, String datesOne,BigDecimal mpid
+    BigDecimal getsumbyid(Map mpas);
 
     //理财产品总数
     int getProCount();
