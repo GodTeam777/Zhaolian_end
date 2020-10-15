@@ -4,11 +4,16 @@ import com.zhaolian.demo.data.entity.Proorder;
 import com.zhaolian.demo.data.entity.ProorderExample;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface ProorderMapper {
+
+    List<Proorder> UserselectByPage(Map<String,Object> map);
+    int UsergetTotalCount(BigDecimal id);
     long countByExample(ProorderExample example);
 
     int deleteByExample(ProorderExample example);

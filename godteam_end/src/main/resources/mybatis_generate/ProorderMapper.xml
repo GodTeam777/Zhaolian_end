@@ -271,4 +271,24 @@
       "STATUS" = #{status,jdbcType=DECIMAL}
     where POID = #{poid,jdbcType=DECIMAL}
   </update>
+
+  <!--    获取总数-->
+  <select id="UsergetTotalCount" parameterType="java.math.BigDecimal" resultType="int">
+       select count(*) from proOrder
+where USERSID=#{usersid}
+
+   </select>
+
+
+ <select id="UserselectByPage" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+select * from (select row_number() over(order by MPID desc) no, p.* from proOrder p
+                where USERSID=#{usersid}   ) temp
+		<if test='endIndex != null and endIndex!=""'>
+			<![CDATA[where temp.no <=#{endIndex}]]>
+		</if>
+		<if test='startIndex != null and startIndex!=""'>
+			and temp.no>=#{startIndex}
+		</if>
+	</select>
 </mapper>

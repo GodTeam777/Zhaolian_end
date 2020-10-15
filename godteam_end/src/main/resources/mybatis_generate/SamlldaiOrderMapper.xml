@@ -293,4 +293,29 @@
       ONEMONEY = #{onemoney,jdbcType=DECIMAL}
     where SDOID = #{sdoid,jdbcType=DECIMAL}
   </update>
+
+
+
+<!--    获取总数-->
+  <select id="getTotalCount" parameterType="java.math.BigDecimal" resultType="int">
+       select count(*) from SAMLLDAI_ORDER
+     where USERSID=#{usersid}
+
+   </select>
+
+
+ <select id="selectByPage" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+select * from (select row_number() over(order by SDOID desc) no, s.* from SAMLLDAI_ORDER s
+
+               where USERSID=#{usersid}   ) temp
+		<if test='endIndex != null and endIndex!=""'>
+			<![CDATA[where temp.no <=#{endIndex}]]>
+		</if>
+		<if test='startIndex != null and startIndex!=""'>
+			and temp.no>=#{startIndex}
+		</if>
+	</select>
+
+
 </mapper>

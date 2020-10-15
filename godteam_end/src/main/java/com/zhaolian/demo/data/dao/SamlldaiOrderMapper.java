@@ -4,11 +4,15 @@ import com.zhaolian.demo.data.entity.SamlldaiOrder;
 import com.zhaolian.demo.data.entity.SamlldaiOrderExample;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface SamlldaiOrderMapper {
+    int getTotalCount(BigDecimal usersid);
+    List<SamlldaiOrder> selectByPage(Map map);
     long countByExample(SamlldaiOrderExample example);
 
     int deleteByExample(SamlldaiOrderExample example);

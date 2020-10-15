@@ -12,10 +12,23 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.List;
+import java.util.*;
+
 @Service
 public class UserServiceimpl implements IUserService {
 
+    @Resource
+    MoneyproMapper moneyproMapper;
+    @Resource
+    ProorderMapper proorderMapper;
+    @Resource
+    BighuankuanMapper bighuankuanMapper;
+    @Resource
+    BigdaiMapper bigdaiMapper;
+    @Resource
+    BigdaiorderMapper bigdaiorderMapper;
+    @Resource
+    SmallhuankuanMapper smallhuankuanMapper;
     @Resource
     HomeMapper homeMapper;
     @Resource
@@ -28,6 +41,8 @@ public class UserServiceimpl implements IUserService {
     BankMapper bankMapper;
     @Resource
     CarMapper carMapper;
+    @Resource
+    SamlldaiOrderMapper samlldaiOrderMapper;
     private InterpretationContext EmptyUtil;
 
     //根据id查询用户
@@ -290,6 +305,232 @@ public class UserServiceimpl implements IUserService {
             carMapper.deleteByPrimaryKey(id);
         }
         return i;
+    }
+
+
+
+    //小额贷款订单查询1
+    @Override
+    public List<SamlldaiOrder>  selectSamllOrder(Users users,Integer pageno,Integer pagesize){
+        Map<String,Object> map=new HashMap<>();
+        map.put("usersid",users.getUsersid());
+        int start = (pageno - 1) * pagesize + 1;
+        int end = pageno * pagesize;
+        map.put("startIndex", start);
+        map.put("endIndex", end);
+        List<SamlldaiOrder> list= samlldaiOrderMapper.selectByPage(map);
+        return list;
+    }
+
+    public int geySamllOrderTotal(Users users){
+        return samlldaiOrderMapper.getTotalCount(users.getUsersid());
+    }
+
+
+    //根据id查询小额贷款订单2
+    @Override
+    public List<Map>  selectSamllOrderByid(BigDecimal id){
+        SamlldaiOrder samlldaiOrder= samlldaiOrderMapper.selectByPrimaryKey(id);
+        List<Map> list=new ArrayList<>();
+        Map<String,Object> map=null;
+        Date date=samlldaiOrder.getDaiDate();
+        int y=date.getYear()+1900;
+        int M=date.getMonth()+1;
+        int d=date.getDate()+2;
+        for (int o = 1; o <=Integer.parseInt(samlldaiOrder.getYihuan().toString()) ; o++) {
+            map = new HashMap<>();
+            map.put("order", samlldaiOrder.getSdoid());
+            map.put("yinhuan","已还");
+            M += 1;
+            if (M > 12) {
+                y += 1;
+                M = 1;
+            }
+            map.put("yinhuanDate",y+"-"+M+"-"+d);
+            list.add(map);
+        }
+        for (int i = 1; i <=(Integer.parseInt(samlldaiOrder.getMou().toString())-Integer.parseInt(samlldaiOrder.getYihuan().toString())) ; i++) {
+            map=new HashMap<>();
+            map.put("order",samlldaiOrder.getSdoid());
+            map.put("yinhuan",samlldaiOrder.getOnemoney());
+            M+=1;
+            if(M>12){
+                y+=1;
+                M=1;
+            }
+            map.put("yinhuanDate",y+"-"+M+"-"+d);
+            list.add(map);
+        }
+
+        return list;
+    }
+
+    //查询小额贷款历史订单3
+    @Override
+    public List<Smallhuankuan>  selectsmallhuankuan(HttpSession session,Integer pageno,Integer pagesize){
+        Users users= (Users) session.getAttribute("myuser");
+        SamlldaiOrderExample sex=new SamlldaiOrderExample();
+        sex.createCriteria().andUsersidEqualTo(users.getUsersid());
+        List<SamlldaiOrder> list= samlldaiOrderMapper.selectByExample(sex);
+        List<Smallhuankuan> alldata=new ArrayList<>();
+        for (SamlldaiOrder samlldaiOrder:list){
+            SmallhuankuanExample smallhuankuanExample=new SmallhuankuanExample();
+            smallhuankuanExample.createCriteria().andSdoidEqualTo(samlldaiOrder.getSdoid());
+            List<Smallhuankuan> huankuan=smallhuankuanMapper.selectByExample(smallhuankuanExample);
+            for (int i = 0; i <huankuan.size() ; i++) {
+                alldata.add(huankuan.get(i));
+            }
+        }
+        return alldata;
+    }
+
+    //小额贷款提前还款4
+    @Override
+    public int addrepayment(Smallhuankuan smallhuankuan,SamlldaiOrder samlldaiOrder){
+        smallhuankuanMapper.insertSelective(smallhuankuan);
+        SamlldaiOrder order=samlldaiOrderMapper.selectByPrimaryKey(samlldaiOrder.getSdoid());
+        samlldaiOrder.setYihuan(new BigDecimal(Integer.parseInt(samlldaiOrder.getYihuan().toString())+Integer.parseInt(order.getYihuan().toString())));
+        int i=samlldaiOrderMapper.updateByPrimaryKeySelective(samlldaiOrder);
+        return i;
+    }
+
+    //大额贷款订单查询1
+    @Override
+    public List<Map>  selectBigdaiorder(Users users){
+        BigdaiorderExample bex=new BigdaiorderExample();
+        bex.createCriteria().andUsersidEqualTo(users.getUsersid());
+        List<Bigdaiorder> list= bigdaiorderMapper.selectByExample(bex);
+        List<Map> allData=new ArrayList<>();
+        Map<String,Object> map=null;
+        for (Bigdaiorder bigdaiorder:list){
+                map=new HashMap<>();
+                Bigdai bigdai=bigdaiMapper.selectByPrimaryKey(bigdaiorder.getBdid());
+                 map.put("boid",bigdaiorder.getBoid());
+                 map.put("bdname",bigdai.getBdname());
+                 map.put("daimoney",bigdaiorder.getBigmoney());
+                 map.put("mou",bigdaiorder.getBigdaiDate());
+                 map.put("yihuan",bigdaiorder.getYihuan());
+                 map.put("daiDate",bigdaiorder.getDaiDate());
+                 map.put("onemoney",bigdaiorder.getOnemoney());
+                 map.put("status",bigdaiorder.getStatus());
+                 allData.add(map);
+        }
+
+        return allData;
+    }
+    //根据id查询大额贷款订单2
+    @Override
+    public List<Map>  selectBigdaiorderByid(BigDecimal id){
+        Bigdaiorder bigdaiorder= bigdaiorderMapper.selectByPrimaryKey(id);
+        List<Map> list=new ArrayList<>();
+        Map<String,Object> map=null;
+        System.out.println(bigdaiorder.getDaiDate());
+        Date date=bigdaiorder.getDaiDate();
+        int y=date.getYear()+1900;
+        int M=date.getMonth()+1;
+        int d=date.getDate()+2;
+        for (int o = 1; o <=Integer.parseInt(bigdaiorder.getYihuan().toString()) ; o++) {
+            map = new HashMap<>();
+            map.put("order", bigdaiorder.getBoid());
+            map.put("yinhuan","已还");
+            M += 1;
+            if (M > 12) {
+                y += 1;
+                M = 1;
+            }
+            map.put("yinhuanDate",y+"-"+M+"-"+d);
+            list.add(map);
+        }
+        for (int i = 1; i <=(Integer.parseInt(bigdaiorder.getBigdaiDate().toString())-Integer.parseInt(bigdaiorder.getYihuan().toString())) ; i++) {
+            map=new HashMap<>();
+            map.put("order",bigdaiorder.getBoid());
+            map.put("yinhuan",bigdaiorder.getOnemoney());
+            M+=1;
+            if(M>12){
+                y+=1;
+                M=1;
+            }
+            map.put("yinhuanDate",y+"-"+M+"-"+d);
+            list.add(map);
+        }
+
+        return list;
+    }
+    //查询大额贷款历史订单3
+    @Override
+    public List<Bighuankuan>  selectbighuankuan(Users users,Integer pageno,Integer pagesize){
+        BigdaiorderExample bex=new BigdaiorderExample();
+        bex.createCriteria().andUsersidEqualTo(users.getUsersid());
+        List<Bigdaiorder> list= bigdaiorderMapper.selectByExample(bex);
+        List<Bighuankuan> alldata=new ArrayList<>();
+        for (Bigdaiorder bigdaiorder:list){
+            BighuankuanExample bighuankuanExample=new BighuankuanExample();
+            bighuankuanExample.createCriteria().andBoidEqualTo(bigdaiorder.getBoid());
+            List<Bighuankuan> huankuan=bighuankuanMapper.selectByExample(bighuankuanExample);
+            for (int i = 0; i <huankuan.size() ; i++) {
+                alldata.add(huankuan.get(i));
+            }
+        }
+        return alldata;
+    }
+    //大额贷款提前还款4
+    @Override
+    public int addbigrepayment(Bighuankuan bighuankuan,Bigdaiorder bigdaiorder){
+        bighuankuanMapper.insertSelective(bighuankuan);
+        Bigdaiorder order=bigdaiorderMapper.selectByPrimaryKey(bigdaiorder.getBoid());
+        bigdaiorder.setYihuan(new BigDecimal(Integer.parseInt(bigdaiorder.getYihuan().toString())+Integer.parseInt(order.getYihuan().toString())));
+        int i=bigdaiorderMapper.updateByPrimaryKeySelective(bigdaiorder);
+        return i;
+    }
+
+    //购买理财产品记录
+    @Override
+    public List<Map> selectproOrder(Users users,int pageno,int pagesize){
+        Map<String,Object> map=new HashMap<>();
+        int start = (pageno - 1) * pagesize + 1;
+        int end = pageno * pagesize;
+        map.put("usersid",users.getUsersid());
+        map.put("startIndex",start);
+        map.put("endIndex",end);
+        List<Proorder> list=proorderMapper.UserselectByPage(map);
+        List<Map> alldata=new ArrayList<>();
+        Map<String,Object> data=null;
+        for (Proorder proorder:list){
+            data=new HashMap<>();
+            Moneypro moneypro=moneyproMapper.selectByPrimaryKey(proorder.getMpid());
+            Date date=new Date();//当前日期
+            Date LicaiDate=proorder.getLicaiDate();//买入时间
+
+            //计算当前收益
+            double a = (int) ((date.getTime() - LicaiDate.getTime()) / (1000*3600*24));
+            double yesterday=(new Double(proorder.getMoney().toString())*new Double(moneypro.getIncome().toString()));
+            double sum=((yesterday/100.00)/365.00)*a;//计算当前收益
+            //计算预计到截止日期的收益
+            Date statrDate=proorder.getLicaiDate();
+            Date endDate=proorder.getShouDate();
+              a = (int) ((endDate.getTime() - statrDate.getTime()) / (1000*3600*24));
+            double yujisum=((yesterday/100.00)/365.00)*a;//预计到截止日期的收益
+            double amount=a+new Double(proorder.getMoney().toString());
+            data.put("amount",amount);//昨日收益
+            data.put("yesterday",yesterday);//昨日收益
+            data.put("Expected",yujisum);//预计到截止日期的收益
+            data.put("runningyield",sum);//当前收益
+            data.put("mptype",moneypro.getMptype());//产品类型
+            data.put("poid",proorder.getPoid());//订单编号
+            data.put("mpname",moneypro.getMpname());//产品名
+            data.put("money",proorder.getMoney());//买入金额
+            data.put("licaiDate",proorder.getLicaiDate());//购买时间
+            data.put("zhifutype",proorder.getZhifutype());//支付方式
+            data.put("shouDate",proorder.getShouDate());//截至时间
+            data.put("status",proorder.getStatus());//状态
+            alldata.add(data);
+        }
+        return alldata;
+    }
+    //购买理财产品记录总数
+    @Override
+    public int geyproOrderTotal(Users users){
+        return proorderMapper.UsergetTotalCount(users.getUsersid());
     }
 
 }

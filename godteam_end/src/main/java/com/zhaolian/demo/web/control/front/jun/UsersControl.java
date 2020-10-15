@@ -3,6 +3,8 @@ package com.zhaolian.demo.web.control.front.jun;
 
 import com.zhaolian.demo.data.entity.*;
 import com.zhaolian.demo.service.front.jun.IUserService;
+import com.zhaolian.demo.web.control.front.util.PageBean;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,10 +17,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class UsersControl {
@@ -102,6 +101,7 @@ public class UsersControl {
         System.out.println("会话："+session.toString());
         Users user= (Users) session.getAttribute("myuser");
         if(user==null){
+            user=new Users();
             user.setUsersid(new BigDecimal(-1));
         }else{
             user=userService.UserSelectByid(user);
@@ -344,7 +344,140 @@ public class UsersControl {
     }
 
 
+
+    //查询小额贷款订单
+    @RequestMapping("selectSaollOrder")
+    public @ResponseBody PageBean<SamlldaiOrder> selectSaollOrder(@RequestBody Map data,HttpSession session){
+        Users users= (Users) session.getAttribute("myuser");
+        int no= (int) data.get("pageno");
+        int size= (int) data.get("pagesize");
+        List<SamlldaiOrder> list=userService.selectSamllOrder(users,no,size);
+        System.out.println(list.toString());
+        PageBean<SamlldaiOrder> pb=new PageBean();
+        pb.setData(list);
+        pb.setPageNo(no);
+        pb.setPageSize(size);
+        pb.setTotalRecords(userService.geySamllOrderTotal(users));
+        System.out.println(pb);
+        return pb;
+    }
+
+    //根据id查询小额贷款订单
+    @RequestMapping("selectSaollOrderByid")
+    public @ResponseBody List<Map> selectSaollOrderByid(@RequestBody Map data){
+        List<Map> list=userService.selectSamllOrderByid(new BigDecimal(data.get("id").toString()));
+        System.out.println(list.toString());
+        return list;
+    }
+
+    //查询小额历史订单
+    @RequestMapping("selectsmallhuankuan")
+    public @ResponseBody List<Smallhuankuan> selectsmallhuankuan(@RequestBody Map data,HttpSession session){
+        List<Smallhuankuan> list=userService.selectsmallhuankuan(session,1,2);
+        return list;
+    }
+
+    //小额贷款提前还款
+    @RequestMapping("addrepayment")
+    public @ResponseBody int addrepayment(@RequestBody Map data,HttpSession session){
+        Smallhuankuan smallhuankuan=new Smallhuankuan();
+        smallhuankuan.setSdoid(new BigDecimal(data.get("id").toString()));
+        smallhuankuan.setZhifutype((String) data.get("zftype"));
+        smallhuankuan.setMoney(new BigDecimal(data.get("sum").toString()));
+        Date date=new Date();
+        int y=date.getYear()+1900;
+        int M=date.getMonth()+1;
+        int d=date.getDate();
+        int h=date.getHours();
+        int m=date.getMinutes();
+        int s=date.getSeconds();
+        String datetime=y+""+M+""+d+""+h+""+m+""+s;
+        smallhuankuan.setHuanDate(date);
+        smallhuankuan.setLiushui(new BigDecimal(datetime));
+
+        SamlldaiOrder samlldaiOrder=new SamlldaiOrder();
+        samlldaiOrder.setSdoid(new BigDecimal(data.get("id").toString()));
+        samlldaiOrder.setYihuan(new BigDecimal(data.get("yihuannum").toString()));
+        System.out.println("添加:"+smallhuankuan.toString());
+        System.out.println("修改:"+samlldaiOrder.toString());
+        int i=userService.addrepayment(smallhuankuan,samlldaiOrder);
+
+        return i;
+    }
+
+
+    //查询大额贷款订单
+    @RequestMapping("selectBigdaiOrder")
+    public @ResponseBody List<Map> selectBigdaiOrder(@RequestBody Map data,HttpSession session){
+        Users users= (Users) session.getAttribute("myuser");
+        List<Map> list=userService.selectBigdaiorder(users);
+        System.out.println(list.toString());
+        return list;
+    }
+
+    //根据id查询大额贷款订单
+    @RequestMapping("selectBigdaiOrderByid")
+    public @ResponseBody List<Map> selectBigdaiOrderByid(@RequestBody Map data){
+        List<Map> list=userService.selectBigdaiorderByid(new BigDecimal(data.get("id").toString()));
+        System.out.println(list.toString());
+        return list;
+    }
+
+    //查询大额历史订单
+    @RequestMapping("selectbighuankuan")
+    public @ResponseBody List<Bighuankuan> selectbighuankuan(@RequestBody Map data,HttpSession session){
+        Users users= (Users) session.getAttribute("myuser");
+        List<Bighuankuan> list=userService.selectbighuankuan(users,1,2);
+        return list;
+    }
+
+    //大额贷款提前还款
+    @RequestMapping("addbigrepayment")
+    public @ResponseBody int addbigrepayment(@RequestBody Map data,HttpSession session){
+        Bighuankuan bighuankuan=new Bighuankuan();
+        bighuankuan.setBoid(new BigDecimal(data.get("id").toString()));
+        bighuankuan.setZhifutype((String) data.get("zftype"));
+        bighuankuan.setMoney(new BigDecimal(data.get("sum").toString()));
+        Date date=new Date();
+        int y=date.getYear()+1900;
+        int M=date.getMonth()+1;
+        int d=date.getDate();
+        int h=date.getHours();
+        int m=date.getMinutes();
+        int s=date.getSeconds();
+        String datetime=y+""+M+""+d+""+h+""+m+""+s;
+        bighuankuan.setHuanDate(date);
+        bighuankuan.setLiushui(new BigDecimal(datetime));
+
+        Bigdaiorder bigdaiorder=new Bigdaiorder();
+        bigdaiorder.setBoid(new BigDecimal(data.get("id").toString()));
+        bigdaiorder.setYihuan(new BigDecimal(data.get("yihuannum").toString()));
+        System.out.println("添加:"+bighuankuan.toString());
+        System.out.println("修改:"+bigdaiorder.toString());
+        int i=userService.addbigrepayment(bighuankuan,bigdaiorder);
+
+        return i;
+    }
+
+
+    //理财产品购买记录
+    @RequestMapping("selectproOrder")
+    public @ResponseBody PageBean<Map> selectproOrder(@RequestBody Map data,HttpSession session){
+        Users users= (Users) session.getAttribute("myuser");
+        int no= (int) data.get("pageno");
+        int size= (int) data.get("pagesize");
+        List<Map> list=userService.selectproOrder(users,no,size);
+        PageBean<Map> pb=new PageBean<>();
+        pb.setData(list);
+        pb.setPageNo(no);
+        pb.setPageSize(size);
+        pb.setTotalRecords(userService.geyproOrderTotal(users));
+        return pb;
+    }
+
+
     @RequestMapping("Test")
+
     public @ResponseBody
     File Test(HttpSession sessios) {
         String path=System.getProperty("user.dir")+"\\upload\\"+"375bb4cd-5394-4216-a0e1-de174f6c297cmy.jpg";
