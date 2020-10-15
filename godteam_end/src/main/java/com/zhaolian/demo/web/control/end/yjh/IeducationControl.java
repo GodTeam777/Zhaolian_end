@@ -1,9 +1,8 @@
-package com.zhaolian.demo.web.control.front.yjh;
+package com.zhaolian.demo.web.control.end.yjh;
 
 import com.zhaolian.demo.data.entity.Education;
-import com.zhaolian.demo.data.entity.Idcard;
 import com.zhaolian.demo.data.entity.Users;
-import com.zhaolian.demo.service.front.yjh.impl.Educationimpl;
+import com.zhaolian.demo.service.end.yjh.impl.Educationimpl;
 import com.zhaolian.demo.service.util.PageBean;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -13,8 +12,6 @@ import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.net.URLDecoder;
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 public class IeducationControl {

@@ -1,8 +1,7 @@
-package com.zhaolian.demo.web.control.front.yjh;
+package com.zhaolian.demo.web.control.end.yjh;
 
 import com.zhaolian.demo.data.entity.SmadaiLilv;
-import com.zhaolian.demo.data.entity.Users;
-import com.zhaolian.demo.service.front.yjh.impl.ISmadaiLilvimpl;
+import com.zhaolian.demo.service.end.yjh.impl.ISmadaiLilvimpl;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;

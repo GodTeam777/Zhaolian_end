@@ -1,16 +1,13 @@
-package com.zhaolian.demo.web.control.front.yjh;
+package com.zhaolian.demo.web.control.end.yjh;
 
-import com.zhaolian.demo.data.entity.Education;
 import com.zhaolian.demo.data.entity.SamlldaiOrder;
-import com.zhaolian.demo.data.entity.SamlldaiOrderExample;
-import com.zhaolian.demo.service.front.yjh.impl.ISamlldaiOrderimpl;
+import com.zhaolian.demo.service.end.yjh.impl.ISamlldaiOrderimpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
 import java.util.List;
 
 @Controller

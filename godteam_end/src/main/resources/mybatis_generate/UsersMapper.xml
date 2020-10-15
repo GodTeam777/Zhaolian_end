@@ -429,7 +429,7 @@ select * from USERS where PETNAME=#{Uname} and USPWS=#{Upass}
         PHONE = #{phone,jdbcType=VARCHAR},
       </if>
       <if test="smalldai != null">
-        SMALLDAI = #{smalldai,jdbcType=DECIMAL},
+        SMALLDAI =SMALLDAI+ #{smalldai,jdbcType=DECIMAL},
       </if>
       <if test="type != null">
         "TYPE" = #{type,jdbcType=DECIMAL},
@@ -477,7 +477,7 @@ select * from USERS where PETNAME=#{Uname} and USPWS=#{Upass}
         PHONE = #{phone,jdbcType=VARCHAR},
       </if>
       <if test="smalldai != null">
-        SMALLDAI = #{smalldai,jdbcType=DECIMAL},
+        SMALLDAI =SMALLDAI+ #{smalldai,jdbcType=DECIMAL},
       </if>
       <if test="type != null">
         "TYPE" = #{type,jdbcType=DECIMAL},
@@ -525,7 +525,7 @@ select * from USERS where PETNAME=#{Uname} and USPWS=#{Upass}
         PHONE = #{phone,jdbcType=VARCHAR},
       </if>
       <if test="smalldai != null">
-        SMALLDAI = #{smalldai,jdbcType=DECIMAL},
+        SMALLDAI =SMALLDAI+ #{smalldai,jdbcType=DECIMAL},
       </if>
       <if test="type != null">
         "TYPE" = #{type,jdbcType=DECIMAL},

@@ -1,8 +1,8 @@
-package com.zhaolian.demo.service.front.yjh.impl;
+package com.zhaolian.demo.service.end.yjh.impl;
 
 import com.zhaolian.demo.data.dao.*;
 import com.zhaolian.demo.data.entity.*;
-import com.zhaolian.demo.service.front.yjh.IUsers;
+import com.zhaolian.demo.service.end.yjh.IUsers;
 import com.zhaolian.demo.service.util.PageBean;
 import com.zhaolian.demo.web.util.SearchUsersDTO;
 import org.springframework.stereotype.Service;

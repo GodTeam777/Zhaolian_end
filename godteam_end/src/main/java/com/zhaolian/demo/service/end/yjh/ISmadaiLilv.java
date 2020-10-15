@@ -1,7 +1,6 @@
-package com.zhaolian.demo.service.front.yjh;
+package com.zhaolian.demo.service.end.yjh;
 
 import com.zhaolian.demo.data.entity.SmadaiLilv;
-import com.zhaolian.demo.data.entity.Users;
 
 public interface ISmadaiLilv {
     //按编号查询利率

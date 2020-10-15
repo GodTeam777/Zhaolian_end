@@ -1,10 +1,7 @@
-package com.zhaolian.demo.web.control.front.yjh;
+package com.zhaolian.demo.web.control.end.yjh;
 
-import com.zhaolian.demo.data.entity.Education;
-import com.zhaolian.demo.data.entity.Newes;
 import com.zhaolian.demo.data.entity.Users;
-import com.zhaolian.demo.service.front.yjh.IUsers;
-import com.zhaolian.demo.service.front.yjh.impl.IUsersimpl;
+import com.zhaolian.demo.service.end.yjh.impl.IUsersimpl;
 import com.zhaolian.demo.service.util.PageBean;
 import com.zhaolian.demo.web.util.SearchUsersDTO;
 import net.sf.json.JSONObject;
@@ -18,7 +15,6 @@ import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.net.URLDecoder;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 

@@ -1,28 +1,25 @@
 package com.zhaolian.demo;
 
+import com.zhaolian.demo.data.dao.EducationMapper;
+import com.zhaolian.demo.data.entity.Education;
 import com.zhaolian.demo.data.entity.Idcard;
-import com.zhaolian.demo.data.entity.SamlldaiOrder;
-import com.zhaolian.demo.data.entity.SmadaiLilv;
 import com.zhaolian.demo.data.entity.Users;
-import com.zhaolian.demo.service.front.yjh.ISmadaiLilv;
-import com.zhaolian.demo.service.front.yjh.IUsers;
-import com.zhaolian.demo.service.front.yjh.impl.ISamlldaiOrderimpl;
-import com.zhaolian.demo.service.front.yjh.impl.Idcardimpl;
-import com.zhaolian.demo.service.util.PageBean;
-import com.zhaolian.demo.web.util.SearchUsersDTO;
+import com.zhaolian.demo.service.end.yjh.Ieducation;
+import com.zhaolian.demo.service.end.yjh.impl.Idcardimpl;
+import com.zhaolian.demo.service.front.yjh.impl.INewesimpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.util.List;
 
 @SpringBootTest
 public class yjhTest {
+//    @Resource
+//    INewesimpl serve;
 
-
-    @Resource
-    IUsers serve;
+//    @Resource
+//    IUsers serve;
 
 //    @Resource
 //    Idcardimpl Idcarserve;
@@ -33,6 +30,10 @@ public class yjhTest {
 
 //    @Resource
 //    ISmadaiLilv server;
+
+    @Resource
+    EducationMapper dao;
+
     @Test
     void Mytest() {
 //        SearchUsersDTO dto = new SearchUsersDTO();
@@ -59,9 +60,9 @@ public class yjhTest {
 //        SmadaiLilv a= server.selectlilv(4);
 //        System.out.println(a);
 
-//        Users user=new Users();
-//        user.setUsersid(new BigDecimal(62));
-//        user.setStatus(new BigDecimal(0));
+//        Education user=new Education();
+//        user.setEdusersid(new BigDecimal(62));
+//        user.setStatus(new BigDecimal(1));
 //        this.serve.updatedaikuan(user);
 
 
@@ -82,5 +83,12 @@ public class yjhTest {
 //            System.out.println("记录----------------" + s.toString());
 //        }
 
+//        NewesExample user=new NewesExample();
+//     List<Newes> all=serve.select(user);
+//        System.out.println(all.toString());
+//        Education my=new Education();
+//        my.setStatus(new BigDecimal(2));
+//        my.setEdusersid(new BigDecimal(46));
+//        this.dao.updateByPrimaryKeySelective(my);
     }
 }
