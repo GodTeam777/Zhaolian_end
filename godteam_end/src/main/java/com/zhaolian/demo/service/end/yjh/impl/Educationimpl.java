@@ -35,6 +35,9 @@ public class Educationimpl implements Ieducation {
             parms.put("startIndex", start);//每一页第一条记录编号
             parms.put("endIndex", end);//每一页最后一条记录编号
             List<com.zhaolian.demo.data.entity.Education> blogs = dao.selectByPage(parms);//分页查询
+            for(Education education:blogs){
+                education.setSpath("http://localhost:10086/img/"+education.getSpath());
+            }
             int totalCount = dao.getTotalCount();//记录总数
             pageBean.setData(blogs);
             pageBean.setTotalRecords(totalCount);

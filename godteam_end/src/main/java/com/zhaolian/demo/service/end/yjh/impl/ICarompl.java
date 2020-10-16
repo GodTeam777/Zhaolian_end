@@ -3,6 +3,7 @@ package com.zhaolian.demo.service.end.yjh.impl;
 import com.zhaolian.demo.data.dao.CarMapper;
 import com.zhaolian.demo.data.dao.UsersMapper;
 import com.zhaolian.demo.data.entity.Car;
+import com.zhaolian.demo.data.entity.Education;
 import com.zhaolian.demo.data.entity.Users;
 import com.zhaolian.demo.service.end.yjh.ICar;
 import com.zhaolian.demo.service.util.PageBean;
@@ -36,6 +37,9 @@ public class ICarompl implements ICar {
             parms.put("startIndex", start);//每一页第一条记录编号
             parms.put("endIndex", end);//每一页最后一条记录编号
             List<Car> blogs = dao.selectByPage(parms);//分页查询
+            for(Car car:blogs){
+                car.setCpath("http://localhost:10086/img/"+car.getCpath());
+            }
             int totalCount = dao.getTotalCount();//记录总数
             pageBean.setData(blogs);
             pageBean.setTotalRecords(totalCount);

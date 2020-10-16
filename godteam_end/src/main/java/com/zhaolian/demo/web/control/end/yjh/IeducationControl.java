@@ -30,6 +30,7 @@ public class IeducationControl {
                         page.getPageSize());
         System.out.println("==========="+pageBeans.toString());
         return pageBeans;
+
     }
     //审核认证通过
     @RequestMapping(value="update",method = RequestMethod.POST)
