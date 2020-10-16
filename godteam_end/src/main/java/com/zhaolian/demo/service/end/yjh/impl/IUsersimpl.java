@@ -52,7 +52,7 @@ public class IUsersimpl  implements IUsers {
         pb.setPageNo(pageNo);
         pb.setPageSize(pageSize);
         //统计按条件查询的总记录数
-        pb.setTotalRecords(this.Usersdao.getTotalCount(dto));
+        pb.setTotalRecords(this.Usersdao.getTotalCountUser(dto));
         return pb;
     }
 
@@ -71,7 +71,7 @@ public class IUsersimpl  implements IUsers {
         pb.setPageNo(pageNo);
         pb.setPageSize(pageSize);
         //统计按条件查询的总记录数
-        pb.setTotalRecords(this.Usersdao.getTotalCount(dto));
+        pb.setTotalRecords(this.Usersdao.getTotalCountkefu(dto));
         return pb;
     }
 
