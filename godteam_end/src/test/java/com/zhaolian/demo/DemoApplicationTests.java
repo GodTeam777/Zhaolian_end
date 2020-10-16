@@ -33,6 +33,7 @@ import com.zhaolian.demo.data.dao.BankMapper;
 import com.zhaolian.demo.data.dao.IdcardMapper;
 import com.zhaolian.demo.data.dao.UsersMapper;
 import com.zhaolian.demo.data.entity.*;
+import com.zhaolian.demo.service.front.jun.IUserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -41,7 +42,7 @@ import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 
 
 import java.util.List;
@@ -84,11 +85,11 @@ class DemoApplicationTests {
 //        BigdaiordeDTO dto=new BigdaiordeDTO();
 //        //dto.setUuname("木");
 //       dto.setBdname("中");
-       ProoderDTO dto=new ProoderDTO();
+       ProoderDTO dto = new ProoderDTO();
 //       //dto.setUuname("木");
        dto.setMpname("国");
-       PageBean<Map> pb=new PageBean<>();
-       pb=pro.getByPage(dto,1,3);
+       PageBean<Map> pb = new PageBean<>();
+       pb = pro.getByPage(dto, 1, 3);
        System.out.println(pb.getRows().toString());
 //        PageBean<Map> pb=new PageBean<>();
 //        pb=service.getByPage(dto,1,3);
@@ -107,7 +108,15 @@ class DemoApplicationTests {
 //        int a = dao.insert(dai);
 //        System.out.println(a);
 
-    }
+
+//    @Resource
+//    IUserService userService;
+
+
+//    //已完成
+//    @Test
+//    void contextLoads() throws ParseException {
+//    }
 //        Bigdai dai = new Bigdai();
 //        dai.setBdname("农行抵押贷");
 //        dai.setBdpath("5.jpg");
@@ -204,8 +213,7 @@ class DemoApplicationTests {
 //    BankMapper bankMapper;
 
 
-
-    //已完成
+       //已完成
 //    @Test
 //    void contextLoads() throws ParseException {
 //        Users user=new Users();
@@ -221,11 +229,34 @@ class DemoApplicationTests {
 //
 
 
+//        小额
+//        List<Map> list=userService.selectSaollOrderByid(new BigDecimal(348));
+//        System.out.println(list.toString());
 
 
+//        理财
+//        Users users=new Users();
+//        users.setUsersid(new BigDecimal(33));
+//
+//        List<Map> list=userService.selectproOrder(users,1,2);
+//        System.out.println(list.toString());
+//        大额
+//        全部查询
+//        Users users=new Users();
+//        users.setUsersid(new BigDecimal(33));
+//            List<Map> list=userService.selectBigdaiorder(users);
+//        System.out.println(list.toString());
+//        根据id查询大额贷款订单2
+//        List<Map> list=userService.selectBigdaiorderByid(new BigDecimal(68));
+//        System.out.println(list.toString());
+       //查询大额贷款历史订单3
+//        Users users=new Users();
+//        users.setUsersid(new BigDecimal(4));
+//        List<Bighuankuan> list= userService.selectbighuankuan(users,1,2);
+//        System.out.println(list.toString());
 
 
-//查询（登录）
+       //查询（登录）
 //        UsersExample es=new UsersExample();
 //        es.createCriteria().andPetnameEqualTo("lisan");
 //        es.createCriteria().andUspwsEqualTo(new BigDecimal(123));
@@ -233,12 +264,9 @@ class DemoApplicationTests {
 //        System.out.println(list.toString());
 
 
-
-
-
-        //插入（注册）
-        //身份证
-        //插入
+       //插入（注册）
+       //身份证
+       //插入
 //        Idcard idcard=new Idcard();
 //        idcard.setName("李三");
 //        idcard.setIdcard("1233211233211233");
@@ -254,9 +282,8 @@ class DemoApplicationTests {
 //        System.out.println(idcard);
 
 
-
 //        //用户
-        //插入
+       //插入
 //        Users user=new Users();
 //        user.setUname("李信");
 //        user.setPetname("lixin");
@@ -284,8 +311,8 @@ class DemoApplicationTests {
 //        user=Usersdao.selectByExample(usersExample).get(0);
 
 
-        //银行卡
-        //插入
+       //银行卡
+       //插入
 //        Bank bank=new Bank();
 //        bank.setBid(new BigDecimal(1));
 //        bank.setBankcard(new BigDecimal(12332112332112L));
@@ -399,11 +426,12 @@ class DemoApplicationTests {
 
 //}
 
-    @Resource
-    SamllService userService;
-
-    @Test
-    void UserTest(){
-        System.err.println(userService.SmallDaiKuanCount());
-    }
+//    @Resource
+//    SamllService userService;
+//
+//    @Test
+//    void UserTest(){
+//        System.err.println(userService.SmallDaiKuanCount());
+//    }
+   }
 }

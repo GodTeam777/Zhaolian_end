@@ -5,14 +5,21 @@ import com.zhaolian.demo.data.entity.SamlldaiOrderExample;
 import java.math.BigDecimal;
 import java.util.List;
 
+import java.util.Map;
+
 
 import com.zhaolian.demo.data.entity.SmadaiLilv;
+
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface SamlldaiOrderMapper {
+
+    int getTotalCount(BigDecimal usersid);
+    List<SamlldaiOrder> selectByPage(Map map);
+
 
 
     //查询小额贷款
@@ -26,6 +33,7 @@ public interface SamlldaiOrderMapper {
 
     //查询小额贷款的总数
     int getSamllCount();
+
 
     long countByExample(SamlldaiOrderExample example);
 
