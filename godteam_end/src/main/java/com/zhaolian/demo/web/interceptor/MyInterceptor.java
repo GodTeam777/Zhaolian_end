@@ -57,6 +57,7 @@ public class MyInterceptor extends WebMvcConfigurationSupport {
 	}
 
 	//防止session变化
+//	@Override
 //	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
 //
 //		response.setHeader("Access-Control-Allow-Origin",request.getHeader("Origin"));

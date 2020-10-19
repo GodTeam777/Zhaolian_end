@@ -39,7 +39,7 @@ public class MoneyproServiceimpl implements MoneyproService {
     @Override
     public int updateByPrimaryKeySelective(Moneypro moneypro) {
         Moneypro  mo=dao.selectByPrimaryKey(moneypro.getMpid());
-        if(mo.getMppath()!=""){
+        if(mo.getMppath()!="" && moneypro.getMppath()!=null){
             System.out.println("要删除的图片"+mo.getMppath());
             System.out.println("要删除的图片"+moneypro.getMppath());
             File file=new File(System.getProperty("user.dir")+"/upload/"+mo.getMppath());

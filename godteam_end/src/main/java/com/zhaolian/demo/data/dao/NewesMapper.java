@@ -31,8 +31,14 @@ public interface NewesMapper {
 
 
     int insertSelective(Newes record);
-
+   //类型1
     List<Newes> selectByExample(NewesExample example);
+
+    //类型2
+    List<Newes> selectByExampletype(NewesExample example);
+
+    //类型
+    List<Newes> selectBytype(NewesExample example);
 
     Newes selectByPrimaryKey(BigDecimal nid);
 

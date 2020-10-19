@@ -90,11 +90,14 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select 
+     <if test="_parameter != null">
+      <!--@mbg.generated-->
+    select
     <include refid="Base_Column_List" />
     from IDCARD
     where CARDID = #{cardid,jdbcType=DECIMAL}
+    </if>
+
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     <!--@mbg.generated-->
