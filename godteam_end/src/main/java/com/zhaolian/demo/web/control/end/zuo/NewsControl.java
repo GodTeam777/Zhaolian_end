@@ -1,6 +1,7 @@
 package com.zhaolian.demo.web.control.end.zuo;
 
 import com.zhaolian.demo.data.entity.Newes;
+import com.zhaolian.demo.data.entity.Users;
 import com.zhaolian.demo.service.end.zuo.NewsService;
 import com.zhaolian.demo.web.dto.zuo.NewsDTO;
 import com.zhaolian.demo.web.util.PageBean;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.Map;
 
@@ -47,8 +49,10 @@ public class NewsControl {
     }
 
     @RequestMapping(value = "news_insert_save", method = RequestMethod.POST)
-    public @ResponseBody Integer News_Insert(@RequestBody Newes news){
+    public @ResponseBody Integer News_Insert(@RequestBody Newes news, HttpSession session){
+        Users user = (Users) session.getAttribute("login");
         news.setNewsDate(new Date());
+        news.setFabiaoname(user.getUname());
         int count = news_service.news_insert(news);
         return count;
     }
@@ -59,11 +63,7 @@ public class NewsControl {
         Integer pageSize = (Integer)news_map.get("pageSize");
         NewsDTO dto = new NewsDTO();
         dto.setSearch_title(String.valueOf(news_map.get("search_title")));
-        //dto.setSearch_body(String.valueOf(news_map.get("search_body")));
-        //dto.setSearch_date(new Date(String.valueOf(news_map.get("search_date"))));
-        //dto.setSearch_press(String.valueOf(news_map.get("search_press")));
         dto.setSearch_name(String.valueOf(news_map.get("search_name")));
-        //dto.setSearch_type(Integer.parseInt(String.valueOf(news_map.get("search_type"))));
         PageBean<Newes> pageBean = news_service.NewsPage(dto, pageNo, pageSize);
         return pageBean;
     }
