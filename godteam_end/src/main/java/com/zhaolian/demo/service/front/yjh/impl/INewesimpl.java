@@ -7,6 +7,7 @@ import com.zhaolian.demo.service.front.yjh.INewes;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -14,6 +15,18 @@ public class INewesimpl implements INewes {
 
     @Resource
     NewesMapper dao;
+
+    @Override
+    public Newes SelectByid(Integer id) {
+        Newes all=   dao.selectByPrimaryKey(new BigDecimal(id));
+        return all;
+    }
+
+    @Override
+    public List<Newes> selectAll(NewesExample newes) {
+        List<Newes> all=dao.selectByAll(newes);
+        return all;
+    }
 
     @Override
     public List<Newes> select(NewesExample newes) {

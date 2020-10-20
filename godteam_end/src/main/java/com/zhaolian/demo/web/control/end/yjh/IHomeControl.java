@@ -27,7 +27,6 @@ public class IHomeControl {
     public @ResponseBody
     PageBean<Home>
     queryPages(PageBean page){
-        System.out.println("===========启动控制器=========");
         PageBean<Home> pageBeans =
                 this.service.queryReturnPage(page.getPageNo(),
                         page.getPageSize());

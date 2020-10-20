@@ -27,11 +27,9 @@ public class ICarControl {
     public @ResponseBody
     PageBean<Car>
     queryPages(PageBean page){
-        System.out.println("===========启动控制器=========");
         PageBean<Car> pageBeans =
                 this.service.queryReturnPage(page.getPageNo(),
                         page.getPageSize());
-        System.out.println("==========="+pageBeans.toString());
         return pageBeans;
     }
     //审核认证通过

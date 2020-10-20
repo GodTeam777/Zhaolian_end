@@ -20,9 +20,7 @@ public class ISamlldaiOrderControl {
     @RequestMapping(value="selectSamlldaiOrderByid",method = RequestMethod.GET)
     public @ResponseBody
     List<SamlldaiOrder> selectByid(String id){
-        System.out.println("前端传递的id:"+id);
         List<SamlldaiOrder>  all=this.servere.selectByid(new Integer(id));
-        System.out.println("查询结果"+all.toString());
         return all;
     }
 

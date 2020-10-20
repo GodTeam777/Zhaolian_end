@@ -31,6 +31,9 @@ public interface NewesMapper {
 
 
     int insertSelective(Newes record);
+    //新闻全部查询
+
+    List<Newes> selectByAll(NewesExample example);
    //类型1
     List<Newes> selectByExample(NewesExample example);
 

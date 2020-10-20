@@ -24,11 +24,9 @@ public class IeducationControl {
     public @ResponseBody
     PageBean<Education>
     queryPages(PageBean page){
-        System.out.println("===========启动控制器=========");
         PageBean<Education> pageBeans =
                 this.service.queryReturnPage(page.getPageNo(),
                         page.getPageSize());
-        System.out.println("==========="+pageBeans.toString());
         return pageBeans;
 
     }

@@ -112,6 +112,28 @@
     <!--@mbg.generated-->
     NID, NEWS_TITLE, NEWS_BODY, CHUBANSHE, FABIAONAME, NEWS_DATE, NTYPE
   </sql>
+    <!--新闻类型1-->
+  <select id="selectByAll" parameterType="com.zhaolian.demo.data.entity.NewesExample" resultMap="BaseResultMap">
+ select
+    *
+from
+   ( (select
+         ROWNUM
+             line,result.*
+     from
+         (select
+              NID,NEWS_TITLE,NEWS_BODY,CHUBANSHE,FABIAONAME,NEWS_DATE,NTYPE
+          from
+              NEWES
+          where
+              1=1)result)order by NID desc)
+where
+    line
+        between
+        1
+        and
+        6
+  </select>
   <!--新闻类型1-->
   <select id="selectByExample" parameterType="com.zhaolian.demo.data.entity.NewesExample" resultMap="BaseResultMap">
  select

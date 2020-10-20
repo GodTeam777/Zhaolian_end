@@ -31,7 +31,6 @@ public class ISmadaiLilvControl {
     @RequestMapping(value = "updatelilv" ,method = RequestMethod.POST)
     @ResponseBody
     Map<String, Object> updatelilv(@RequestBody String lilv) throws UnsupportedEncodingException {
-        System.out.println("++++++++++:"+lilv);
         String myContent = URLDecoder.decode(lilv,"utf-8");
         int pos = myContent.lastIndexOf("=");
         String result = myContent.substring(0, pos);
