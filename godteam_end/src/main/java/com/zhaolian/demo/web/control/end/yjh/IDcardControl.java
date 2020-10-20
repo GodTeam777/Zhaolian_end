@@ -41,20 +41,24 @@ public class IDcardControl {
         Map<String,Object> map=new HashMap<>();
         if(data.get("id")!=null){
             Idcard all=   this.server.selectByid((Integer) data.get("id"));
+            all.setFront("http://localhost:10086/img/"+all.getFront());
             map.put("all",all);
             System.out.println("查询身份证:"+all.toString());
         } if(data.get("edusersid")!=null){
             Education education=this.Educationserver.selectByid((Integer) data.get("edusersid"));
+            education.setSpath("http://localhost:10086/img/"+education.getSpath());
             map.put("education",education);
             System.out.println("查询学历:"+education.toString());
         }
          if(data.get("cid")!=null){
             Car car=this.ICarserver.selectByid((Integer) data.get("cid"));
+             car.setCpath("http://localhost:10086/img/"+car.getCpath());
             map.put("car",car);
             System.out.println("查询车辆:"+car.toString());
         }
          if(data.get("hid")!=null){
             Home home=this.IHomeserver.selectByid((Integer) data.get("hid"));
+             home.setHpath("http://localhost:10086/img/"+home.getHpath());
             map.put("home",home);
             System.out.println("查询房屋:"+home.toString());
         }

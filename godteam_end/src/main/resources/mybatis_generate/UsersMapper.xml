@@ -546,9 +546,27 @@ select * from USERS where PETNAME=#{Uname} and USPWS=#{Upass}
     </set>
     where   HID = #{hid,jdbcType=DECIMAL}
   </update>
-  <!--总记录数：-->
+  <!--总记录数管理员：-->
   <select id="getTotalCount" parameterType="com.zhaolian.demo.web.util.SearchUsersDTO" resultType="int">
-    select count(*) from USERS use
+    select count(*) from USERS use where TYPE=3
+    <where>
+    <if test='search_name != null and search_name!=""'>
+         use.UNAME like '%'||#{search_name}||'%'
+   </if>
+   </where>
+  </select>
+    <!--总记录数客服：-->
+  <select id="getTotalCountkefu" parameterType="com.zhaolian.demo.web.util.SearchUsersDTO" resultType="int">
+    select count(*) from USERS use where TYPE=2
+    <where>
+    <if test='search_name != null and search_name!=""'>
+         use.UNAME like '%'||#{search_name}||'%'
+   </if>
+   </where>
+   </select>
+      <!--总记录数用户：-->
+  <select id="getTotalCountUser" parameterType="com.zhaolian.demo.web.util.SearchUsersDTO" resultType="int">
+    select count(*) from USERS use where TYPE=1
     <where>
     <if test='search_name != null and search_name!=""'>
          use.UNAME like '%'||#{search_name}||'%'

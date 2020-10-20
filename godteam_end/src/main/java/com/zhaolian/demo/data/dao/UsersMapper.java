@@ -17,9 +17,13 @@ public interface UsersMapper {
 
     //查询用户总数
     int getUserCount();
+    //后台查询用户总数
+    int getTotalCountkefu(SearchUsersDTO dto);
+    //后台查询用户总数
+    int getTotalCountUser(SearchUsersDTO dto);
     //系统登录
     List<Users> SystemLogin(Users user);
-    //查询记录总数
+    //后台查询记录总数
     public int getTotalCount(SearchUsersDTO dto);
     //用户分页
     public List<Users> selectByPage(Map<String, Object> param);
