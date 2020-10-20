@@ -64,7 +64,7 @@ public class Prooderserviceimpl implements Prooderservice {
             if(dto.getStatus()!=null&&dto.getStatus()!=""){
                 List<Proorder> max=new ArrayList<Proorder>();
                 for (int i = 0; i <list.size() ; i++) {
-                    if(list.get(i).getStatus().equals(dto.getStatus())){
+                    if(list.get(i).getStatus().toString().equals(dto.getStatus())){
                         max.add(list.get(i));
                     }
                 }
