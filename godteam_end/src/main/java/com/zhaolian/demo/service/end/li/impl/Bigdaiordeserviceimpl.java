@@ -60,9 +60,10 @@ public class Bigdaiordeserviceimpl implements Bigdaiordeservice {
                 list=max;
             };
             if(dto.getStatus()!=null&&dto.getStatus()!=""){
+                System.out.println("进入修改状态方法");
                 List<Bigdaiorder> max=new ArrayList<Bigdaiorder>();
                 for (int i = 0; i <list.size() ; i++) {
-                    if(list.get(i).getStatus().equals(dto.getStatus())){
+                    if(list.get(i).getStatus().toString().equals(dto.getStatus())){
                         max.add(list.get(i));
                     }
                 }
